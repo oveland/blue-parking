@@ -31,19 +31,19 @@
 
                 <div class="px-6">
                     <jet-nav-link :href="route('dashboard')" :active="route().current('dashboard')" icon="dashboard" class="w-full">
-                        Dashboard
+                        {{ $t('Dashboard') }}
                     </jet-nav-link>
 
                     <jet-nav-link :href="route('clients')" :active="route().current('clients')" icon="passengers" class="w-full">
-                        Clients
+                        {{ $t('Clients') }}
                     </jet-nav-link>
 
                     <jet-nav-link :href="route('vehicles')" :active="route().current('vehicles')" icon="vehicle" class="w-full">
-                        Vehicles
+                        {{ $t('Vehicles') }}
                     </jet-nav-link>
 
                     <jet-nav-link :href="route('account')" :active="route().current('account')" icon="user" class="w-full">
-                        Account
+                        {{ $t('Account') }}
                     </jet-nav-link>
                 </div>
 
