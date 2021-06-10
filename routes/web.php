@@ -1,6 +1,8 @@
 <?php
 
+use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,5 +16,27 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return Inertia::render('Welcome', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
+        'laravelVersion' => Application::VERSION,
+        'phpVersion' => PHP_VERSION,
+    ]);
 });
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+    return Inertia::render('Dashboard');
+})->name('dashboard');
+
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/clients', function () {
+    return Inertia::render('Dashboard');
+})->name('clients');
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/vehicles', function () {
+    return Inertia::render('Dashboard');
+})->name('vehicles');
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/account', function () {
+    return Inertia::render('Dashboard');
+})->name('account');
