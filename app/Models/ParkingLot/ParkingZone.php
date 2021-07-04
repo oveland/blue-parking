@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class ParkingZone extends Model
 {
     use HasFactory;
+
+    function type()
+    {
+        return $this->belongsTo(ParkingType::class);
+    }
 }

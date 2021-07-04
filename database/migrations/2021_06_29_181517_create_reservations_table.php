@@ -17,11 +17,11 @@ class CreateReservationsTable extends Migration
             $table->id();
             $table->timestamps();
 
-            $table->timestamp('start')->useCurrent();
-            $table->timestamp('end')->useCurrent();
+            $table->timestamp('start')->nullable();
+            $table->timestamp('end')->nullable();
             $table->timestamp('hold_start')->useCurrent();
-            $table->timestamp('hold_end')->useCurrent();
-            $table->boolean('active')->default(true);
+            $table->timestamp('hold_end')->nullable();
+            $table->boolean('active')->default(false);
 
             $table->unsignedBigInteger('vehicle_id');
             $table->unsignedBigInteger('reservation_type_id');

@@ -38,7 +38,8 @@ class AddColumnsToUsersTable extends Migration
             $table->dropColumn('address');
             $table->dropColumn('phone');
             $table->dropColumn('identity');
-            $table->dropColumn('username');
+
+            $table->dropColumn('deleted_at');
         });
     }
 }
