@@ -1,5 +1,5 @@
 <template>
-    <inertia-link :href="href" class="inline-flex items-center mt-1 px-5 py-4 transition duration-200 font-bold rounded-lg" :class="classes">
+    <inertia-link :href="href" class="inline-flex items-center px-5 py-4 transition duration-200 font-bold rounded-lg" :class="classes">
         <icon v-if="icon" :name="icon" color="blank" class="mr-2"></icon>
         <slot></slot>
     </inertia-link>

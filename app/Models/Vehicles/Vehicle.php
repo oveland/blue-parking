@@ -38,6 +38,8 @@ class Vehicle extends Model
     use HasFactory;
     use SoftDeletes;
 
+    protected $fillable = ['plate', 'color', 'model', 'vehicle_type_id', 'user_id'];
+
     function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
@@ -45,6 +47,17 @@ class Vehicle extends Model
 
     function type(): BelongsTo
     {
-        return $this->belongsTo(VehicleType::class);
+        return $this->belongsTo(VehicleType::class, 'vehicle_type_id');
+    }
+
+    public function toArray()
+    {
+        return [
+            'id' => $this->id,
+            'plate' => $this->plate,
+            'color' => $this->color,
+            'model' => $this->model,
+            'type' => $this->type->toArray()
+        ];
     }
 }

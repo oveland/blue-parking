@@ -16,6 +16,7 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $updated_at
  * @property string $name
  * @property string|null $icon
+ * @property string|null $color
  * @method static Builder|VehicleType newModelQuery()
  * @method static Builder|VehicleType newQuery()
  * @method static Builder|VehicleType query()
@@ -24,4 +25,14 @@ use Illuminate\Support\Carbon;
 class VehicleType extends Model
 {
     use HasFactory;
+
+    public function toArray(): array
+    {
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'icon' => $this->icon,
+            'color' => $this->color,
+        ];
+    }
 }

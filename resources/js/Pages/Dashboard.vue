@@ -5,19 +5,22 @@
                 {{ $t('Dashboard') }}
             </h2>
         </template>
-
-        <welcome/>
+        <div class="m-6">
+            <reservations-list/>
+        </div>
     </app-layout>
 </template>
 
 <script>
 import AppLayout from '@/Layouts/AppLayout'
+import ReservationsList from '@/Pages/Reservations/List'
 import Welcome from '@/Jetstream/Welcome'
 
 export default {
     components: {
         AppLayout,
         Welcome,
+        ReservationsList,
     },
 }
 </script>

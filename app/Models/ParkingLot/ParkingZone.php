@@ -23,6 +23,7 @@ use Illuminate\Support\Carbon;
  * @method static Builder|ParkingZone newQuery()
  * @method static Builder|ParkingZone query()
  * @mixin Eloquent
+ * @method static Builder|ParkingZone available()
  */
 class ParkingZone extends Model
 {
@@ -31,5 +32,19 @@ class ParkingZone extends Model
     function type(): BelongsTo
     {
         return $this->belongsTo(ParkingType::class);
+    }
+
+    function scopeAvailable(Builder $query): Builder|ParkingZone
+    {
+        return $query->where('available', true);
+    }
+
+    public function toArray(): array
+    {
+        return [
+            'id' => $this->id,
+            'code' => $this->code,
+            'available' => $this->available
+        ];
     }
 }

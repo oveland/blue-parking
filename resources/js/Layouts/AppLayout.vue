@@ -3,7 +3,7 @@
         <jet-banner />
 
         <div class="min-h-screen flex">
-            <nav class="bg-blue-800 w-full sm:w-2/3 md:w-1/3 lg:relative lg:w-full xl:w-1/2 absolute inset-y-0 transition-all duration-200 ease-in-out" :class="showSidebar ? 'bg-red-900' : 'transform -translate-x-full lg:translate-x-0'">
+            <nav class="bg-blue-800 w-auto sm:w-2/3 md:w-1/3 lg:relative lg:w-auto xl:w-auto absolute inset-y-0 transition-all duration-200 ease-in-out" :class="showSidebar ? 'bg-red-900' : 'transform -translate-x-full lg:translate-x-0'">
                 <div class="flex justify-between items-center bg-blue-900 shadow py-6 px-6 lg:rounded-bl-3xl border-blue-900 border-b-4 lg:border-0">
                     <div class="flex items-center">
                         <!-- Logo -->
@@ -125,7 +125,7 @@
             </nav>
 
             <!-- Page Content -->
-            <main>
+            <main class="w-full">
                 <!-- Page Heading -->
                 <header class="bg-blue-900 lg:bg-white shadow lg:border-b py-6 px-8" v-if="$slots.header">
                     <div class="flex justify-between items-center">

@@ -19,6 +19,7 @@ class CreateVehicleTypesTable extends Migration
 
             $table->string('name', 45);
             $table->string('icon', 45)->nullable();
+            $table->string('color', 45)->nullable();
         });
     }
 

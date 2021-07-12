@@ -353,5 +353,16 @@
     "Turn number": "# Turno",
     "to": "a",
     "Clients": "Clientes",
-    "Account": "Cuenta"
+    "Account": "Cuenta",
+    "Reservations": "Reservaciones",
+    "Reservation": "Reservación",
+    "Model": "Modelo",
+    "Client": "Cliente",
+    "Zone": "Zona",
+    "Color": "Color",
+    "minute": "minuto",
+    "Id": "Id",
+    "Parked": "Parqueado",
+    "Log in": "Ingresar",
+    "Remember me": "Recordar ingreso"
 }
