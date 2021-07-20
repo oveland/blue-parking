@@ -1,7 +1,5 @@
 <template>
-    <jet-button @click.native="confirmDelete = true" color="transparent">
-        {{ $t('Delete') }}
-
+    <icon @click.native="confirmDelete = true" name="delete" color="red">
         <!-- Delete Account Confirmation Modal -->
         <jet-confirmation-modal :show="confirmDelete" @close="confirmDelete = false">
             <template #title>
@@ -24,7 +22,7 @@
                 </jet-button>
             </template>
         </jet-confirmation-modal>
-    </jet-button>
+    </icon>
 </template>
 
 <script>
@@ -34,6 +32,8 @@ import JetInput from '@/Jetstream/Input'
 import JetSecondaryButton from '@/Jetstream/SecondaryButton'
 import JetDangerButton from '@/Jetstream/DangerButton'
 import JetSectionBorder from '@/Jetstream/SectionBorder'
+
+import Icon from '@/Jetstream/Icon'
 
 export default {
     props: {
@@ -52,6 +52,7 @@ export default {
         }
     },
     components: {
+        Icon,
         JetInput,
         JetButton,
         JetSecondaryButton,
@@ -73,13 +74,17 @@ export default {
                 this.form.delete(route('reservations.destroy', this.reservation), {
                     preserveScroll: true,
                     onSuccess: () => {
-                        if (!this.form.hasErrors()) {
-                            this.confirmDelete = false
-                        }
+                        this.done();
                     }
                 })
             }
-        }
+        },
+        done() {
+            if (!this.form.hasErrors) {
+                this.confirmDelete = false;
+                this.$emit('refresh');
+            }
+        },
     }
 }
 </script>

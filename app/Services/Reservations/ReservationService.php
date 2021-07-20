@@ -53,11 +53,14 @@ class ReservationService
     {
         $vehicle = Vehicle::where('plate', $data->get('vehicle')['plate'])->first();
 
+        $dataVehicle = $data->get('vehicle');
+
         if (!$vehicle) {
-            $dataVehicle = $data->get('vehicle');
             $vehicle = new Vehicle($dataVehicle);
 
             $user = new User($dataVehicle['user']);
+
+            $user->name = $user->name ?? __('Internal');
             $user->email = Carbon::now()->format('y.m.d.h.i.s.u') . '@mail.com';
             $user->password = Hash::make('12345');
             $user->save();
@@ -65,6 +68,8 @@ class ReservationService
             $vehicle->user()->associate($user);
             $vehicle->type()->associate(VehicleType::find($data->get('parkingType')['vehicleType']['id']));
             $vehicle->save();
+        }else {
+            $vehicle->user->fill($dataVehicle)->save();
         }
 
         return $vehicle;

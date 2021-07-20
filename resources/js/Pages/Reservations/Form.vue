@@ -2,13 +2,17 @@
     <form @keypress.enter="save" @submit.prevent="save">
         <div class="grid gap-4">
             <parking-type v-for="type in parkingTypes" :type="type" @select="selectParkingType($event)" :selected="isSelectedType(type)"></parking-type>
-            <jet-input-error :message="form.errors.parkingType" class="mt-1 ml-14 clear-both"/>
+            <jet-input-error :message="form.errors.parkingType" class="clear-both text-xs font-bold"/>
 
             <jet-input ref="focus" v-model="form.vehicle.plate" :placeholder="$t('Plate')" :uppercase="true"></jet-input>
+            <jet-input-error :message="form.errors['vehicle.plate']" class="clear-both text-xs font-bold"/>
+
             <jet-input v-model="form.vehicle.model" :placeholder="$t('Model')" :uppercase="true"></jet-input>
             <jet-input v-model="form.vehicle.color" :placeholder="$t('Color')" :uppercase="true"></jet-input>
             <jet-input v-model="form.vehicle.user.name" :placeholder="$t('Client')" :uppercase="true"></jet-input>
+
             <jet-select v-model="form.zone" :options="form.parkingType.availableZones" label="code" track-by="id" icon="point" :placeholder="$t('Zone')" @input="changeZone"></jet-select>
+            <jet-input-error :message="form.errors['zone.id']" class="clear-both text-xs font-bold"/>
         </div>
 
         <div class="grid text-center mt-4">
@@ -17,7 +21,7 @@
                     {{ $t('Cancel') }}
                 </jet-button>
 
-                <jet-button color="indigo" :disabled="form.processing && false">
+                <jet-button color="indigo" :disabled="form.processing">
                     {{ $t('Save') }}
                 </jet-button>
             </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Reservations;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ReservationRequest;
 use App\Models\ParkingLot\ParkingType;
 use App\Models\Reservations\Reservation;
 use App\Models\Reservations\ReservationType;
@@ -40,20 +41,13 @@ class ReservationController extends Controller
     /**
      * @throws Throwable
      */
-    public function store(Request $request): Redirector|Application|RedirectResponse
+    public function store(ReservationRequest $request): Redirector|Application|RedirectResponse|null
     {
         $reservation = $this->service->create($request);
 
-        if (!$reservation) {
-            $response = [
-                'banner' => __('Reservation not created')
-            ];
-        }
+        if (!$reservation) return null;
 
-        return redirect(route('dashboard'))->with([
-            'banner' => 'Test error message',
-            'bannerStyle' => 'error'
-        ]);
+        return redirect(route('dashboard'));
     }
 
     public function show(Request $request): Collection|array
@@ -71,8 +65,9 @@ class ReservationController extends Controller
         //
     }
 
-    public function destroy(Reservation $reservation)
+    public function destroy(Reservation $reservation): Redirector|Application|RedirectResponse
     {
-        //
+        $reservation->forceDelete();
+        return redirect(route('dashboard'));
     }
 }

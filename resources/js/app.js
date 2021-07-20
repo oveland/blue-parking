@@ -57,5 +57,4 @@ const app = createApp({
     //     }
     // });
 
-
 InertiaProgress.init({color: '#4B5563'});

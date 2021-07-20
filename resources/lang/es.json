@@ -364,5 +364,11 @@
     "Id": "Id",
     "Parked": "Parqueado",
     "Log in": "Ingresar",
-    "Remember me": "Recordar ingreso"
+    "Finished": "Finalizado",
+    "In total": "En total",
+    "Vehicle plate is required": "Se requiere la placa del vehículo",
+    "Zone is required": "Especifique la zona de parqueo",
+    "minutes": "minutos",
+    "Internal": "Interno",
+    "reservation": "reservación"
 }

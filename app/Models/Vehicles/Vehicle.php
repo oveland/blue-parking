@@ -57,7 +57,10 @@ class Vehicle extends Model
             'plate' => $this->plate,
             'color' => $this->color,
             'model' => $this->model,
-            'type' => $this->type->toArray()
+            'type' => $this->type->toArray(),
+            'user' => [
+                'name' => $this->user->name
+            ]
         ];
     }
 }

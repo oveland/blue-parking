@@ -28,8 +28,10 @@ services:
             POSTGRES_DB: '${DB_DATABASE}'
             POSTGRES_USER: '${DB_USERNAME}'
             POSTGRES_PASSWORD: '${DB_PASSWORD:-secret}'
+            TZ: 'America/Bogota'
+            PGTZ: 'America/Bogota'
         volumes:
-            - 'sailpgsql:/var/lib/postgresql/data'
+            - './docker/database/data:/var/lib/postgresql/data'
         networks:
             - sail
         healthcheck:

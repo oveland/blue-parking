@@ -62,15 +62,42 @@ class Reservation extends Model
         return [
             'id' => $this->id,
             'start' => $this->start->toDateTimeString(),
+            'startHuman' => $this->start->format('Y-m-d h:i:s a'),
+
             'end' => $this->end?->toDateTimeString(),
-            'hold_start' => $this->hold_start?->toDateTimeString(),
-            'hold_end' => $this->hold_end?->toDateTimeString(),
-            'hold_timeout' => $this->hold_timeout,
+            'endHuman' => $this->end?->format('Y-m-d h:i:s a'),
+
+            'holdStart' => $this->hold_start?->toDateTimeString(),
+            'holdStartHuman' => $this->hold_start?->format('Y-m-d h:i:s a'),
+
+            'holdEnd' => $this->hold_end?->toDateTimeString(),
+            'holdEndHuman' => $this->hold_end?->format('Y-m-d h:i:s a'),
+
+            'holdTimeout' => $this->hold_timeout,
             'active:' => $this->active,
             'type' => $this->type->toArray(),
             'zone' => $this->zone->toArray(),
             'vehicle' => $this->vehicle->toArray(),
-            'status' => $this->active ? 'Parked' : 'Done'
+            'status' => $this->status(),
+            'updatedAt' => $this->updated_at->format('Y-m-d h:i:s a')
         ];
+    }
+
+    function status(): object
+    {
+        $name = 'Reserved';
+        $color = 'yellow';
+
+        if ($this->active) {
+            if ($this->hold_end) {
+                $name = 'Parked';
+                $color = 'blue';
+            }
+        } else {
+            $name = 'Finished';
+            $color = 'green';
+        }
+
+        return (object)compact(['name', 'color']);
     }
 }

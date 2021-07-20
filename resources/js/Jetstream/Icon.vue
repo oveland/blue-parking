@@ -1,6 +1,7 @@
 <template>
     <span :class="fillColor" @click="$emit('click', $event)">
         <component :is="iconComponent" :class="`h-${h} w-${w}`" :light="fillColorLight"></component>
+        <slot></slot>
     </span>
 </template>
 

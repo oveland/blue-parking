@@ -35,10 +35,13 @@
                     <template #head>
                         <tr>
                             <th scope="col" class="px-6 py-3 text-left text-sm text-gray-400 uppercase">
-                                {{ $t('Time') }}
-                            </th>
-                            <th scope="col" class="px-6 py-3 text-center text-sm text-gray-400 uppercase">
                                 {{ $t('Vehicle') }}
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-left text-sm text-gray-400 uppercase">
+                                {{ $t('Client') }}
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-left text-sm text-gray-400 uppercase">
+                                {{ $t('Time') }}
                             </th>
                             <th scope="col" class="px-6 py-3 text-left text-sm text-gray-400 uppercase">
                                 {{ $t('Status') }}
@@ -55,6 +58,7 @@
                                                 :disable="disable"
                                                 :class="{ 'bg-gray-50': index % 2 !== 0 }"
                                                 @edit="edit()"
+                                                @refresh="refresh()"
                             ></reservation-detail>
                         </template>
                     </template>
