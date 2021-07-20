@@ -1,5 +1,5 @@
 <p align="center">
-    <a href="https://laravel.com" target="_blank">
+    <a href="https://github.com/oveland/parking-manager" target="_blank">
         <img src="https://pcwserviciosgps.com/files/docs/parking-manager/banner.png" width="80%" style="border-radius: 12px">
     </a>
 </p>
