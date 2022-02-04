@@ -24,9 +24,12 @@ class ParkingTypeController extends Controller
         //
     }
 
-    public function show(): Collection|array
+    public function show($filer): Collection|array
     {
-        return ParkingType::all();
+        return match ($filer) {
+            'all' => ParkingType::all(),
+            default => ParkingType::where('id', $filer)->get(),
+        };
     }
 
     public function edit(ParkingType $parkingType)

@@ -3,7 +3,7 @@
         <jet-banner />
 
         <div class="min-h-screen flex">
-            <nav class="bg-blue-800 w-auto sm:w-2/3 md:w-1/3 lg:relative lg:w-auto xl:w-auto absolute inset-y-0 transition-all duration-200 ease-in-out" :class="showSidebar ? 'bg-red-900' : 'transform -translate-x-full lg:translate-x-0'">
+            <nav class="bg-blue-800 w-auto sm:w-2/3 md:w-1/3 lg:relative lg:w-auto xl:w-auto absolute inset-y-0 transition-all duration-200 ease-in-out z-10" :class="showSidebar ? 'bg-red-900' : 'transform -translate-x-full lg:translate-x-0'">
                 <div class="flex justify-between items-center bg-blue-900 shadow py-6 px-6 lg:rounded-bl-3xl border-blue-900 border-b-4 lg:border-0">
                     <div class="flex items-center">
                         <!-- Logo -->
@@ -34,15 +34,15 @@
                         {{ $t('Dashboard') }}
                     </jet-nav-link>
 
-                    <jet-nav-link :href="route('clients')" :active="route().current('clients')" icon="passengers" class="w-full">
+                    <jet-nav-link :href="route('clients')" :active="route().current('clients')" icon="passengers" class="w-full" :disabled="true">
                         {{ $t('Clients') }}
                     </jet-nav-link>
 
-                    <jet-nav-link :href="route('vehicles')" :active="route().current('vehicles')" icon="vehicle" class="w-full">
+                    <jet-nav-link :href="route('vehicles')" :active="route().current('vehicles')" icon="vehicle" class="w-full" :disabled="true">
                         {{ $t('Vehicles') }}
                     </jet-nav-link>
 
-                    <jet-nav-link :href="route('account')" :active="route().current('account')" icon="user" class="w-full">
+                    <jet-nav-link :href="route('account')" :active="route().current('account')" icon="user" class="w-full" :disabled="true">
                         {{ $t('Account') }}
                     </jet-nav-link>
                 </div>

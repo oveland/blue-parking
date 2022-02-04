@@ -39,7 +39,7 @@ export default {
         set() {
             this.setElapsedTime();
             if (!this.to) {
-                this.interval = setInterval(() => this.setElapsedTime(), 1000 * (this.period >= 10 ? this.period : 10));
+                this.interval = setInterval(() => this.setElapsedTime, 1000 * (this.period >= 10 ? this.period : 10));
             }
         },
         stop() {
@@ -52,7 +52,14 @@ export default {
                 this.endTime().diff(this.startTime())
             );
 
-            this.elapsedTime = `${duration.hours()} ${ this.$t('hours') } ${duration.minutes()} ${ this.$t('minutes') }`;
+            const totalHours = parseInt(duration.asHours().toString());
+            const minutes = parseInt(duration.minutes().toString());
+
+            if (totalHours) {
+                this.elapsedTime = `${totalHours} ${this.$t('hours')} ${minutes} ${this.$t('minutes')}`;
+            } else {
+                this.elapsedTime = `${minutes} ${this.$t('minutes')}`;
+            }
         },
 
         startTime() {

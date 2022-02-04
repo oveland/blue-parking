@@ -37,7 +37,29 @@ class ReservationService
         DB::beginTransaction();
 
         $reservation->vehicle()->associate($this->validateVehicle($data));
-        $reservation->type()->associate(ParkingType::find($data->get('parkingType')['id']));
+        $reservation->type()->associate(ParkingType::find($data->get('type')['id']));
+        $reservation->zone()->associate(ParkingZone::find($data->get('zone')['id']));
+
+        if ($reservation->save()) {
+            DB::commit();
+            return $reservation;
+        }
+
+        DB::rollBack();
+        return null;
+    }
+
+    /**
+     * @throws Throwable
+     */
+    function update(Reservation $reservation, Collection|Request $data): ?Reservation
+    {
+        Log::info("Updating reservation ", $data->toArray());
+
+        DB::beginTransaction();
+
+        $reservation->vehicle()->associate($this->validateVehicle($data));
+        $reservation->type()->associate(ParkingType::find($data->get('type')['id']));
         $reservation->zone()->associate(ParkingZone::find($data->get('zone')['id']));
 
         if ($reservation->save()) {
@@ -54,23 +76,25 @@ class ReservationService
         $vehicle = Vehicle::where('plate', $data->get('vehicle')['plate'])->first();
 
         $dataVehicle = $data->get('vehicle');
+        $dataUser = $dataVehicle['user'];
 
         if (!$vehicle) {
             $vehicle = new Vehicle($dataVehicle);
-
             $user = new User($dataVehicle['user']);
 
-            $user->name = $user->name ?? __('Internal');
             $user->email = Carbon::now()->format('y.m.d.h.i.s.u') . '@mail.com';
             $user->password = Hash::make('12345');
-            $user->save();
-
-            $vehicle->user()->associate($user);
-            $vehicle->type()->associate(VehicleType::find($data->get('parkingType')['vehicleType']['id']));
-            $vehicle->save();
-        }else {
-            $vehicle->user->fill($dataVehicle)->save();
+        } else {
+            $user = $vehicle->user;
+            $vehicle->fill($dataVehicle);
         }
+
+        $user->name = $dataUser['name'] ?? __('Internal');
+        $user->save();
+
+        $vehicle->user()->associate($user);
+        $vehicle->type()->associate(VehicleType::find($data->get('type')['vehicleType']['id']));
+        $vehicle->save();
 
         return $vehicle;
     }

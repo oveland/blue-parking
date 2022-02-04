@@ -23496,13 +23496,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Jetstream_Icon__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Jetstream/Icon */ "./resources/js/Jetstream/Icon.vue");
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ['href', 'active', 'icon'],
+  props: ['href', 'active', 'icon', 'disabled'],
   components: {
     Icon: _Jetstream_Icon__WEBPACK_IMPORTED_MODULE_0__.default
   },
   computed: {
     classes: function classes() {
+      if (this.disabled) {
+        return 'text-gray-200 opacity-50';
+      }
+
       return this.active ? 'text-white bg-blue-900 border-l-4 border-gray-200' : 'text-gray-200 hover:text-blue-900 hover:bg-white';
+    },
+    link: function link() {
+      return this.disabled ? '' : this.href;
     }
   }
 });
@@ -23615,7 +23622,9 @@ __webpack_require__.r(__webpack_exports__);
       type: String,
       "default": ''
     },
-    value: {},
+    modelValue: {
+      type: Object
+    },
     icon: String
   },
   data: function data() {
@@ -23624,7 +23633,6 @@ __webpack_require__.r(__webpack_exports__);
       isLoading: false,
       query: null,
       asyncOptions: [],
-      content: this.value ? this.value : {},
       style: {
         container: 'relative cursor-pointer border-0 bg-white text-base leading-snug outline-none jet-input form-input rounded-md focus:border-indigo-100 shadow text-sm px-3 py-2 h-10 w-full text-xs',
         containerDisabled: 'cursor-default bg-gray-100',
@@ -23665,10 +23673,19 @@ __webpack_require__.r(__webpack_exports__);
   },
   watch: {
     options: function options() {
-      this.content = null;
+      this.value = null;
+      this.deselect();
     }
   },
   computed: {
+    value: {
+      get: function get() {
+        return this.modelValue && this.modelValue.id ? this.modelValue : {};
+      },
+      set: function set(value) {
+        this.$emit('update:modelValue', value);
+      }
+    },
     placeholderStr: function placeholderStr() {
       return this.$t('Search') + (this.placeholder !== '' ? " ".concat(this.placeholder) : " ".concat(this.title)).toLowerCase();
     },
@@ -23681,11 +23698,8 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
-    onInput: function onInput(value) {
-      value = _.find(this.optionsSelect, {
-        id: value
-      });
-      this.$emit('input', value);
+    deselect: function deselect() {
+      this.$refs.multiselect.deselect();
     },
     search: function search(query) {
       var _this = this;
@@ -23721,8 +23735,7 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     Icon: _Jetstream_Icon__WEBPACK_IMPORTED_MODULE_1__.default,
     Multiselect: _vueform_multiselect__WEBPACK_IMPORTED_MODULE_0__.default
-  },
-  mounted: function mounted() {}
+  }
 });
 
 /***/ }),
@@ -23799,7 +23812,7 @@ __webpack_require__.r(__webpack_exports__);
 
       if (!this.to) {
         this.interval = setInterval(function () {
-          return _this.setElapsedTime();
+          return _this.setElapsedTime;
         }, 1000 * (this.period >= 10 ? this.period : 10));
       }
     },
@@ -23809,7 +23822,14 @@ __webpack_require__.r(__webpack_exports__);
     },
     setElapsedTime: function setElapsedTime() {
       var duration = moment__WEBPACK_IMPORTED_MODULE_0___default().duration(this.endTime().diff(this.startTime()));
-      this.elapsedTime = "".concat(duration.hours(), " ").concat(this.$t('hours'), " ").concat(duration.minutes(), " ").concat(this.$t('minutes'));
+      var totalHours = parseInt(duration.asHours().toString());
+      var minutes = parseInt(duration.minutes().toString());
+
+      if (totalHours) {
+        this.elapsedTime = "".concat(totalHours, " ").concat(this.$t('hours'), " ").concat(minutes, " ").concat(this.$t('minutes'));
+      } else {
+        this.elapsedTime = "".concat(minutes, " ").concat(this.$t('minutes'));
+      }
     },
     startTime: function startTime() {
       return moment__WEBPACK_IMPORTED_MODULE_0___default()(this.from);
@@ -25181,7 +25201,11 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     edit: function edit() {
       this.reservation.edit = true;
-      this.$emit('edit');
+      this.$emit('edit', this.reservation);
+    },
+    complete: function complete() {
+      this.reservation.complete = true;
+      this.$emit('complete', this.reservation);
     }
   }
 });
@@ -25226,9 +25250,46 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       form: (0,_inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_8__.useForm)(this.reservation),
-      parkingTypes: []
+      parkingTypes: [],
+      style: {
+        container: 'relative cursor-pointer border-0 bg-white text-base leading-snug outline-none jet-input form-input rounded-md focus:border-indigo-100 shadow text-sm px-3 py-2 h-10 w-full text-xs',
+        containerDisabled: 'cursor-default bg-gray-100',
+        containerOpen: 'rounded-b-none',
+        containerOpenTop: 'rounded-t-none',
+        containerActive: 'ring ring-green-500 ring-opacity-30',
+        singleLabel: 'flex items-center h-full absolute left-0 top-0 pointer-events-none bg-transparent leading-snug pl-3 text-xs',
+        multipleLabel: 'flex items-center h-full absolute left-0 top-0 pointer-events-none bg-transparent leading-snug pl-3 text-xs',
+        search: 'jet-input w-full absolute inset-0 outline-none appearance-none box-border border-0 text-base font-sans bg-white rounded pl-3',
+        tags: 'flex-grow flex-shrink flex flex-wrap mt-1 pl-2',
+        tag: 'bg-green-500 text-white text-xs font-semibold py-0.5 pl-2 rounded mr-1 mb-1 flex items-center whitespace-nowrap',
+        tagDisabled: 'pr-2 !bg-gray-400 text-white',
+        tagRemove: 'flex items-center justify-center p-1 mx-0.5 rounded-sm hover:bg-black hover:bg-opacity-10 group',
+        tagRemoveIcon: 'bg-multiselect-remove bg-center bg-no-repeat opacity-30 inline-block w-3 h-3 group-hover:opacity-60',
+        tagsSearch: 'h-full border-0 outline-none appearance-none p-0 text-base font-sans mx-1 mb-1 box-border flex-grow flex-shrink',
+        placeholder: 'flex items-center h-full absolute left-0 top-0 pointer-events-none bg-transparent leading-snug pl-3 text-gray-400 text-xs',
+        caret: 'bg-multiselect-caret bg-center bg-no-repeat w-2.5 h-4 py-px box-content mr-3 relative z-10 opacity-40 flex-shrink-0 flex-grow-0 transition-transform transform',
+        caretOpen: 'rotate-180',
+        clear: 'pr-3 z-10 mt-1 opacity-40 transition duration-300 hover:opacity-100 float-right rounded-full bg-green-400 hover:bg-red-400 h-4 w-4',
+        clearIcon: 'bg-multiselect-remove bg-center bg-no-repeat w-2.5 h-4 py-px box-content inline-block',
+        spinner: 'bg-multiselect-spinner bg-center bg-no-repeat w-4 h-4 z-10 mr-3 animate-spin flex-shrink-0 flex-grow-0',
+        dropdown: 'absolute -left-px -right-px bottom-0 transform translate-y-full border border-gray-300 -mt-px overflow-y-scroll z-50 bg-white flex flex-col rounded-b',
+        dropdownTop: '-translate-y-full top-px bottom-auto flex-col-reverse rounded-b-none rounded-t',
+        options: 'flex flex-col p-0 m-0 list-none',
+        optionsTop: 'flex-col-reverse',
+        option: 'flex items-center justify-start box-border text-left cursor-pointer leading-snug py-2 px-3 text-xs',
+        optionPointed: 'text-white bg-indigo-600',
+        optionSelected: 'text-white bg-indigo-800',
+        optionDisabled: 'text-gray-300 cursor-not-allowed',
+        optionSelectedPointed: 'text-white bg-indigo-800 opacity-90',
+        optionSelectedDisabled: 'text-indigo-100 bg-indigo-500 bg-opacity-50 cursor-not-allowed',
+        noOptions: 'py-2 px-3 text-gray-500 bg-white',
+        noResults: 'py-2 px-3 text-gray-500 bg-white',
+        fakeInput: 'bg-transparent absolute left-0 right-0 -bottom-px w-full h-px border-0 p-0 appearance-none outline-none text-transparent',
+        spacer: 'h-9 py-px box-content'
+      }
     };
   },
+  watch: {},
   components: {
     ParkingType: _Pages_Reservations_Form_ParkingType__WEBPACK_IMPORTED_MODULE_9__.default,
     Icon: _Jetstream_Icon__WEBPACK_IMPORTED_MODULE_0__.default,
@@ -25245,25 +25306,23 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios.get(route('parking-types.show', {
-        'parking_type': 'all'
+        'parking_type': this.form.create ? 'all' : this.form.type
       })).then(function (response) {
-        var _this$form$parkingTyp;
+        var _this$form$type;
 
         _this.parkingTypes = response.data;
-
-        _this.selectParkingType((_this$form$parkingTyp = _this.form.parkingType) !== null && _this$form$parkingTyp !== void 0 && _this$form$parkingTyp.id ? _this.form.parkingType : _.first(_this.parkingTypes));
+        _this.form.type = (_this$form$type = _this.form.type) !== null && _this$form$type !== void 0 && _this$form$type.id ? _this.form.type : _.first(_this.parkingTypes);
       });
     },
     selectParkingType: function selectParkingType(type) {
-      this.form.parkingType = type;
+      this.form.zone = null;
+      this.form.type = type;
     },
     isSelectedType: function isSelectedType(type) {
-      return type.id === this.form.parkingType.id || type.version === this.form.parkingType.version && type.version;
+      return this.form.type && type.id === this.form.type.id || type.version && type.version === this.form.type.version;
     },
     save: function save() {
       var _this2 = this;
-
-      console.log('Saving');
 
       if (this.form.create) {
         this.form.post(route('reservations.store'), {
@@ -25284,10 +25343,6 @@ __webpack_require__.r(__webpack_exports__);
         this.$emit('close');
         this.$emit('refresh');
       }
-    },
-    changeZone: function changeZone(data) {
-      console.log('changeZone = ', data);
-      this.form.zone = data;
     }
   },
   mounted: function mounted() {
@@ -25316,14 +25371,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _Jetstream_Icon__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Jetstream/Icon */ "./resources/js/Jetstream/Icon.vue");
+/* harmony import */ var _Jetstream_TimeAgo__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Jetstream/TimeAgo */ "./resources/js/Jetstream/TimeAgo.vue");
+
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     type: Object,
-    selected: Boolean | Number
+    selected: Boolean | Number,
+    reservation: Object | null
   },
   components: {
-    Icon: _Jetstream_Icon__WEBPACK_IMPORTED_MODULE_0__.default
+    Icon: _Jetstream_Icon__WEBPACK_IMPORTED_MODULE_0__.default,
+    TimeAgo: _Jetstream_TimeAgo__WEBPACK_IMPORTED_MODULE_1__.default
   },
   computed: {
     vehicleType: function vehicleType() {
@@ -25334,6 +25393,13 @@ __webpack_require__.r(__webpack_exports__);
     },
     textColor: function textColor() {
       return this.selected ? 'text-white' : 'text-gray-400';
+    }
+  },
+  methods: {
+    select: function select() {
+      if (!this.selected) {
+        this.$emit('select', this.type);
+      }
     }
   }
 });
@@ -25441,6 +25507,9 @@ __webpack_require__.r(__webpack_exports__);
     showModalForm: function showModalForm() {
       return this.dataForm && (this.dataForm.create || this.dataForm.edit);
     },
+    showModalComplete: function showModalComplete() {
+      return this.dataForm && this.dataForm.complete;
+    },
     disable: function disable() {
       return this.showModalForm || this.loading;
     },
@@ -25474,18 +25543,22 @@ __webpack_require__.r(__webpack_exports__);
             name: ''
           }
         },
-        parkingType: {
+        type: {
           id: null,
           zones: []
         },
         zone: null,
         updatedAt: '',
-        create: true
+        create: true,
+        complete: false
       };
     },
-    edit: function edit(reservation) {
-      reservation.edit = true;
+    setModal: function setModal(reservation) {
       this.dataForm = reservation;
+    },
+    closeModal: function closeModal() {
+      this.dataForm = null;
+      this.refresh();
     },
     reset: function reset() {
       this.loading = false;
@@ -25715,20 +25788,25 @@ __webpack_require__.r(__webpack_exports__);
 var _hoisted_1 = {
   "aria-hidden": "true",
   focusable: "false",
-  "data-prefix": "fas",
-  "data-icon": "arrows",
+  "data-prefix": "fad",
+  "data-icon": "parking-circle",
   role: "img",
   xmlns: "http://www.w3.org/2000/svg",
-  viewBox: "0 0 512 512",
-  "class": "text-white rotate-45"
+  viewBox: "0 0 496 512",
+  "class": "text-indigo-900 mx-auto animate-bounce"
 };
 
-var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("path", {
-  transform: "translate(255,-105) rotate(45)",
+var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("g", {
+  "class": "fa-group"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("path", {
   fill: "currentColor",
-  d: "M352.634 428.621l-74.007 74.007c-12.497 12.497-32.758 12.497-45.255 0l-74.007-74.007c-9.373-9.373-9.373-24.569 0-33.941l10.84-10.84c9.556-9.556 25.113-9.341 34.402.474L228 410.365V284H101.635l26.051 23.392c9.815 9.289 10.03 24.846.474 34.402l-10.84 10.84c-9.373 9.373-24.569 9.373-33.941 0L9.373 278.627c-12.497-12.497-12.497-32.758 0-45.255l74.007-74.007c9.373-9.373 24.569-9.373 33.941 0l10.84 10.84c9.556 9.556 9.341 25.114-.474 34.402L101.635 228H228V101.635l-23.392 26.051c-9.289 9.815-24.846 10.03-34.402.474l-10.84-10.84c-9.373-9.373-9.373-24.569 0-33.941l74.007-74.007c12.497-12.497 32.758-12.497 45.255 0l74.007 74.007c9.373 9.373 9.373 24.569 0 33.941l-10.84 10.84c-9.556 9.556-25.113 9.341-34.402-.474L284 101.635V228h126.365l-26.051-23.392c-9.815-9.289-10.03-24.846-.474-34.402l10.84-10.84c9.373-9.373 24.569-9.373 33.941 0l74.007 74.007c12.497 12.497 12.497 32.758 0 45.255l-74.007 74.007c-9.373 9.373-24.569 9.373-33.941 0l-10.84-10.84c-9.556-9.556-9.341-25.113.474-34.402L410.365 284H284v126.365l23.392-26.051c9.289-9.815 24.846-10.03 34.402-.474l10.84 10.84c9.373 9.372 9.373 24.568 0 33.941z",
-  "class": ""
-}, null, -1
+  d: "M280,208H232v32h48a16,16,0,0,0,0-32ZM248,8C111,8,0,119,0,256S111,504,248,504,496,393,496,256,385,8,248,8Zm32,296H232v48a16,16,0,0,1-16,16H184a16,16,0,0,1-16-16V160a16,16,0,0,1,16-16h96a80,80,0,0,1,0,160Z",
+  "class": "fa-secondary"
+}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("path", {
+  fill: "currentColor",
+  d: "M280,144H184a16,16,0,0,0-16,16V352a16,16,0,0,0,16,16h32a16,16,0,0,0,16-16V304h48a80,80,0,0,0,0-160Zm0,96H232V208h48a16,16,0,0,1,0,32Z",
+  "class": "text-white"
+})], -1
 /* HOISTED */
 );
 
@@ -25944,7 +26022,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onClick: _cache[1] || (_cache[1] = function ($event) {
       return _ctx.$emit('click', $event);
     }),
-    "class": ["inline-flex items-center py-2 border border-transparent rounded-md  font-semibold text-xs tracking-widest focus:outline-none transition ease-in-out duration-200 uppercase", "bg-".concat($props.color, "-700 hover:bg-").concat($props.color, "-600 active:bg-").concat($props.color, "-900 focus:border-").concat($props.color, "-900\n            focus:shadow-outline-").concat($props.color, "\n            px-").concat($props.color === 'transparent' ? '0' : '4', "\n            text-").concat($props.color === 'transparent' ? 'gray-500' : 'white', "\n            ").concat($props.disabled ? 'opacity-25' : '', "\n            h-").concat($props.h, "\n        ")]
+    "class": ["inline-flex items-center py-2 border border-transparent rounded-md font-semibold text-xs tracking-widest focus:outline-none transition ease-in-out duration-200 uppercase", "bg-".concat($props.color, "-700 hover:bg-").concat($props.color, "-600 active:bg-").concat($props.color, "-900 focus:border-").concat($props.color, "-900\n            focus:shadow-outline-").concat($props.color, "\n            px-").concat($props.color === 'transparent' ? '0' : '4', "\n            text-").concat($props.color === 'transparent' ? 'gray-500' : 'white', "\n            ").concat($props.disabled ? 'opacity-25' : '', "\n            h-").concat($props.h, "\n        ")]
   }, [$props.icon ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_icon, {
     key: 0,
     name: $props.icon,
@@ -26525,14 +26603,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
+  key: 0
+};
+var _hoisted_2 = {
   "class": "text-sm text-red-600 ml-3"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", _hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$t($props.message || '')), 1
+  return $props.message ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$t($props.message)), 1
   /* TEXT */
-  )], 512
-  /* NEED_PATCH */
-  )), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $props.message]]);
+  )])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true);
 }
 
 /***/ }),
@@ -26709,8 +26788,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_inertia_link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("inertia-link");
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_inertia_link, {
-    href: $props.href,
-    "class": ["inline-flex items-center px-5 py-4 transition duration-200 font-bold rounded-lg", $options.classes]
+    href: $options.link,
+    "class": ["inline-flex items-center px-5 py-4 transition duration-200 font-bold rounded-lg", $options.classes],
+    title: $props.disabled ? 'En desarrollo... ' : ''
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [$props.icon ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_icon, {
@@ -26727,7 +26807,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   }, 8
   /* PROPS */
-  , ["href", "class"]);
+  , ["href", "class", "title"]);
 }
 
 /***/ }),
@@ -26879,25 +26959,27 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_multiselect, {
     ref: "multiselect",
     id: $data.id,
-    modelValue: $data.content,
+    modelValue: $options.value,
     "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
-      return $data.content = $event;
+      return $options.value = $event;
     }),
     options: $options.optionsSelect,
     "class": "multiselect-indigo",
     classes: $data.style,
     searchable: $props.searchable,
     label: $props.label,
-    trackBy: $props.trackBy,
-    valueProp: $props.trackBy,
+    "track-by": $props.trackBy,
+    "value-prop": "id",
     placeholder: $props.placeholder,
     multiple: $props.multiple,
     disabled: $props.disabled,
     loading: $data.isLoading,
-    onChange: $options.onInput
+    object: true,
+    "native-support": true,
+    "resolve-on-load": true
   }, null, 8
   /* PROPS */
-  , ["id", "modelValue", "options", "classes", "searchable", "label", "trackBy", "valueProp", "placeholder", "multiple", "disabled", "loading", "onChange"])]);
+  , ["id", "modelValue", "options", "classes", "searchable", "label", "track-by", "placeholder", "multiple", "disabled", "loading"])]);
 }
 
 /***/ }),
@@ -27507,7 +27589,7 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
   var _component_jet_dropdown = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("jet-dropdown");
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_banner), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("nav", {
-    "class": ["bg-blue-800 w-auto sm:w-2/3 md:w-1/3 lg:relative lg:w-auto xl:w-auto absolute inset-y-0 transition-all duration-200 ease-in-out", $data.showSidebar ? 'bg-red-900' : 'transform -translate-x-full lg:translate-x-0']
+    "class": ["bg-blue-800 w-auto sm:w-2/3 md:w-1/3 lg:relative lg:w-auto xl:w-auto absolute inset-y-0 transition-all duration-200 ease-in-out z-10", $data.showSidebar ? 'bg-red-900' : 'transform -translate-x-full lg:translate-x-0']
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Logo "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_inertia_link, {
     href: _ctx.route('dashboard')
   }, {
@@ -27558,7 +27640,8 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
     href: _ctx.route('clients'),
     active: _ctx.route().current('clients'),
     icon: "passengers",
-    "class": "w-full"
+    "class": "w-full",
+    disabled: true
   }, {
     "default": _withId(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$t('Clients')), 1
@@ -27574,7 +27657,8 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
     href: _ctx.route('vehicles'),
     active: _ctx.route().current('vehicles'),
     icon: "vehicle",
-    "class": "w-full"
+    "class": "w-full",
+    disabled: true
   }, {
     "default": _withId(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$t('Vehicles')), 1
@@ -27590,7 +27674,8 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
     href: _ctx.route('account'),
     active: _ctx.route().current('account'),
     icon: "user",
-    "class": "w-full"
+    "class": "w-full",
+    disabled: true
   }, {
     "default": _withId(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$t('Account')), 1
@@ -30490,6 +30575,12 @@ var _hoisted_12 = {
   "class": "text-xs"
 };
 var _hoisted_13 = {
+  "class": "px-6 py-2 w-1/4"
+};
+var _hoisted_14 = {
+  "class": "text-sm font-medium text-gray-900"
+};
+var _hoisted_15 = {
   "class": "px-6 py-2 w-auto float-right"
 };
 
@@ -30530,7 +30621,9 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
     to: $props.reservation.end
   }, null, 8
   /* PROPS */
-  , ["from", "to"])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("td", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_tooltip, {
+  , ["from", "to"])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("td", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.reservation.zone.code), 1
+  /* TEXT */
+  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("td", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_tooltip, {
     "class": "flex gap-1"
   }, {
     data: _withId(function () {
@@ -30556,7 +30649,7 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
       }, null, 8
       /* PROPS */
       , ["onClick"]), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, !$props.disable]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_icon, {
-        onClick: $options.edit,
+        onClick: $options.complete,
         color: "green",
         "class": "hover:opacity-100 opacity-25",
         name: "exit"
@@ -30616,33 +30709,32 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
   var _component_jet_button = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("jet-button");
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("form", {
-    onKeypress: _cache[8] || (_cache[8] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withKeys)(function () {
+    onKeypress: _cache[7] || (_cache[7] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withKeys)(function () {
       return $options.save && $options.save.apply($options, arguments);
     }, ["enter"])),
-    onSubmit: _cache[9] || (_cache[9] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
+    onSubmit: _cache[8] || (_cache[8] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
       return $options.save && $options.save.apply($options, arguments);
     }, ["prevent"]))
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_1, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.parkingTypes, function (type) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_parking_type, {
       type: type,
-      onSelect: _cache[1] || (_cache[1] = function ($event) {
-        return $options.selectParkingType($event);
-      }),
-      selected: $options.isSelectedType(type)
+      onSelect: $options.selectParkingType,
+      selected: $options.isSelectedType(type),
+      reservation: $props.reservation
     }, null, 8
     /* PROPS */
-    , ["type", "selected"]);
+    , ["type", "onSelect", "selected", "reservation"]);
   }), 256
   /* UNKEYED_FRAGMENT */
   )), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
-    message: $data.form.errors.parkingType,
+    message: $data.form.errors.type,
     "class": "clear-both text-xs font-bold"
   }, null, 8
   /* PROPS */
   , ["message"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
     ref: "focus",
     modelValue: $data.form.vehicle.plate,
-    "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
+    "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
       return $data.form.vehicle.plate = $event;
     }),
     placeholder: _ctx.$t('Plate'),
@@ -30656,7 +30748,7 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
   /* PROPS */
   , ["message"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
     modelValue: $data.form.vehicle.model,
-    "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
+    "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
       return $data.form.vehicle.model = $event;
     }),
     placeholder: _ctx.$t('Model'),
@@ -30665,7 +30757,7 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
   /* PROPS */
   , ["modelValue", "placeholder"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
     modelValue: $data.form.vehicle.color,
-    "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
+    "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
       return $data.form.vehicle.color = $event;
     }),
     placeholder: _ctx.$t('Color'),
@@ -30674,7 +30766,7 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
   /* PROPS */
   , ["modelValue", "placeholder"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
     modelValue: $data.form.vehicle.user.name,
-    "onUpdate:modelValue": _cache[5] || (_cache[5] = function ($event) {
+    "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
       return $data.form.vehicle.user.name = $event;
     }),
     placeholder: _ctx.$t('Client'),
@@ -30683,24 +30775,23 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
   /* PROPS */
   , ["modelValue", "placeholder"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_select, {
     modelValue: $data.form.zone,
-    "onUpdate:modelValue": _cache[6] || (_cache[6] = function ($event) {
+    "onUpdate:modelValue": _cache[5] || (_cache[5] = function ($event) {
       return $data.form.zone = $event;
     }),
-    options: $data.form.parkingType.availableZones,
+    options: $data.form.type.availableZones,
     label: "code",
-    "track-by": "id",
+    "track-by": "code",
     icon: "point",
-    placeholder: _ctx.$t('Zone'),
-    onInput: $options.changeZone
+    placeholder: _ctx.$t('Zone')
   }, null, 8
   /* PROPS */
-  , ["modelValue", "options", "placeholder", "onInput"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
+  , ["modelValue", "options", "placeholder"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
     message: $data.form.errors['zone.id'],
     "class": "clear-both text-xs font-bold"
   }, null, 8
   /* PROPS */
   , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_button, {
-    onClick: _cache[7] || (_cache[7] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
+    onClick: _cache[6] || (_cache[6] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
       _ctx.$emit('close');
     }, ["prevent"])),
     color: "transparent",
@@ -30770,16 +30861,21 @@ var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("
 );
 
 var _hoisted_5 = {
+  key: 0,
   "class": "pt-2"
 };
 var _hoisted_6 = {
-  "class": "w-auto float-right text-right font-bold"
+  key: 1,
+  "class": "pt-2"
 };
 var _hoisted_7 = {
+  "class": "w-auto float-right text-right font-bold"
+};
+var _hoisted_8 = {
   "class": "text-3xl"
 };
 
-var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br", null, null, -1
+var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br", null, null, -1
 /* HOISTED */
 );
 
@@ -30788,10 +30884,12 @@ var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("
 var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data, $options) {
   var _component_icon = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("icon");
 
+  var _component_time_ago = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("time-ago");
+
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
-    "class": ["w-full shadow cursor-pointer rounded-xl", $options.mainColor + ' ' + $options.textColor],
-    onClick: _cache[1] || (_cache[1] = function ($event) {
-      return _ctx.$emit('select', $props.type);
+    "class": ["w-full shadow rounded-xl", $options.mainColor + ' ' + $options.textColor + ($props.selected ? '' : ' cursor-pointer')],
+    onClick: _cache[1] || (_cache[1] = function () {
+      return $options.select && $options.select.apply($options, arguments);
     })
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
     "class": ["w-auto rounded-md p-3 text-center", "bg-".concat($options.vehicleType.color, "-100")]
@@ -30806,11 +30904,16 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
   /* CLASS */
   ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", _hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.vehicleType.name), 1
   /* TEXT */
-  ), _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.type.available) + " " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$t('available')), 1
+  ), _hoisted_4, $props.reservation && $props.reservation.start ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("span", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_time_ago, {
+    from: $props.reservation.start,
+    to: $props.reservation.end
+  }, null, 8
+  /* PROPS */
+  , ["from", "to"])])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("span", _hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.type.available) + " " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$t('available')), 1
   /* TEXT */
-  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", _hoisted_7, " $" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.type.tariff), 1
+  ))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", _hoisted_8, " $" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.type.tariff), 1
   /* TEXT */
-  ), _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$t('minute')), 1
+  ), _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$t('minute')), 1
   /* TEXT */
   )])])], 2
   /* CLASS */
@@ -30939,25 +31042,35 @@ var _hoisted_14 = {
 };
 var _hoisted_15 = {
   scope: "col",
-  "class": "px-6 py-3 text-right text-sm  text-gray-400 uppercase"
+  "class": "px-6 py-3 text-left text-sm text-gray-400 uppercase"
 };
 var _hoisted_16 = {
-  "class": ""
+  scope: "col",
+  "class": "px-6 py-3 text-right text-sm  text-gray-400 uppercase"
 };
 var _hoisted_17 = {
+  "class": ""
+};
+var _hoisted_18 = {
   key: 1,
   "class": "bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6"
 };
-var _hoisted_18 = {
+var _hoisted_19 = {
   "class": "text-sm font-medium text-gray-500"
 };
-var _hoisted_19 = {
+var _hoisted_20 = {
   key: 0
 };
-var _hoisted_20 = {
+var _hoisted_21 = {
   key: 1
 };
-var _hoisted_21 = {
+var _hoisted_22 = {
+  "class": "ml-1"
+};
+
+var _hoisted_23 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)();
+
+var _hoisted_24 = {
   "class": "ml-1"
 };
 
@@ -31023,30 +31136,26 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
       /* TEXT */
       ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("th", _hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$t('Status')), 1
       /* TEXT */
-      ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("th", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", _hoisted_16, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$t('Actions')), 1
+      ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("th", _hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$t('Zone')), 1
+      /* TEXT */
+      ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("th", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", _hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$t('Actions')), 1
       /* TEXT */
       )])])];
     }),
     body: _withId(function () {
       return [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($options.sortedList, function (reservation, index) {
-        return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [!reservation.edit && !reservation.create ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_reservation_detail, {
-          key: 0,
+        return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_reservation_detail, {
           reservation: reservation,
           disable: $options.disable,
           "class": {
             'bg-gray-50': index % 2 !== 0
           },
-          onEdit: _cache[3] || (_cache[3] = function ($event) {
-            return $options.edit();
-          }),
-          onRefresh: _cache[4] || (_cache[4] = function ($event) {
-            return $options.refresh();
-          })
+          onEdit: $options.setModal,
+          onComplete: $options.setModal,
+          onRefresh: $options.refresh
         }, null, 8
         /* PROPS */
-        , ["reservation", "disable", "class"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)], 64
-        /* STABLE_FRAGMENT */
-        );
+        , ["reservation", "disable", "class", "onEdit", "onComplete", "onRefresh"]);
       }), 256
       /* UNKEYED_FRAGMENT */
       ))];
@@ -31054,7 +31163,7 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
     _: 1
     /* STABLE */
 
-  })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), !$data.list.length && !$data.loading ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("dt", _hoisted_18, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_action_message, {
+  })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), !$data.list.length && !$data.loading ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_18, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("dt", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_action_message, {
     on: true
   }, {
     "default": _withId(function () {
@@ -31067,17 +31176,15 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
 
   })])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_dialog_modal, {
     show: $options.showModalForm,
-    onClose: _cache[6] || (_cache[6] = function ($event) {
-      return $data.dataForm = null;
-    }),
+    onClose: $options.closeModal,
     width: "md"
   }, {
     title: _withId(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h1", null, [$data.dataForm.create ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("span", _hoisted_19, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$t('Create')), 1
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h1", null, [$data.dataForm.create ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("span", _hoisted_20, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$t('Create')), 1
       /* TEXT */
-      )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $data.dataForm.edit ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("span", _hoisted_20, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$t('Edit')), 1
+      )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $data.dataForm.edit ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("span", _hoisted_21, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$t('Edit')), 1
       /* TEXT */
-      )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", _hoisted_21, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$t('Reservation')), 1
+      )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", _hoisted_22, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$t('Reservation')), 1
       /* TEXT */
       )])];
     }),
@@ -31085,7 +31192,7 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_reservation_form, {
         reservation: $data.dataForm,
         onRefresh: $options.refresh,
-        onClose: _cache[5] || (_cache[5] = function ($event) {
+        onClose: _cache[3] || (_cache[3] = function ($event) {
           return $data.dataForm = null;
         })
       }, null, 8
@@ -31097,7 +31204,35 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
 
   }, 8
   /* PROPS */
-  , ["show"])]);
+  , ["show", "onClose"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_dialog_modal, {
+    show: $options.showModalComplete,
+    onClose: $options.closeModal,
+    width: "md"
+  }, {
+    title: _withId(function () {
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h1", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$t('Terminate')), 1
+      /* TEXT */
+      ), _hoisted_23, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", _hoisted_24, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$t('Reservation')), 1
+      /* TEXT */
+      )])];
+    }),
+    content: _withId(function () {
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_reservation_form, {
+        reservation: $data.dataForm,
+        onRefresh: $options.refresh,
+        onClose: _cache[4] || (_cache[4] = function ($event) {
+          return $data.dataForm = null;
+        })
+      }, null, 8
+      /* PROPS */
+      , ["reservation", "onRefresh"])];
+    }),
+    _: 1
+    /* STABLE */
+
+  }, 8
+  /* PROPS */
+  , ["show", "onClose"])]);
 });
 
 /***/ }),
@@ -81237,7 +81372,7 @@ webpackContext.id = "./resources/js/Pages sync recursive ^\\.\\/.*$";
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('{"Home":"Inicio","Create":"Crear","Created":"Creado","Update":"Actualizar","Save":"Guardar","Saved":"Guardado","save":"guardar","Delete":"Eliminar","delete":"eliminar","Cancel":"Cancelar","Close":"Cerrar","Route":"Ruta","Company":"Empresa","company":"empresa","Routes":"Rutas","Reports":"Reportes","Report":"Reporte","report":"reporte","Search report":"Consultar reporte","Date report":"Fecha de Reporte","Search":"Buscar","Query":"Consultar","Vehicle":"Vehículo","vehicle":"vehículo","Vehicles":"Vehículos","vehicles":"vehículos","Round Trip":"Vuelta","round trip":"vuelta","Turn":"Turno","Turns":"Turnos","turn":"turnos","turns":"turnos","No registers found":"No se encontraron registros","No dispatch registers found":"No se encontraron despachos","Select an option":"Seleccione","Select a route":"Seleccione una ruta","Select a vehicle":"Seleccione un vehículo","Select an vehicle":"Seleccione un vehículo","Select a company":"Seleccione una empresa","Loading...":"Cargando...","No routes found":"Sin rutas","No vehicles found":"Sin vehículos","Actions":"Acciones","Detail":"Ver detalle","Report detail":"Ver reporte","Hide / Show":"Ocultar / Mostrar","Remove":"Eliminar","Round trip":"Vuelta","Track on map":"Seguimiento en el mapa","List":"Lista","Oops, something went wrong!":"Opps, parece que algo anda mal :(","of the route":"de la ruta","No report found for this vehicle":"No se ha encontrado ningún reporte para este vehículo","No passengers report found for this vehicle":"No se ha encontrado ningún reporte de pasajeros para este vehículo","Route info":"Información de la ruta","Route report":"Reporte de ruta","Control point going":"Ida","Control point return":"Regreso","Passengers report":"Reporte de pasajeros","Register historic":"Histórico de registro","Passengers":"Pasajeros","Seat":"Asiento","Seats":"Asientos","seat":"asiento","seats":"asientos","Time":"Hora","Event active time":"Ocupado a las","Event inactive time":"Libre a las","Active time":"Activo durante","Active kilometers":"Kilómetros","Feature on development":"Funcionalidad en desarrollo","Still busy":"Ocupado aún","Username":"Usuario","Password":"Contraseña","Remember Me":"Recuérdame","Login":"Ingresar","Log In":"Inicia sesión","Type your credentials":"Ingresa tus credenciales","Confirm Password":"Confirma Contraseña","Register":"Registro","Name":"Nombre","Logout":"Cerrar Sesión","Passengers_Report_":"Reporte_Pasajeros_","Passengers Report":"Reporte de pasajeros","Export excel":"Exportar a excel","Export":"Exportar","Date":"Fecha","All Routes":"Todas las rutas","All routes":"Todas las rutas","passengers":"pasajeros","Status":"Estado","status":"estado","Address":"Dirección","Users":"Usuarios","All":"Todos","all":"todos","reports":"reportes","routes":"rutas","route":"ruta","users":"usuarios","Plate":"Placa","Departure time":"Hora despachado","Departure":"Salida","Arrived":"Llegada","Arrival time":"Hora de llegada","Driver":"Operador","Drivers":"Operadores","driver":"operador","drivers":"operadores","Dispatchers":"Despachadores","dispatchers":"despachadores","Options":"Opciones","Edit":"Modificar","Clear":"Limpiar","Number":"Número","Profile":"Perfil","Profile information":"Información del perfil","Update the profile information associated with your account":"Actualice la información del perfil asociada a su cuenta","Make sure your account is using a long, random password for added security":"Asegúrese de que su cuenta esté usando una contraseña larga y aleatoria para mayor seguridad","Manage and logout your active sessions on other browsers and devices":"Administre y cierre sus sus sesiones activas en otros navegadores y dispositivos","If necessary, you may logout of all of your other browser sessions across all of your devices":"Si es necesario, puede cerrar las sesiones de su navegador en todos sus dispositivos","If you feel your account has been compromised, you should also update your password":"Si cree que su cuenta se ha visto comprometida, considere actualizar su contraseña","Are you sure you want to delete this register?":"Está seguro de que desea eliminar este registro?","Are you sure you want to delete your account?":"Está seguro de que desea eliminar su cuenta?","Are you sure you want to delete this turn?":"Está seguro de que desea eliminar este turno?","Are you sure you want to annul this dispatch?":"Está seguro de que desea anular este despacho?","Are you sure you want to delete this bearing?":"Está seguro de que desea eliminar esta programación?","Once your account is deleted, all of its resources and data will be permanently deleted":"Una vez que se elimine su cuenta, todos sus recursos y datos se eliminarán permanentemente","Please enter your password to confirm you would like to permanently delete your account":"Ingrese su contraseña para confirmar que desea eliminar permanentemente su cuenta","Before deleting your account, please download any data or information that you wish to retain":"Antes de eliminar su cuenta, descargue cualquier dato o información que desee conservar","Add additional security to your account using two factor authentication":"Agregue seguridad adicional a su cuenta mediante el factor de autenticación doble","You have not enabled two factor authentication":"Aún no ha habilitado el factor de autenticación doble","You have enabled two factor authentication":"El factor de autenticación doble está habilitado","When two factor authentication is enabled, you will be prompted for a secure, random token during authentication":"Cuando el factor de autenticación doble está habilitado, se le pedirá un token aleatorio y seguro durante el inicio de sesión","You may retrieve this token from your phone\'s Google Authenticator application":"Puede recuperar este token por medio de la aplicación Google Authenticator instalada en su teléfono","Two factor authentication is now enabled. Scan the following QR code using your phone\'s authenticator application":"La autenticación de doble factor se ha habilitado. Escanee el siguiente código QR usando la aplicación Google Authenticator instalada en su teléfono","Store these recovery codes in a secure password manager. They can be used to recover access to your account if your two factor authentication device is lost":"Guarde estos códigos de restauración en un administrador de contraseñas seguro. Se pueden usar para recuperar el acceso a su cuenta si pierde su dispositivo de autenitcación","For security, please confirm your password to continue":"Por seguridad, porfavor confirme su contraseña para continuar","Please enter your password to confirm you would like to logout of your other browser sessions across all of your devices":"Ingrese su contraseña para confirmar que desea cerrar las otras sesiones en todos sus dispositivos","This password does not match our records":"Esta contraseña no coincide con nuestros registros","Photo":"Foto","Select a new photo":"Seleccionar una nueva foto","Email":"Correo","Current password":"Contraseña actual","Remove photo":"Eliminar foto","Switch teams":"Seleccionar equipos","Team settings":"Ajuste de equipos","Manage team":"Administrar equipos","Create new team":"Crear equipo","API tokens":"Llaves de acceso","Manage account":"Administrar cuenta","Update password":"Actualizar contraseña","New password":"Nueva contraseña","Confirm password":"Confirmar contraseña","User sessions":"Sesiones de usuario","This device":"Este dispositivo","Last active :hours hours ago":"Last active :hours hours ago","Active":"Activo","Logout all sessions":"Cerrar todas las sesiones","Enable":"Habilitar","Delete account":"Eliminar cuenta","Permanently delete your account":"Elimina la cuenta permanentemente","Two factor authentication":"Factor de autenticación doble","Regenerate recovery codes":"Generar nuevos códigos de restauración","Show recovery codes":"Mostrar códigos de restauración","Disable":"Deshabilitar","Confirm":"Confirmar","Bearing":"Rodamiento","bearing":"rodamiento","Operation":"Operación","Dispatch of vehicles":"Despacho de vehículos","Dispatches":"Despachos","Dispatch":"Despacho","To dispatch":"Despachar","Administration":"Administración","Companies":"Empresas","No registers":"Sin registros","Main":"Principal","Are you sure you want to delete this company?":"Está seguro que desea eliminar esta empresa?","Are you sure you want to delete this vehicle?":"Está seguro que desea eliminar este vehículo?","Are you sure you want to delete this route?":"Está seguro que desea eliminar esta ruta?","Are you sure you want to delete this associated?":"Está seguro que desea eliminar este asociado?","Are you sure you want to delete this driver?":"Está seguro que desea eliminar este Operador?","Are you sure you want to delete this city?":"Está seguro que desea eliminar esta ciudad?","Are you sure you want to delete this passenger?":"Está seguro que desea eliminar este pasajero?","Are you sure you want to delete this office?":"Está seguro que desea eliminar esta oficina?","Are you sure you want to delete this service type?":"Está seguro que desea eliminar este tipo de servicio?","For security enter the company name":"Por seguridad ingrese el nombre de la empresa","For security enter the vehicle plate":"Por seguridad ingrese la placa del vehículo","For security enter the route name":"Por seguridad ingrese el nombre de la ruta","For security enter the office name":"Por seguridad ingrese el nombre de la oficina","For security enter the service type name":"Por seguridad ingrese el nombre del tipo de servicio","capacity":"capacidad","Associates":"Asociados","Associated":"Asociado","associated":"asociado","Office":"Oficina","Offices":"Oficinas","office":"oficina","offices":"oficinas","Last name":"Apellido","Identity":"Identificación","Capacity":"Capacidad","Select":"Seleccione","Updated at":"Modificado","Description":"Descripción","Global":"Global","Dashboard":"Panel de Control","Code":"Código","days":"días","associates":"associados","destinations":"destinos","No elements found":"No encontrado","current":"actual","City":"Ciudad","city":"ciudad","Cities":"Ciudades","cities":"ciudades","Tariff":"Tarifa","tariff":"tarifa","Destination":"Destino","Service type":"Tipo de servicio","Updated":"Actualizado","Type":"Tipo","Service types":"Tipos de servicio","service type":"tipo de servicio","service types":"tipos de servicio","Type at least 3 chars":"Escriba al menos 3 caractéres","Type at least 2 chars":"Escriba al menos 2 caractéres","Current turn":"Turno actual","Generate":"Generar","Open":"Abrir","Closed":"Cerrado","Active turn":"Turno activo","Closed turn":"Turno cerrado","Start date":"Fecha inicio","End date":"Fecha fin","User":"Usuario","Manage bearing":"Administrar rodamiento","Manage":"Administrar","Unassigned":"No asignado","Empty":"Vacío","Reserved":"Reservado","Details":"Detalles","Usage rate":"Tasa de uso","Usage r.":"T. de uso","Ramp":"Rampa","Dispatched":"Despachado","In ramp":"En rampa","dispatch":"despacho","Sell":"Vender","Seating":"Asientos","seating":"asientos","available":"disponibles","Today":"Hoy","Now":"Ahora","Yesterday":"Ayer","Tomorrow":"Mañana","Passenger":"Pasajero","Origin":"Origen","In ramp from":"En rampa desde","Remember me":"Mantener sesión abierta","Redirecting":"Redireccionando","Only one active session is allowed":"Solo se permite una sesión activa","Log out of the following devices":"Cierre la session en los siguientes dispositivos","Logout other sessions":"Cerrar otras sessiones","Register new passenger":"Registrar nuevo pasajero","Print":"Imprimir","Register dispatch":"Despachar vehículo","Are you sure you want to dispatch this vehicle?":"Confirme el despacho del siguiente vehículo","dispatches":"despachos","STQ":"Sistema de tiquetes QR","Department":"Departamento","NIT":"NIT","In 15 minutes":"En 15 min.","In 30 minutes":"En 30 min.","In 1 hour":"En 1 hora","Dispatcher":"Despachador","System":"Sistema","Administrator":"Administrador","Administrator users can perform any action":"Los usuarios administradores tienen acceso total","Supervisor users have the ability to read, create, and update":"Los usuarios Supervisores pueden realizar acciones de Lectura, Creación y Modificación","Dispatcher users have the ability to read and update":"Los usuarios Despachadores pueden realizar acciones de Lectura y Modificación","Team members":"Miembros del equipo","Team Settings":"Ajuste","Please provide the an existing email to add to this team":"Porfavor ingresa un correo existente para asociarlo a este equipo","Add team member":"Agregar usuario","Add a new user to your team":"Agrega un nuevo usuario a tu equipo","This user already belongs to the team.":"Este usuario ya se encuentra en el equipo","Added":"Agregado","Add":"Agregar","All of the people that are part of this team":"Todas las personas que forman parte del equipo","Role":"Rol","Team name":"Nombre del equipo","The team\'s name and owner information":"Nombre del equipo e información del propietario","Owner":"Propietario","Manage role":"Administar rol","Remove team member":"Eliminar miembro del equipo","Are you sure you would like to remove this person from the team?":"Está seguro que desea eliminar este miembro del equipo?","Leave":"Abandonar","Leave team":"Abandonar equipo","Are you sure you would like to leave this team?":"Está seguro que desea abandonar este equipo?","We were unable to find a registered user with this email address.":"No pudimos encontrar un usuario registrado con este correo","Delete team":"Eliminar equipo","Permanently delete this team":"Elimina este equipo de manera permanente","Once a team is deleted, all of its resources and data will be permanently deleted. Before deleting this team, please download any data or information that you wish to retain":"Una vez que se elimina un equipo, todos sus recursos y datos se eliminarán de forma permanente. Antes de eliminar este equipo, descargue cualquier dato o información que desee conservar","Are you sure you want to delete this team? Once a team is deleted, all of its resources and data will be permanently deleted":"¿Estás seguro de que deseas eliminar este equipo? Una vez que se elimina un equipo, todos sus recursos y datos se eliminarán de forma permanente","Team details":"Detalles del equipo","Team":"Equipo","Whoops! Something went wrong":"Whoops! algo salió mal","The :attribute must be at least :min characters":"Al menos  :min caracteres","Forbidden":"Acceso no autorizado","This action is unauthorized.":"Esta acción no está autorizada","Team of":"Equipo de","Manage users":"Administrar usuarios","Teams":"Equipos","username":"usuario","Admin users":"Administrar usuarios","The password confirmation does not match.":"Las constraseñas no coinciden","dispatcher":"despachador","system":"analista","Analyst":"Analista","analyst":"analista","admin":"administrator","owner":"administrador","Unassigned rol":"Sin rol","« Previous":"« Anterior","Next »":"« Siguiente","Parent route":"Ruta padre","annul":"anular","Annul":"Anular","Type a description":"Ingrese una descripción","Print driver report":"Imprimir reporte para operador","The time departure should be greater than current time":"La hora de salida debe ser mayor que la hora actual","Transactions":"Transacciones","Service":"Servicio","My dispatches":"Mis despachos","Value":"Valor","TOTAL":"TOTAL","Vehicle associates":"Asociados del vehículo","Vehicle associated":"Asociado del vehículo","Initial date":"Fecha inicial","Current":"Actual","Info":"Info","Total":"Total","By range":"Por rango","By day":"Por día","Last week":"-1 semana","Last month":"-1 mes","Charge":"Valor","Clear filters":"Borrar filtros","Turn number":"# Turno","to":"a","Clients":"Clientes","Account":"Cuenta","Reservations":"Reservaciones","Reservation":"Reservación","Model":"Modelo","Client":"Cliente","Zone":"Zona","Color":"Color","minute":"minuto","Id":"Id","Parked":"Parqueado","Log in":"Ingresar","Finished":"Finalizado","In total":"En total","Vehicle plate is required":"Se requiere la placa del vehículo","Zone is required":"Especifique la zona de parqueo","minutes":"minutos","Internal":"Interno","reservation":"reservación"}');
+module.exports = JSON.parse('{"Home":"Inicio","Create":"Crear","Created":"Creado","Update":"Actualizar","Save":"Guardar","Saved":"Guardado","save":"guardar","Delete":"Eliminar","delete":"eliminar","Cancel":"Cancelar","Close":"Cerrar","Route":"Ruta","Company":"Empresa","company":"empresa","Routes":"Rutas","Reports":"Reportes","Report":"Reporte","report":"reporte","Search report":"Consultar reporte","Date report":"Fecha de Reporte","Search":"Buscar","Query":"Consultar","Vehicle":"Vehículo","vehicle":"vehículo","Vehicles":"Vehículos","vehicles":"vehículos","Round Trip":"Vuelta","round trip":"vuelta","Turn":"Turno","Turns":"Turnos","turn":"turnos","turns":"turnos","No registers found":"No se encontraron registros","No dispatch registers found":"No se encontraron despachos","Select an option":"Seleccione","Select a route":"Seleccione una ruta","Select a vehicle":"Seleccione un vehículo","Select an vehicle":"Seleccione un vehículo","Select a company":"Seleccione una empresa","Loading...":"Cargando...","No routes found":"Sin rutas","No vehicles found":"Sin vehículos","Actions":"Acciones","Detail":"Ver detalle","Report detail":"Ver reporte","Hide / Show":"Ocultar / Mostrar","Remove":"Eliminar","Round trip":"Vuelta","Track on map":"Seguimiento en el mapa","List":"Lista","Oops, something went wrong!":"Opps, parece que algo anda mal :(","of the route":"de la ruta","No report found for this vehicle":"No se ha encontrado ningún reporte para este vehículo","No passengers report found for this vehicle":"No se ha encontrado ningún reporte de pasajeros para este vehículo","Route info":"Información de la ruta","Route report":"Reporte de ruta","Control point going":"Ida","Control point return":"Regreso","Passengers report":"Reporte de pasajeros","Register historic":"Histórico de registro","Passengers":"Pasajeros","Seat":"Asiento","Seats":"Asientos","seat":"asiento","seats":"asientos","Time":"Hora","Event active time":"Ocupado a las","Event inactive time":"Libre a las","Active time":"Activo durante","Active kilometers":"Kilómetros","Feature on development":"Funcionalidad en desarrollo","Still busy":"Ocupado aún","Username":"Usuario","Password":"Contraseña","Remember Me":"Recuérdame","Login":"Ingresar","Log In":"Inicia sesión","Type your credentials":"Ingresa tus credenciales","Confirm Password":"Confirma Contraseña","Register":"Registro","Name":"Nombre","Logout":"Cerrar Sesión","Passengers_Report_":"Reporte_Pasajeros_","Passengers Report":"Reporte de pasajeros","Export excel":"Exportar a excel","Export":"Exportar","Date":"Fecha","All Routes":"Todas las rutas","All routes":"Todas las rutas","passengers":"pasajeros","Status":"Estado","status":"estado","Address":"Dirección","Users":"Usuarios","All":"Todos","all":"todos","reports":"reportes","routes":"rutas","route":"ruta","users":"usuarios","Plate":"Placa","Departure time":"Hora despachado","Departure":"Salida","Arrived":"Llegada","Arrival time":"Hora de llegada","Driver":"Operador","Drivers":"Operadores","driver":"operador","drivers":"operadores","Dispatchers":"Despachadores","dispatchers":"despachadores","Options":"Opciones","Edit":"Modificar","Clear":"Limpiar","Number":"Número","Profile":"Perfil","Profile information":"Información del perfil","Update the profile information associated with your account":"Actualice la información del perfil asociada a su cuenta","Make sure your account is using a long, random password for added security":"Asegúrese de que su cuenta esté usando una contraseña larga y aleatoria para mayor seguridad","Manage and logout your active sessions on other browsers and devices":"Administre y cierre sus sus sesiones activas en otros navegadores y dispositivos","If necessary, you may logout of all of your other browser sessions across all of your devices":"Si es necesario, puede cerrar las sesiones de su navegador en todos sus dispositivos","If you feel your account has been compromised, you should also update your password":"Si cree que su cuenta se ha visto comprometida, considere actualizar su contraseña","Are you sure you want to delete this register?":"Está seguro de que desea eliminar este registro?","Are you sure you want to delete your account?":"Está seguro de que desea eliminar su cuenta?","Are you sure you want to delete this turn?":"Está seguro de que desea eliminar este turno?","Are you sure you want to annul this dispatch?":"Está seguro de que desea anular este despacho?","Are you sure you want to delete this bearing?":"Está seguro de que desea eliminar esta programación?","Once your account is deleted, all of its resources and data will be permanently deleted":"Una vez que se elimine su cuenta, todos sus recursos y datos se eliminarán permanentemente","Please enter your password to confirm you would like to permanently delete your account":"Ingrese su contraseña para confirmar que desea eliminar permanentemente su cuenta","Before deleting your account, please download any data or information that you wish to retain":"Antes de eliminar su cuenta, descargue cualquier dato o información que desee conservar","Add additional security to your account using two factor authentication":"Agregue seguridad adicional a su cuenta mediante el factor de autenticación doble","You have not enabled two factor authentication":"Aún no ha habilitado el factor de autenticación doble","You have enabled two factor authentication":"El factor de autenticación doble está habilitado","When two factor authentication is enabled, you will be prompted for a secure, random token during authentication":"Cuando el factor de autenticación doble está habilitado, se le pedirá un token aleatorio y seguro durante el inicio de sesión","You may retrieve this token from your phone\'s Google Authenticator application":"Puede recuperar este token por medio de la aplicación Google Authenticator instalada en su teléfono","Two factor authentication is now enabled. Scan the following QR code using your phone\'s authenticator application":"La autenticación de doble factor se ha habilitado. Escanee el siguiente código QR usando la aplicación Google Authenticator instalada en su teléfono","Store these recovery codes in a secure password manager. They can be used to recover access to your account if your two factor authentication device is lost":"Guarde estos códigos de restauración en un administrador de contraseñas seguro. Se pueden usar para recuperar el acceso a su cuenta si pierde su dispositivo de autenitcación","For security, please confirm your password to continue":"Por seguridad, porfavor confirme su contraseña para continuar","Please enter your password to confirm you would like to logout of your other browser sessions across all of your devices":"Ingrese su contraseña para confirmar que desea cerrar las otras sesiones en todos sus dispositivos","This password does not match our records":"Esta contraseña no coincide con nuestros registros","Photo":"Foto","Select a new photo":"Seleccionar una nueva foto","Email":"Correo","Current password":"Contraseña actual","Remove photo":"Eliminar foto","Switch teams":"Seleccionar equipos","Team settings":"Ajuste de equipos","Manage team":"Administrar equipos","Create new team":"Crear equipo","API tokens":"Llaves de acceso","Manage account":"Administrar cuenta","Update password":"Actualizar contraseña","New password":"Nueva contraseña","Confirm password":"Confirmar contraseña","User sessions":"Sesiones de usuario","This device":"Este dispositivo","Last active :hours hours ago":"Last active :hours hours ago","Active":"Activo","Logout all sessions":"Cerrar todas las sesiones","Enable":"Habilitar","Delete account":"Eliminar cuenta","Permanently delete your account":"Elimina la cuenta permanentemente","Two factor authentication":"Factor de autenticación doble","Regenerate recovery codes":"Generar nuevos códigos de restauración","Show recovery codes":"Mostrar códigos de restauración","Disable":"Deshabilitar","Confirm":"Confirmar","Bearing":"Rodamiento","bearing":"rodamiento","Operation":"Operación","Dispatch of vehicles":"Despacho de vehículos","Dispatches":"Despachos","Dispatch":"Despacho","To dispatch":"Despachar","Administration":"Administración","Companies":"Empresas","No registers":"Sin registros","Main":"Principal","Are you sure you want to delete this company?":"Está seguro que desea eliminar esta empresa?","Are you sure you want to delete this vehicle?":"Está seguro que desea eliminar este vehículo?","Are you sure you want to delete this route?":"Está seguro que desea eliminar esta ruta?","Are you sure you want to delete this associated?":"Está seguro que desea eliminar este asociado?","Are you sure you want to delete this driver?":"Está seguro que desea eliminar este Operador?","Are you sure you want to delete this city?":"Está seguro que desea eliminar esta ciudad?","Are you sure you want to delete this passenger?":"Está seguro que desea eliminar este pasajero?","Are you sure you want to delete this office?":"Está seguro que desea eliminar esta oficina?","Are you sure you want to delete this service type?":"Está seguro que desea eliminar este tipo de servicio?","For security enter the company name":"Por seguridad ingrese el nombre de la empresa","For security enter the vehicle plate":"Por seguridad ingrese la placa del vehículo","For security enter the route name":"Por seguridad ingrese el nombre de la ruta","For security enter the office name":"Por seguridad ingrese el nombre de la oficina","For security enter the service type name":"Por seguridad ingrese el nombre del tipo de servicio","capacity":"capacidad","Associates":"Asociados","Associated":"Asociado","associated":"asociado","Office":"Oficina","Offices":"Oficinas","office":"oficina","offices":"oficinas","Last name":"Apellido","Identity":"Identificación","Capacity":"Capacidad","Select":"Seleccione","Updated at":"Modificado","Description":"Descripción","Global":"Global","Dashboard":"Panel de Control","Code":"Código","days":"días","associates":"associados","destinations":"destinos","No elements found":"No encontrado","current":"actual","City":"Ciudad","city":"ciudad","Cities":"Ciudades","cities":"ciudades","Tariff":"Tarifa","tariff":"tarifa","Destination":"Destino","Service type":"Tipo de servicio","Updated":"Actualizado","Type":"Tipo","Service types":"Tipos de servicio","service type":"tipo de servicio","service types":"tipos de servicio","Type at least 3 chars":"Escriba al menos 3 caractéres","Type at least 2 chars":"Escriba al menos 2 caractéres","Current turn":"Turno actual","Generate":"Generar","Open":"Abrir","Closed":"Cerrado","Active turn":"Turno activo","Closed turn":"Turno cerrado","Start date":"Fecha inicio","End date":"Fecha fin","User":"Usuario","Manage bearing":"Administrar rodamiento","Manage":"Administrar","Unassigned":"No asignado","Empty":"Vacío","Reserved":"Reservado","Details":"Detalles","Usage rate":"Tasa de uso","Usage r.":"T. de uso","Ramp":"Rampa","Dispatched":"Despachado","In ramp":"En rampa","dispatch":"despacho","Sell":"Vender","Seating":"Asientos","seating":"asientos","available":"disponibles","Today":"Hoy","Now":"Ahora","Yesterday":"Ayer","Tomorrow":"Mañana","Passenger":"Pasajero","Origin":"Origen","In ramp from":"En rampa desde","Remember me":"Mantener sesión abierta","Redirecting":"Redireccionando","Only one active session is allowed":"Solo se permite una sesión activa","Log out of the following devices":"Cierre la session en los siguientes dispositivos","Logout other sessions":"Cerrar otras sessiones","Register new passenger":"Registrar nuevo pasajero","Print":"Imprimir","Register dispatch":"Despachar vehículo","Are you sure you want to dispatch this vehicle?":"Confirme el despacho del siguiente vehículo","dispatches":"despachos","STQ":"Sistema de tiquetes QR","Department":"Departamento","NIT":"NIT","In 15 minutes":"En 15 min.","In 30 minutes":"En 30 min.","In 1 hour":"En 1 hora","Dispatcher":"Despachador","System":"Sistema","Administrator":"Administrador","Administrator users can perform any action":"Los usuarios administradores tienen acceso total","Supervisor users have the ability to read, create, and update":"Los usuarios Supervisores pueden realizar acciones de Lectura, Creación y Modificación","Dispatcher users have the ability to read and update":"Los usuarios Despachadores pueden realizar acciones de Lectura y Modificación","Team members":"Miembros del equipo","Team Settings":"Ajuste","Please provide the an existing email to add to this team":"Porfavor ingresa un correo existente para asociarlo a este equipo","Add team member":"Agregar usuario","Add a new user to your team":"Agrega un nuevo usuario a tu equipo","This user already belongs to the team.":"Este usuario ya se encuentra en el equipo","Added":"Agregado","Add":"Agregar","All of the people that are part of this team":"Todas las personas que forman parte del equipo","Role":"Rol","Team name":"Nombre del equipo","The team\'s name and owner information":"Nombre del equipo e información del propietario","Owner":"Propietario","Manage role":"Administar rol","Remove team member":"Eliminar miembro del equipo","Are you sure you would like to remove this person from the team?":"Está seguro que desea eliminar este miembro del equipo?","Leave":"Abandonar","Leave team":"Abandonar equipo","Are you sure you would like to leave this team?":"Está seguro que desea abandonar este equipo?","We were unable to find a registered user with this email address.":"No pudimos encontrar un usuario registrado con este correo","Delete team":"Eliminar equipo","Permanently delete this team":"Elimina este equipo de manera permanente","Once a team is deleted, all of its resources and data will be permanently deleted. Before deleting this team, please download any data or information that you wish to retain":"Una vez que se elimina un equipo, todos sus recursos y datos se eliminarán de forma permanente. Antes de eliminar este equipo, descargue cualquier dato o información que desee conservar","Are you sure you want to delete this team? Once a team is deleted, all of its resources and data will be permanently deleted":"¿Estás seguro de que deseas eliminar este equipo? Una vez que se elimina un equipo, todos sus recursos y datos se eliminarán de forma permanente","Team details":"Detalles del equipo","Team":"Equipo","Whoops! Something went wrong":"Whoops! algo salió mal","The :attribute must be at least :min characters":"Al menos  :min caracteres","Forbidden":"Acceso no autorizado","This action is unauthorized.":"Esta acción no está autorizada","Team of":"Equipo de","Manage users":"Administrar usuarios","Teams":"Equipos","username":"usuario","Admin users":"Administrar usuarios","The password confirmation does not match.":"Las constraseñas no coinciden","dispatcher":"despachador","system":"analista","Analyst":"Analista","analyst":"analista","admin":"administrator","owner":"administrador","Unassigned rol":"Sin rol","« Previous":"« Anterior","Next »":"« Siguiente","Parent route":"Ruta padre","annul":"anular","Annul":"Anular","Type a description":"Ingrese una descripción","Print driver report":"Imprimir reporte para operador","The time departure should be greater than current time":"La hora de salida debe ser mayor que la hora actual","Transactions":"Transacciones","Service":"Servicio","My dispatches":"Mis despachos","Value":"Valor","TOTAL":"TOTAL","Vehicle associates":"Asociados del vehículo","Vehicle associated":"Asociado del vehículo","Initial date":"Fecha inicial","Current":"Actual","Info":"Info","Total":"Total","By range":"Por rango","By day":"Por día","Last week":"-1 semana","Last month":"-1 mes","Charge":"Valor","Clear filters":"Borrar filtros","Turn number":"# Turno","to":"a","Clients":"Clientes","Account":"Cuenta","Reservations":"Reservaciones","Reservation":"Reservación","Model":"Modelo","Client":"Cliente","Zone":"Zona","Color":"Color","minute":"minuto","Id":"Id","Parked":"Parqueado","Log in":"Ingresar","Finished":"Finalizado","In total":"En total","Vehicle plate is required":"Se requiere la placa del vehículo","Zone is required":"Especifique la zona de parqueo","hours":"horas","minutes":"minutos","Internal":"Interno","reservation":"reservación"}');
 
 /***/ }),
 

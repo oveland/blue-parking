@@ -1,5 +1,5 @@
 <template>
-    <div class="w-full shadow cursor-pointer rounded-xl" :class="mainColor + ' ' + textColor" @click="$emit('select', type)">
+    <div class="w-full shadow rounded-xl" :class="mainColor + ' ' + textColor + (selected ? '' : ' cursor-pointer')" @click="select">
         <div class="flex gap-6 p-6">
             <div class="w-auto rounded-md p-3 text-center" :class="`bg-${vehicleType.color}-100`">
                 <icon :name="vehicleType.icon" :color="vehicleType.color" h="8" w="8"></icon>
@@ -9,7 +9,12 @@
                     {{ vehicleType.name }}
                 </span>
                 <br>
-                <span class="pt-2">{{ type.available }} {{ $t('available') }}</span>
+                <span v-if="reservation && reservation.start" class="pt-2">
+                    <time-ago :from="reservation.start" :to="reservation.end"></time-ago>
+                </span>
+                <span v-else class="pt-2">
+                    {{ type.available }} {{ $t('available') }}
+                </span>
             </div>
             <div class="w-auto float-right text-right font-bold">
                 <span class="text-3xl">
@@ -24,14 +29,17 @@
 
 <script>
 import Icon from '@/Jetstream/Icon'
+import TimeAgo from '@/Jetstream/TimeAgo'
 
 export default {
     props: {
         type: Object,
-        selected: Boolean | Number
+        selected: Boolean | Number,
+        reservation: Object | null
     },
     components: {
-        Icon
+        Icon,
+        TimeAgo
     },
     computed: {
         vehicleType() {
@@ -42,6 +50,13 @@ export default {
         },
         textColor() {
             return this.selected ? 'text-white' : 'text-gray-400';
+        }
+    },
+    methods: {
+        select() {
+            if (!this.selected) {
+                this.$emit('select', this.type);
+            }
         }
     }
 }

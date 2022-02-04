@@ -3,19 +3,21 @@
         <multiselect
             ref="multiselect"
             :id="id"
-            v-model="content"
+            v-model="value"
             :options="optionsSelect"
             class="multiselect-indigo"
             :classes="style"
             :searchable="searchable"
             :label="label"
-            :trackBy="trackBy"
-            :valueProp="trackBy"
+            :track-by="trackBy"
+            value-prop="id"
             :placeholder="placeholder"
             :multiple="multiple"
             :disabled="disabled"
             :loading="isLoading"
-            @change="onInput"
+            :object="true"
+            :native-support="true"
+            :resolve-on-load="true"
         ></multiselect>
     </div>
 </template>
@@ -72,7 +74,9 @@ export default {
             type: String,
             default: ''
         },
-        value: {},
+        modelValue: {
+            type: Object,
+        },
         icon: String,
     },
     data() {
@@ -81,7 +85,6 @@ export default {
             isLoading: false,
             query: null,
             asyncOptions: [],
-            content: this.value ? this.value : {},
             style: {
                 container: 'relative cursor-pointer border-0 bg-white text-base leading-snug outline-none jet-input form-input rounded-md focus:border-indigo-100 shadow text-sm px-3 py-2 h-10 w-full text-xs',
                 containerDisabled: 'cursor-default bg-gray-100',
@@ -122,10 +125,19 @@ export default {
     },
     watch: {
         options() {
-            this.content = null;
-        }
+            this.value = null;
+            this.deselect();
+        },
     },
     computed: {
+        value: {
+            get() {
+                return this.modelValue && this.modelValue.id ? this.modelValue : {};
+            },
+            set(value) {
+                this.$emit('update:modelValue', value);
+            }
+        },
         placeholderStr() {
             return this.$t('Search') + (this.placeholder !== '' ? ` ${ this.placeholder }` : ` ${this.title}`).toLowerCase();
         },
@@ -138,9 +150,8 @@ export default {
         },
     },
     methods: {
-        onInput(value) {
-            value = _.find(this.optionsSelect, {id: value});
-            this.$emit('input', value);
+        deselect() {
+            this.$refs.multiselect.deselect();
         },
         search(query) {
             this.query = query;
@@ -175,8 +186,6 @@ export default {
     components: {
         Icon,
         Multiselect
-    },
-    mounted() {
     }
 }
 </script>

@@ -46,6 +46,9 @@
                             <th scope="col" class="px-6 py-3 text-left text-sm text-gray-400 uppercase">
                                 {{ $t('Status') }}
                             </th>
+                            <th scope="col" class="px-6 py-3 text-left text-sm text-gray-400 uppercase">
+                                {{ $t('Zone') }}
+                            </th>
                             <th scope="col" class="px-6 py-3 text-right text-sm  text-gray-400 uppercase">
                                 <span class="">{{ $t('Actions') }}</span>
                             </th>
@@ -53,12 +56,12 @@
                     </template>
                     <template #body>
                         <template v-for="(reservation, index) in sortedList">
-                            <reservation-detail v-if="!reservation.edit && !reservation.create"
-                                                :reservation.sync="reservation"
+                            <reservation-detail :reservation.sync="reservation"
                                                 :disable="disable"
                                                 :class="{ 'bg-gray-50': index % 2 !== 0 }"
-                                                @edit="edit()"
-                                                @refresh="refresh()"
+                                                @edit="setModal"
+                                                @complete="setModal"
+                                                @refresh="refresh"
                             ></reservation-detail>
                         </template>
                     </template>
@@ -73,12 +76,23 @@
             </div>
         </div>
 
-        <jet-dialog-modal :show="showModalForm" @close="dataForm = null" width="md">
+        <jet-dialog-modal :show="showModalForm" @close="closeModal" width="md">
             <template #title>
                 <h1>
                     <span v-if="dataForm.create">{{ $t('Create') }}</span>
                     <span v-if="dataForm.edit">{{ $t('Edit') }}</span>
                     <span class="ml-1">{{ $t('Reservation') }}</span>
+                </h1>
+            </template>
+            <template #content>
+                <reservation-form :reservation.sync="dataForm" @refresh="refresh" @close="dataForm = null"></reservation-form>
+            </template>
+        </jet-dialog-modal>
+
+        <jet-dialog-modal :show="showModalComplete" @close="closeModal" width="md">
+            <template #title>
+                <h1>
+                    <span>{{ $t('Terminate') }}</span> <span class="ml-1">{{ $t('Reservation') }}</span>
                 </h1>
             </template>
             <template #content>
@@ -137,6 +151,9 @@ export default {
         showModalForm() {
             return this.dataForm && (this.dataForm.create || this.dataForm.edit);
         },
+        showModalComplete() {
+            return this.dataForm && this.dataForm.complete;
+        },
         disable() {
             return this.showModalForm || this.loading;
         },
@@ -165,18 +182,22 @@ export default {
                         name: '',
                     },
                 },
-                parkingType: {
+                type: {
                     id: null,
                     zones: []
                 },
                 zone: null,
                 updatedAt: '',
-                create: true
+                create: true,
+                complete: false
             };
         },
-        edit(reservation) {
-            reservation.edit = true;
+        setModal(reservation) {
             this.dataForm = reservation;
+        },
+        closeModal() {
+            this.dataForm = null;
+            this.refresh();
         },
         reset() {
             this.loading = false;

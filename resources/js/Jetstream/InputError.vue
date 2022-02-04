@@ -1,7 +1,7 @@
 <template>
-    <div v-show="message">
+    <div v-if="message">
         <p class="text-sm text-red-600 ml-3">
-            {{ $t(message || '') }}
+            {{ $t(message) }}
         </p>
     </div>
 </template>

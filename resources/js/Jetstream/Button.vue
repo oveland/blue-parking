@@ -1,6 +1,6 @@
 <template>
     <button :type="type" :disabled="disabled" @click="$emit('click', $event)"
-        class="inline-flex items-center py-2 border border-transparent rounded-md  font-semibold text-xs tracking-widest focus:outline-none transition ease-in-out duration-200 uppercase"
+        class="inline-flex items-center py-2 border border-transparent rounded-md font-semibold text-xs tracking-widest focus:outline-none transition ease-in-out duration-200 uppercase"
         :class="`bg-${color}-700 hover:bg-${color}-600 active:bg-${color}-900 focus:border-${color}-900
             focus:shadow-outline-${color}
             px-${ color === 'transparent' ? '0' : '4' }

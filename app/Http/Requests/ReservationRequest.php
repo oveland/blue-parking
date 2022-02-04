@@ -14,7 +14,7 @@ class ReservationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'parkingType' => 'required',
+            'type' => 'required',
             'vehicle.plate' => 'required',
             'zone.id' => 'required',
         ];

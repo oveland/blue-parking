@@ -4,14 +4,8 @@ namespace App\Http\Controllers\Reservations;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ReservationRequest;
-use App\Models\ParkingLot\ParkingType;
 use App\Models\Reservations\Reservation;
-use App\Models\Reservations\ReservationType;
-use App\Models\User;
-use App\Models\Vehicles\Vehicle;
-use App\Models\Vehicles\VehicleType;
 use App\Services\Reservations\ReservationService;
-use Carbon\Carbon;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\RedirectResponse;
@@ -57,12 +51,19 @@ class ReservationController extends Controller
 
     public function edit(Reservation $reservation)
     {
-        //
+
     }
 
-    public function update(Request $request, Reservation $reservation)
+    /**
+     * @throws Throwable
+     */
+    public function update(ReservationRequest $request, Reservation $reservation)
     {
-        //
+        $reservation = $this->service->update($reservation, $request);
+
+        if (!$reservation) return null;
+
+        return redirect(route('dashboard'));
     }
 
     public function destroy(Reservation $reservation): Redirector|Application|RedirectResponse

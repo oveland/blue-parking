@@ -32,6 +32,12 @@
             </div>
         </td>
 
+        <td class="px-6 py-2 w-1/4">
+            <div class="text-sm font-medium text-gray-900">
+                {{ reservation.zone.code }}
+            </div>
+        </td>
+
         <td class="px-6 py-2 w-auto float-right">
             <jet-tooltip class="flex gap-1">
                 <reservation-destroy class="font-bold hover:opacity-100 opacity-25"
@@ -41,7 +47,7 @@
                 ></reservation-destroy>
 
                 <icon v-show="!disable" @click="edit" color="yellow" class="hover:opacity-100 opacity-25" name="edit"></icon>
-                <icon v-show="!disable" @click="edit" color="green" class="hover:opacity-100 opacity-25" name="exit"></icon>
+                <icon v-show="!disable" @click="complete" color="green" class="hover:opacity-100 opacity-25" name="exit"></icon>
 
                 <template #data>
                     {{ $t('Updated') }}: {{ reservation.updatedAt }}
@@ -86,7 +92,11 @@ export default {
     methods: {
         edit() {
             this.reservation.edit = true;
-            this.$emit('edit');
+            this.$emit('edit', this.reservation);
+        },
+        complete() {
+            this.reservation.complete = true;
+            this.$emit('complete', this.reservation);
         }
     }
 }
