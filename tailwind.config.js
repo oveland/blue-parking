@@ -11,9 +11,7 @@ module.exports = {
         './resources/js/**/*.vue',
     ],
 
-    // safelist: [/^bg-/, /^text-/, /^h-/, /^w-/, /^top-/],
     safelist: [
-        // 'bg-gray-700',
         {
             pattern: /(bg-|text-|h-|w-|top-)/,
             variants: ['sm', 'md', 'lg', 'xl', '2xl', 'hover'],
