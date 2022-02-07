@@ -3,11 +3,11 @@
         <jet-banner />
 
         <div class="min-h-screen flex">
-            <nav class="bg-blue-800 w-auto sm:w-2/3 md:w-1/3 lg:relative lg:w-auto xl:w-auto absolute inset-y-0 transition-all duration-200 ease-in-out z-10" :class="showSidebar ? 'bg-red-900' : 'transform -translate-x-full lg:translate-x-0'">
+            <nav class="bg-blue-800 w-auto sm:w-2/3 md:w-1/3 lg:relative lg:w-auto xl:w-auto absolute inset-y-0 transition-all duration-200 ease-in-out z-10" :class="showSidebar ? 'bg-blue-900' : '-translate-x-full lg:translate-x-0'">
                 <div class="flex justify-between items-center bg-blue-900 shadow py-6 px-6 lg:rounded-bl-3xl border-blue-900 border-b-4 lg:border-0">
                     <div class="flex items-center">
                         <!-- Logo -->
-                        <div class="flex-shrink-0 flex items-center">
+                        <div class="shrink-0 flex items-center">
                             <inertia-link :href="route('dashboard')">
                                 <jet-application-mark class="block h-9 w-auto" />
                             </inertia-link>
@@ -58,7 +58,7 @@
                     <!-- Responsive Settings Options -->
                     <div class="pt-4 pb-1 border-t border-gray-200">
                         <div class="flex items-center px-4">
-                            <div v-if="$page.props.jetstream.managesProfilePhotos" class="flex-shrink-0 mr-3" >
+                            <div v-if="$page.props.jetstream.managesProfilePhotos" class="shrink-0 mr-3" >
                                 <img class="h-10 w-10 rounded-full object-cover" :src="$page.props.user.profile_photo_url" :alt="$page.props.user.name" />
                             </div>
 

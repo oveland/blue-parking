@@ -8,7 +8,7 @@
                         leave-active-class="ease-in duration-200"
                         leave-from-class="opacity-100"
                         leave-to-class="opacity-0">
-                    <div v-show="show" class="fixed inset-0 transform transition-all" @click="close">
+                    <div v-show="show" class="fixed inset-0 transition-all" @click="close">
                         <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
                     </div>
                 </transition>
@@ -19,7 +19,7 @@
                         leave-active-class="ease-in duration-200"
                         leave-from-class="opacity-100 translate-y-0 sm:scale-100"
                         leave-to-class="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95">
-                    <div v-show="show" class="mb-6 bg-white rounded-lg shadow-xl transform transition-all mx-auto" :class="`${widthClass}`">
+                    <div v-show="show" class="mb-6 bg-white rounded-lg shadow-xl transition-all mx-auto relative z-50" :class="`${widthClass}`">
                         <slot v-if="show"></slot>
                     </div>
                 </transition>

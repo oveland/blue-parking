@@ -3,7 +3,7 @@ const defaultTheme = require('tailwindcss/defaultTheme');
 const colors = require('tailwindcss/colors')
 
 module.exports = {
-    purge: [
+    content: [
         './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
         './vendor/laravel/jetstream/**/*.blade.php',
         './storage/framework/views/*.php',
@@ -11,22 +11,35 @@ module.exports = {
         './resources/js/**/*.vue',
     ],
 
+    // safelist: [/^bg-/, /^text-/, /^h-/, /^w-/, /^top-/],
+    safelist: [
+        // 'bg-gray-700',
+        {
+            pattern: /(bg-|text-|h-|w-|top-)/,
+            variants: ['sm', 'md', 'lg', 'xl', '2xl', 'hover'],
+        }
+    ],
+
     theme: {
         extend: {
             screens: {
-                'sm': '376px',
-                // 'md': '768px',
-                // 'lg': '1024px',
-                // 'xl': '1280px',
-                // '2xl': '1536px',
-                // 'sm': {'min': '0px', 'max': '767px'},
-                // 'md': {'min': '768px', 'max': '1023px'},
-                // 'lg': {'min': '1024px', 'max': '1279px'},
-                // 'xl': {'min': '1280px', 'max': '1535px'},
-                // '2xl': {'min': '1536px'},
+                'sm': '640px',
+                // => @media (min-width: 640px) { ... }
+
+                'md': '768px',
+                // => @media (min-width: 768px) { ... }
+
+                'lg': '1024px',
+                // => @media (min-width: 1024px) { ... }
+
+                'xl': '1280px',
+                // => @media (min-width: 1280px) { ... }
+
+                '2xl': '1536px',
+                // => @media (min-width: 1536px) { ... }
             },
             colors: {
-                gray: colors.blueGray,
+                gray: colors.slate,
                 green: colors.lime,
                 blue: {
                     50: '#cfcde5',
@@ -47,11 +60,7 @@ module.exports = {
         },
     },
 
-    variants: {
-        extend: {
-            opacity: ['disabled'],
-        },
-    },
-
     plugins: [require('@tailwindcss/forms'), require('@tailwindcss/typography')],
+
+    separator: ':',
 };
