@@ -12,7 +12,7 @@
             </div>
         </div>
 
-        <div :class="clear ? '' : 'px-6 py-4 bg-gray-100 text-right'">
+        <div :class="clear || noFooter ? '' : 'px-6 py-4 bg-gray-100 text-right'">
             <slot name="footer">
             </slot>
         </div>
@@ -41,6 +41,9 @@
             },
             closeable: {
                 default: true
+            },
+            noFooter: {
+                default: false
             },
         },
 

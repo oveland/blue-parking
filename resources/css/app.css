@@ -1,3 +1,15 @@
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: rgb(148 163 184) !important;
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: rgb(148 163 184) !important;
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+    color: rgb(148 163 184) !important;
+}

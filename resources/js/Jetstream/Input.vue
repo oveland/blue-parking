@@ -1,5 +1,5 @@
 <template>
-    <input class="jet-input form-input rounded-md focus:border-blue-100 shadow text-sm px-3 py-2 h-10 w-full text-xs" :value="modelValue" @input="$emit('update:modelValue', $event.target.value)" ref="input">
+    <input class="jet-input form-input caret-pink-500 rounded-md focus:border-blue-100 shadow text-sm px-3 py-2 h-10 w-full font-extrabold text-gray-500" :value="modelValue" @input="$emit('update:modelValue', $event.target.value)" ref="input">
 </template>
 
 <script>
@@ -17,9 +17,5 @@
 </script>
 
 <style>
-input.jet-input {
-    border-color: #d3d3d378;
-    font-size: 0.8rem;
-}
 </style>
 

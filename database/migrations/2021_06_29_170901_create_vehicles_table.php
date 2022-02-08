@@ -18,8 +18,8 @@ class CreateVehiclesTable extends Migration
             $table->timestamps();
 
             $table->string('plate', 10);
-            $table->string('color', 45);
-            $table->string('model', 45);
+            $table->string('color', 45)->nullable();
+            $table->string('model', 45)->nullable();
 
             $table->unsignedBigInteger('vehicle_type_id');
             $table->unsignedBigInteger('user_id');

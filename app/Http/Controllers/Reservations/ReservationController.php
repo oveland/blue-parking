@@ -22,20 +22,10 @@ class ReservationController extends Controller
         $this->service = $service;
     }
 
-    public function index()
-    {
-        //
-    }
-
-    public function create()
-    {
-        //
-    }
-
     /**
      * @throws Throwable
      */
-    public function store(ReservationRequest $request): Redirector|Application|RedirectResponse|null
+    public function open(ReservationRequest $request): Redirector|Application|RedirectResponse|null
     {
         $reservation = $this->service->create($request);
 
@@ -49,17 +39,21 @@ class ReservationController extends Controller
         return Reservation::all();
     }
 
-    public function edit(Reservation $reservation)
-    {
-
-    }
-
     /**
      * @throws Throwable
      */
-    public function update(ReservationRequest $request, Reservation $reservation)
+    public function update(ReservationRequest $request, Reservation $reservation): Redirector|RedirectResponse|Application|null
     {
         $reservation = $this->service->update($reservation, $request);
+
+        if (!$reservation) return null;
+
+        return redirect(route('dashboard'));
+    }
+
+    public function finalize(ReservationRequest $request, Reservation $reservation): Redirector|RedirectResponse|Application|null
+    {
+        $reservation = $this->service->finalize($reservation, $request);
 
         if (!$reservation) return null;
 

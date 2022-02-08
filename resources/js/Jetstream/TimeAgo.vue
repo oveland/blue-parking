@@ -1,6 +1,6 @@
 <template>
     <div>
-        {{ elapsedTime }}
+        <small>{{ elapsedTime }}</small>
     </div>
 </template>
 
@@ -18,7 +18,11 @@ export default {
         period: {
             type: Number,
             default: 10
-        }
+        },
+        full: {
+            type: Boolean,
+            default: false
+        },
     },
     data() {
         return {
@@ -31,6 +35,14 @@ export default {
             this.init();
         }
     },
+    computed: {
+        format() {
+            return {
+                hours: this.$t(this.full ? 'hours' : 'h'),
+                minutes: this.$t(this.full ? 'minutes' : 'm'),
+            }
+        }
+    },
     methods: {
         init() {
             this.stop();
@@ -39,7 +51,8 @@ export default {
         set() {
             this.setElapsedTime();
             if (!this.to) {
-                this.interval = setInterval(() => this.setElapsedTime, 1000 * (this.period >= 10 ? this.period : 10));
+                const intervalPeriod = 1000 * (this.period >= 10 ? this.period : 10);
+                this.interval = setInterval(() => this.setElapsedTime(), intervalPeriod);
             }
         },
         stop() {
@@ -52,13 +65,20 @@ export default {
                 this.endTime().diff(this.startTime())
             );
 
+            let space = this.full ? ' ': '';
             const totalHours = parseInt(duration.asHours().toString());
             const minutes = parseInt(duration.minutes().toString());
 
+            this.$emit('elapsed', duration.asMinutes());
+
             if (totalHours) {
-                this.elapsedTime = `${totalHours} ${this.$t('hours')} ${minutes} ${this.$t('minutes')}`;
+                if(totalHours < 999) {
+                    this.elapsedTime = `${totalHours}${space}${this.format.hours} ${minutes}${space}${this.format.minutes}`;
+                } else {
+                    this.elapsedTime = `${totalHours}${space}${this.format.hours}...`;
+                }
             } else {
-                this.elapsedTime = `${minutes} ${this.$t('minutes')}`;
+                this.elapsedTime = `${minutes}${space}${this.format.minutes}`;
             }
         },
 
@@ -69,9 +89,12 @@ export default {
             return this.to ? moment(this.to) : moment();
         }
     },
-    created() {
+    mounted() {
         this.init();
-    }
+    },
+    unmounted() {
+        this.stop();
+    },
 }
 </script>
 

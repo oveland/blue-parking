@@ -126,6 +126,7 @@
     "Are you sure you want to delete this turn?": "Está seguro de que desea eliminar este turno?",
     "Are you sure you want to annul this dispatch?": "Está seguro de que desea anular este despacho?",
     "Are you sure you want to delete this bearing?": "Está seguro de que desea eliminar esta programación?",
+    "Are you sure you want to delete this reservation?": "Está seguro de que desea eliminar esta reservación?",
     "Once your account is deleted, all of its resources and data will be permanently deleted": "Una vez que se elimine su cuenta, todos sus recursos y datos se eliminarán permanentemente",
     "Please enter your password to confirm you would like to permanently delete your account": "Ingrese su contraseña para confirmar que desea eliminar permanentemente su cuenta",
     "Before deleting your account, please download any data or information that you wish to retain": "Antes de eliminar su cuenta, descargue cualquier dato o información que desee conservar",
@@ -371,5 +372,13 @@
     "hours": "horas",
     "minutes": "minutos",
     "Internal": "Interno",
-    "reservation": "reservación"
+    "reservation": "reservación",
+    "Finalize": "Finalizar",
+    "Terminate": "Cerrar",
+    "Entry": "Ingreso",
+    "Exit": "Salida",
+    "Charges": "Cargos",
+    "h": "h",
+    "m": "m",
+    "#": "#"
 }

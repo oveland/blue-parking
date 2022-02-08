@@ -9,7 +9,7 @@
                 ${ disabled ? 'opacity-25' : '' }
                 h-${ h }`
             ">
-        <icon v-if="icon" :name="icon" color="gray" density="50" :class="onlyIcon ? '' : 'mr-2'" w="3" h="3"></icon>
+        <icon v-if="icon" :name="icon" :color="colorIcon" :density="densityIcon" :class="onlyIcon ? '' : 'mr-2'" :size="sizeIcon"></icon>
         <slot></slot>
     </button>
 </template>
@@ -39,6 +39,14 @@ export default {
             type: String,
             required: false
         },
+        sizeIcon: {
+            type: [Number, String],
+            default: 3
+        },
+        colorIcon: {
+            type: [String],
+            default: 'gray'
+        },
         onlyIcon: false,
     },
     components: {
@@ -46,10 +54,16 @@ export default {
     },
     computed: {
         textColor() {
-            return this.color === 'transparent' ? 'text-gray-500' : 'text-white';
+            return this.isTransparent ? 'text-gray-500' : 'text-white';
         },
         padding() {
-            return this.color === 'transparent' ? 'px-0' : 'px-4';
+            return this.isTransparent ? 'px-0' : 'px-4';
+        },
+        densityIcon() {
+            return this.isTransparent ? 400 : 50;
+        },
+        isTransparent() {
+            return this.color === 'transparent';
         }
     }
 }

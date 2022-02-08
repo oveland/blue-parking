@@ -1,8 +1,8 @@
 <template>
-    <div>
-        <div class="bg-white grid 2xl:rounded-3xl">
+    <div class="">
+        <div class="bg-white grid">
             <div class="px-6 py-5">
-                <div class="grid grid-cols-3 items-center">
+                <div class="grid grid-cols-2 items-center">
                     <div>
                         <div class="text-lg cursor-pointer flex items-center" @click="refresh">
                             <div class="float-left animate-pulse mr-2">
@@ -14,26 +14,32 @@
                             </div>
                         </div>
                         <div>
-                            <small class="text-gray-400">{{ list.length }} {{ $t('In total') }}</small>
+                            <small class="text-gray-400 font-extrabold">{{ list.length }} {{ $t('In total') }}</small>
                         </div>
                     </div>
 
-                    <div class="text-center">
-                        <jet-button :disabled="disable" @click="add()">
+                    <div class="text-right md:text-center">
+                        <jet-button :disabled="disable" @click="add()" class="hidden md:block">
                             {{ $t('Create') }}
                         </jet-button>
+                        <span>
+                            <icon name="add" size="8" color="blue" @click="add()" class="float-right md:hidden"></icon>
+                        </span>
                     </div>
 
-                    <div></div>
+                    <div class="hidden md:block"></div>
                 </div>
                 <p class="mt-1 max-w-2xl text-sm text-gray-500 hidden">
                     {{ $t('Description') }}
                 </p>
             </div>
-            <div class="border-t border-gray-200">
+            <div class="border-t border-gray-200 overflow-x-scroll">
                 <jet-table v-if="list.length">
                     <template #head>
                         <tr>
+                            <th scope="col" class="pl-6 py-3 text-center text-sm text-gray-400 uppercase">
+                                {{ $t('#') }}
+                            </th>
                             <th scope="col" class="px-6 py-3 text-left text-sm text-gray-400 uppercase">
                                 {{ $t('Vehicle') }}
                             </th>
@@ -49,6 +55,9 @@
                             <th scope="col" class="px-6 py-3 text-left text-sm text-gray-400 uppercase">
                                 {{ $t('Zone') }}
                             </th>
+                            <th scope="col" class="px-6 py-3 text-left text-sm text-gray-400 uppercase">
+                                {{ $t('Charges') }}
+                            </th>
                             <th scope="col" class="px-6 py-3 text-right text-sm  text-gray-400 uppercase">
                                 <span class="">{{ $t('Actions') }}</span>
                             </th>
@@ -60,7 +69,7 @@
                                                 :disable="disable"
                                                 :class="{ 'bg-gray-50': index % 2 !== 0 }"
                                                 @edit="setModal"
-                                                @complete="setModal"
+                                                @finalize="setModal"
                                                 @refresh="refresh"
                             ></reservation-detail>
                         </template>
@@ -76,24 +85,17 @@
             </div>
         </div>
 
-        <jet-dialog-modal :show="showModalForm" @close="closeModal" width="md">
+        <jet-dialog-modal :show="showModalForm" @close="closeModal" width="md" :no-footer="true">
             <template #title>
-                <h1>
-                    <span v-if="dataForm.create">{{ $t('Create') }}</span>
-                    <span v-if="dataForm.edit">{{ $t('Edit') }}</span>
-                    <span class="ml-1">{{ $t('Reservation') }}</span>
-                </h1>
-            </template>
-            <template #content>
-                <reservation-form :reservation.sync="dataForm" @refresh="refresh" @close="dataForm = null"></reservation-form>
-            </template>
-        </jet-dialog-modal>
-
-        <jet-dialog-modal :show="showModalComplete" @close="closeModal" width="md">
-            <template #title>
-                <h1>
-                    <span>{{ $t('Terminate') }}</span> <span class="ml-1">{{ $t('Reservation') }}</span>
-                </h1>
+                <div class="flex gap-2 items-center font-extrabold text-gray-500">
+                    <icon name="reservation"></icon>
+                    <div>
+                        <span v-if="dataForm.finalize">{{ $t('Finalize') }}</span>
+                        <span v-else-if="dataForm.create">{{ $t('Create') }}</span>
+                        <span v-if="dataForm.edit">{{ $t('Edit') }}</span>
+                        <span class="ml-1">{{ $t('Reservation') }}</span>
+                    </div>
+                </div>
             </template>
             <template #content>
                 <reservation-form :reservation.sync="dataForm" @refresh="refresh" @close="dataForm = null"></reservation-form>
@@ -149,10 +151,7 @@ export default {
     },
     computed: {
         showModalForm() {
-            return this.dataForm && (this.dataForm.create || this.dataForm.edit);
-        },
-        showModalComplete() {
-            return this.dataForm && this.dataForm.complete;
+            return this.dataForm && (this.dataForm.create || this.dataForm.edit || this.dataForm.finalize);
         },
         disable() {
             return this.showModalForm || this.loading;
@@ -164,6 +163,7 @@ export default {
     methods: {
         refresh() {
             this.loading = true;
+            this.list = [];
             axios.get(route('reservations.show', {reservation: 'all'})).then(response => {
                 this.list = response.data
                 this.reset();
@@ -189,7 +189,7 @@ export default {
                 zone: null,
                 updatedAt: '',
                 create: true,
-                complete: false
+                finalize: false
             };
         },
         setModal(reservation) {

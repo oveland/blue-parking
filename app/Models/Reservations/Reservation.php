@@ -57,7 +57,31 @@ class Reservation extends Model
         return $this->belongsTo(Vehicle::class);
     }
 
-    public function toArray(): array
+    function isOpen(): bool
+    {
+        return !$this->end;
+    }
+
+    function isFinalized(): bool
+    {
+        return !!$this->end;
+    }
+
+    function finalize(): Reservation
+    {
+        if ($this->isOpen()) {
+            $this->active = false;
+            $this->end = Carbon::now();
+        }
+
+        return $this;
+    }
+
+    function getCharge() {
+
+    }
+
+    function toArray(): array
     {
         return [
             'id' => $this->id,
@@ -74,7 +98,7 @@ class Reservation extends Model
             'holdEndHuman' => $this->hold_end?->format('Y-m-d h:i:s a'),
 
             'holdTimeout' => $this->hold_timeout,
-            'active:' => $this->active,
+            'active' => $this->active,
             'type' => $this->type->toArray(),
             'zone' => $this->zone->toArray(),
             'vehicle' => $this->vehicle->toArray(),

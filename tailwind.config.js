@@ -20,36 +20,20 @@ module.exports = {
 
     theme: {
         extend: {
-            screens: {
-                'sm': '640px',
-                // => @media (min-width: 640px) { ... }
-
-                'md': '768px',
-                // => @media (min-width: 768px) { ... }
-
-                'lg': '1024px',
-                // => @media (min-width: 1024px) { ... }
-
-                'xl': '1280px',
-                // => @media (min-width: 1280px) { ... }
-
-                '2xl': '1536px',
-                // => @media (min-width: 1536px) { ... }
-            },
             colors: {
                 gray: colors.slate,
                 green: colors.lime,
                 blue: {
                     50: '#cfcde5',
                     100: '#aeaae5',
-                    200: '#554cde',
-                    300: '#3629e9',
-                    400: '#2115e3',
-                    500: '#2116d0',
-                    600: '#180cc8',
-                    700: '#180cb7',
-                    800: '#0e067c',
-                    900: '#070341',
+                    200: '#7c73f5',
+                    300: '#6961e8',
+                    400: '#5951e0',
+                    500: '#3025de',
+                    600: '#150ab4',
+                    700: '#1006a0',
+                    800: '#09017f',
+                    900: '#05004c',
                 },
             },
             fontFamily: {
@@ -58,7 +42,11 @@ module.exports = {
         },
     },
 
-    plugins: [require('@tailwindcss/forms'), require('@tailwindcss/typography')],
+    plugins: [
+        require('@tailwindcss/forms'),
+        require('@tailwindcss/typography'),
+        require('flowbite/plugin')
+    ],
 
     separator: ':',
 };

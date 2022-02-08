@@ -5,7 +5,7 @@
                 {{ $t('Dashboard') }}
             </h2>
         </template>
-        <div class="m-6">
+        <div>
             <reservations-list/>
         </div>
     </app-layout>

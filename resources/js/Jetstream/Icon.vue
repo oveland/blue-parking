@@ -1,6 +1,6 @@
 <template>
     <span :class="fillColor" @click="$emit('click', $event)">
-        <component :is="iconComponent" :class="`h-${h} w-${w}`" :light="fillColorLight"></component>
+        <component :is="iconComponent" :class="`h-${height} w-${width}`" :light="fillColorLight"></component>
         <slot></slot>
     </span>
 </template>
@@ -33,11 +33,21 @@ export default {
             type: [Number, String],
             default: 6
         },
+        size: {
+            type: [Number, String],
+            default: ""
+        }
     },
     components: {
         IconVehicle
     },
     computed: {
+        width() {
+            return parseInt(this.size) ? this.size : this.w;
+        },
+        height() {
+            return parseInt(this.size) ? this.size : this.h;
+        },
         iconComponent() {
             return defineAsyncComponent(() => import(`@/Icons/${this.componentNameIcon()}`));
         },
@@ -48,16 +58,28 @@ export default {
             return `text-${this.color}-${this.density}`;
         },
         fillColorLight() {
+            let densityLight = this.density - 200;
+
             if (this.color === 'black' || this.color === 'blank') {
                 return `text-gray-400`;
             }
-            return `text-${this.color}-${this.density - 200}`;
+
+            if (this.density > 200) {
+                return `text-${this.color}-${densityLight}`;
+            }
+
+            return `text-${this.color}-50`;
         },
     },
     methods: {
         componentNameIcon() {
-            let iconName = this.name.toLowerCase();
-            return iconName.charAt(0).toUpperCase() + iconName.slice(1);
+            let iconName = "";
+
+            this.name.toLowerCase().split('-').map(section => {
+                iconName += section.charAt(0).toUpperCase() + section.slice(1);
+            });
+
+            return iconName;
         }
     }
 }

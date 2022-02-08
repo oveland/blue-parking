@@ -9,8 +9,8 @@
                     {{ vehicleType.name }}
                 </span>
                 <br>
-                <span v-if="reservation && reservation.start" class="pt-2">
-                    <time-ago :from="reservation.start" :to="reservation.end"></time-ago>
+                <span v-if="reservation && reservation.start" class="pt-2 text-lg font-bold">
+                    <time-ago :from="reservation.start" :to="reservation.end" :full="true"></time-ago>
                 </span>
                 <span v-else class="pt-2">
                     {{ type.available }} {{ $t('available') }}

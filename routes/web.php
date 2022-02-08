@@ -22,6 +22,11 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::resource('reservations', ReservationController::class);
+    Route::name('reservations.')->prefix('reservations')->group(function () {
+        Route::post('open', [ReservationController::class, 'open'])->name('open');
+        Route::put('finalize/{reservation}', [ReservationController::class, 'finalize'])->name('finalize');
+    });
+
     Route::resource('parking-types', ParkingTypeController::class);
 
     Route::get('/clients', function () {

@@ -3,8 +3,12 @@
         <jet-banner />
 
         <div class="min-h-screen flex">
-            <nav class="bg-blue-800 w-auto sm:w-2/3 md:w-1/3 lg:relative lg:w-auto xl:w-auto absolute inset-y-0 transition-all duration-200 ease-in-out z-10" :class="showSidebar ? 'bg-blue-900' : '-translate-x-full lg:translate-x-0'">
-                <div class="flex justify-between items-center bg-blue-900 shadow py-6 px-6 lg:rounded-bl-3xl border-blue-900 border-b-4 lg:border-0">
+            <nav class="bg-blue-800 w-auto absolute
+                sm:w-2/3 md:w-1/3 lg:w-4/12 xl:w-3/12
+                xl:relative
+                xl:w-auto
+                inset-y-0 transition-all duration-200 ease-in-out z-10" :class="showSidebar ? 'bg-blue-900' : '-translate-x-full xl:translate-x-0'">
+                <div class="flex justify-between items-center bg-blue-900 shadow py-6 px-6 xl:rounded-bl-3xl border-blue-900 border-b-4 xl:border-0">
                     <div class="flex items-center">
                         <!-- Logo -->
                         <div class="shrink-0 flex items-center">
@@ -20,7 +24,7 @@
                             </a>
                         </div>
                     </div>
-                    <div class="lg:hidden" @click="showSidebar = false">
+                    <div class="xl:hidden" @click="showSidebar = false">
                         <span class="text-white">
                             <icon name="times" color="blank" h="7" w="7"></icon>
                         </span>
@@ -127,10 +131,10 @@
             <!-- Page Content -->
             <main class="w-full">
                 <!-- Page Heading -->
-                <header class="bg-blue-900 lg:bg-white shadow lg:border-b py-6 px-8" v-if="$slots.header">
+                <header class="bg-blue-900 xl:bg-white shadow xl:border-b py-6 px-6" v-if="$slots.header">
                     <div class="flex justify-between items-center">
-                        <div class="flex items-center text-white lg:text-gray-600 header">
-                            <button class="bg-blue-900 p-2 rounded-md mr-2 lg:hidden">
+                        <div class="flex items-center text-white xl:text-gray-600 header">
+                            <button class="bg-blue-900 p-2 rounded-md mr-2 xl:hidden">
                                 <icon name="menu" @click="showSidebar = true" color="blank"></icon>
                             </button>
                             <slot name="header"></slot>
@@ -238,7 +242,9 @@
                     </div>
                 </header>
 
-                <slot></slot>
+                <div class="bg-red-700 ala">
+                    <slot></slot>
+                </div>
             </main>
         </div>
     </div>

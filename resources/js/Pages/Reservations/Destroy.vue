@@ -1,5 +1,5 @@
 <template>
-    <icon @click.native="confirmDelete = true" name="delete" color="red">
+    <icon @click.native="confirmDelete = true" name="delete" color="red" size="5">
         <!-- Delete Account Confirmation Modal -->
         <jet-confirmation-modal :show="confirmDelete" @close="confirmDelete = false">
             <template #title>

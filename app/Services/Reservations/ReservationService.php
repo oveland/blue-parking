@@ -58,7 +58,7 @@ class ReservationService
 
         DB::beginTransaction();
 
-        $reservation->vehicle()->associate($this->validateVehicle($data));
+        $reservation->vehicle()->associate($this->validateVehicle($data, true));
         $reservation->type()->associate(ParkingType::find($data->get('type')['id']));
         $reservation->zone()->associate(ParkingZone::find($data->get('zone')['id']));
 
@@ -71,25 +71,41 @@ class ReservationService
         return null;
     }
 
-    private function validateVehicle(Collection|Request $data): Vehicle
+    function finalize(Reservation $reservation, Collection|Request $data): ?Reservation
+    {
+        Log::info("Finalizing reservation: " . $reservation->id);
+
+        $reservation->finalize();
+
+        if ($reservation->save()) {
+            return $reservation;
+        }
+
+        return null;
+    }
+
+    private function validateVehicle(Collection|Request $data, $update = false): Vehicle
     {
         $vehicle = Vehicle::where('plate', $data->get('vehicle')['plate'])->first();
 
         $dataVehicle = $data->get('vehicle');
         $dataUser = $dataVehicle['user'];
+        $nameUser = $dataUser['name'] ?? __('Internal');
 
         if (!$vehicle) {
             $vehicle = new Vehicle($dataVehicle);
             $user = new User($dataVehicle['user']);
+            $user->name = $nameUser;
 
             $user->email = Carbon::now()->format('y.m.d.h.i.s.u') . '@mail.com';
             $user->password = Hash::make('12345');
         } else {
             $user = $vehicle->user;
+            if ($update) $user->name = $nameUser;
+
             $vehicle->fill($dataVehicle);
         }
 
-        $user->name = $dataUser['name'] ?? __('Internal');
         $user->save();
 
         $vehicle->user()->associate($user);
