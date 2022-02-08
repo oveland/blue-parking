@@ -25595,13 +25595,13 @@ __webpack_require__.r(__webpack_exports__);
       return moment__WEBPACK_IMPORTED_MODULE_7___default()(this.reservation.end);
     },
     startTimeString: function startTimeString() {
-      return this.start.format('hh:mm:ss a');
+      return this.start.format('HH:mm:ss');
     },
     startDateString: function startDateString() {
       return this.start.format('yyyy-MM-DD');
     },
     endTimeString: function endTimeString() {
-      return this.reservation.end ? this.end.format('hh:mm:ss a') : '';
+      return this.reservation.end ? this.end.format('HH:mm:ss') : '';
     },
     endDateString: function endDateString() {
       return this.reservation.end ? this.end.format('yyyy-MM-DD') : '';
@@ -25743,7 +25743,7 @@ __webpack_require__.r(__webpack_exports__);
     setTimeout(function () {
       var _this3$$refs$focus;
 
-      (_this3$$refs$focus = _this3.$refs.focus) === null || _this3$$refs$focus === void 0 ? void 0 : _this3$$refs$focus.focus();
+      if (_this3.form.create) (_this3$$refs$focus = _this3.$refs.focus) === null || _this3$$refs$focus === void 0 ? void 0 : _this3$$refs$focus.focus();
     }, 500);
   }
 });

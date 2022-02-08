@@ -1,46 +1,53 @@
-# For more information: https://laravel.com/docs/sail
-version: '3'
-services:
-    laravel.test:
-        build:
-            context: ./docker/8.0
-            dockerfile: Dockerfile
-            args:
-                WWWGROUP: '${WWWGROUP}'
-        image: sail-8.0/app
-        ports:
-            - '4000:80'
-        environment:
-            WWWUSER: '${WWWUSER}'
-            LARAVEL_SAIL: 1
-        volumes:
-            - '.:/var/www/html'
-        networks:
-            - sail
-        depends_on:
-            - pgsql
-    pgsql:
-        image: 'postgres:13'
-        ports:
-            - '5435:5432'
-        environment:
-            PGPASSWORD: '${DB_PASSWORD:-secret}'
-            POSTGRES_DB: '${DB_DATABASE}'
-            POSTGRES_USER: '${DB_USERNAME}'
-            POSTGRES_PASSWORD: '${DB_PASSWORD:-secret}'
-            TZ: 'America/Bogota'
-            PGTZ: 'America/Bogota'
-        volumes:
-            - './docker/database/data:/var/lib/postgresql/data'
-        networks:
-            - sail
-        healthcheck:
-          test: ["CMD", "pg_isready", "-q", "-d", "${DB_DATABASE}", "-U", "${DB_USERNAME}"]
-          retries: 3
-          timeout: 5s
+version: '3.8'
+
 networks:
-    sail:
-        driver: bridge
-volumes:
-    sailpgsql:
-        driver: local
+  backend:
+    name: ${DOCKER_NET_NAME}
+    driver: bridge
+
+services:
+  db_sever:
+    container_name: ${DOCKER_DB_CONTAINER_NAME}
+    networks:
+      - backend
+    image: postgres:${DOCKER_DB_VERSION}
+    expose:
+      - 5432
+    ports:
+      - ${DOCKER_DB_EXTERNAL_PORT}:5432 # Delete this line on production
+    volumes:
+      - .docker/data/db:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: ${DB_DATABASE}
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    restart: always
+
+  web_server:
+    container_name: ${DOCKER_NG_CONTAINER_NAME}
+    networks:
+      - backend
+    build:
+      context: .docker
+      args:
+        - php_version=${DOCKER_PHP_VERSION}
+        - ng_root=${DOCKER_NG_ROOT}
+        - time_zone=${APP_TIMEZONE}
+    depends_on:
+      - db_sever
+    environment:
+      #PHP
+      PHP_VERSION: ${DOCKER_PHP_VERSION}
+      PHP_TIMEZONE: ${DOCKER_PHP_TIMEZONE}
+
+      # Nginx
+      NG_HOST: ${DOCKER_NG_HOST}
+      NG_PORT: ${DOCKER_NG_PORT}
+      NG_EXTERNAL_PORT: ${DOCKER_NG_EXTERNAL_PORT}
+      NG_ROOT: ${DOCKER_NG_ROOT}
+    ports:
+      - "${DOCKER_NG_EXTERNAL_PORT}:${DOCKER_NG_PORT}"
+    volumes:
+      - ./:/var/www/${DOCKER_NG_ROOT}/
+    restart: always
+    command: /bin/bash -c "/tmp/configure.sh && tail -f /dev/null"

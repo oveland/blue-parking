@@ -113,7 +113,7 @@ export default {
         this.init();
 
         setTimeout(() => {
-            this.$refs.focus?.focus();
+            if (this.form.create)this.$refs.focus?.focus();
         }, 500);
     }
 }

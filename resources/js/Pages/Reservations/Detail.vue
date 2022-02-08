@@ -141,13 +141,13 @@ export default {
             return moment(this.reservation.end)
         },
         startTimeString() {
-            return this.start.format('hh:mm:ss a')
+            return this.start.format('HH:mm:ss')
         },
         startDateString() {
             return this.start.format('yyyy-MM-DD')
         },
         endTimeString() {
-            return this.reservation.end ? this.end.format('hh:mm:ss a') : '';
+            return this.reservation.end ? this.end.format('HH:mm:ss') : '';
         },
         endDateString() {
             return this.reservation.end ? this.end.format('yyyy-MM-DD') : '';
