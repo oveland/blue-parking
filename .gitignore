@@ -15,3 +15,4 @@ yarn-error.log
 /.vscode
 /docker/database/data
 .docker/data
+.phpstorm.meta.php

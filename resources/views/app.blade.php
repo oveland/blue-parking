@@ -16,6 +16,19 @@
         <!-- Scripts -->
         @routes
         <script src="{{ mix('js/app.js') }}" defer></script>
+
+        @if( app()->environment('production') )
+            <script>
+                if ('serviceWorker' in navigator) {
+                    caches.keys().then(function(cacheNames) {
+                        cacheNames.forEach(function(cacheName) {
+                            caches.delete(cacheName);
+                        });
+                    });
+                }
+            </script>
+            @laravelPWA
+        @endif
     </head>
     <body class="font-sans antialiased bg-gray-100">
         @inertia
