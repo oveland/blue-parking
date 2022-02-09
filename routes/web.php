@@ -41,3 +41,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         return Inertia::render('Dashboard');
     })->name('account');
 });
+
+Route::get('/offline', function () {
+    return "Offline";
+});
