@@ -1,5 +1,5 @@
 <template>
-    <div class="max-w-screen-2xl mx-auto rounded-tr-3xl overflow-hidden">
+    <div class="max-w-screen-2xl mx-auto overflow-hidden">
         <jet-banner />
 
         <div class="min-h-screen flex">
@@ -140,7 +140,7 @@
                             <slot name="header"></slot>
                         </div>
 
-                        <div class="hidden sm:flex sm:items-center sm:ml-6">
+                        <div class="hiddsen sm:flex sm:items-center sm:ml-6">
                             <div class="ml-3 relative">
                                 <!-- Teams Dropdown -->
                                 <jet-dropdown align="right" width="60" v-if="$page.props.jetstream.hasTeamFeatures">
