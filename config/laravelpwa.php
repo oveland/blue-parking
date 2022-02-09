@@ -3,8 +3,8 @@
 return [
     'name' => 'LaravelPWA',
     'manifest' => [
-        'name' => env('APP_NAME', 'Parking Manager'),
-        'short_name' => 'PRM',
+        'name' => env('APP_NAME', 'BlueParking'),
+        'short_name' => 'BlueParking',
         'start_url' => env('APP_URL'),
         'background_color' => '#ffffff',
         'theme_color' => '#000000',

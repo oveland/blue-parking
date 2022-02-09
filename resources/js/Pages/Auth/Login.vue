@@ -2,7 +2,7 @@
     <jet-authentication-card>
         <template #logo>
             <jet-authentication-card-logo />
-            <h1 class="text-white font-bold text-center text-4xl mt-4">Parking Manager</h1>
+            <h1 class="text-white font-bold text-center text-4xl mt-4">BlueParking</h1>
         </template>
 
         <jet-validation-errors class="mb-4"/>
