@@ -242,7 +242,7 @@
                     </div>
                 </header>
 
-                <div class="bg-red-700 ala">
+                <div class="">
                     <slot></slot>
                 </div>
             </main>
