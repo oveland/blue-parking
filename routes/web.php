@@ -19,7 +19,11 @@ use Inertia\Inertia;
 */
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
-    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/', function () {
+        return \Redirect::route('dashboard');
+    })->name('home');
+
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::resource('reservations', ReservationController::class);
     Route::name('reservations.')->prefix('reservations')->group(function () {
