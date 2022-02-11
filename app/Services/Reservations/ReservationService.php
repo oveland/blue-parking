@@ -15,7 +15,7 @@ use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Log;
-use Ramsey\Collection\Collection;
+use Illuminate\Support\Collection;
 use Throwable;
 
 class ReservationService
@@ -27,10 +27,12 @@ class ReservationService
     {
         Log::info("Creating reservation ", $data->toArray());
 
+        $date = $data->get('date') ?? Carbon::now();
+
         $reservation = new Reservation();
-        $reservation->start = Carbon::now();
-        $reservation->hold_start = Carbon::now();
-        $reservation->hold_end = Carbon::now();
+        $reservation->start = $date;
+        $reservation->hold_start = $date;
+        $reservation->hold_end = $date;
         $reservation->hold_timeout = 60;
         $reservation->active = true;
 
