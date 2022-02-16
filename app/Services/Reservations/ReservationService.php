@@ -20,6 +20,11 @@ use Throwable;
 
 class ReservationService
 {
+    function list(): Collection|array
+    {
+        return Reservation::all();
+    }
+
     /**
      * @throws Throwable
      */

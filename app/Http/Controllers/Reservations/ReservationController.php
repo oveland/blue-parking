@@ -9,8 +9,6 @@ use App\Services\Reservations\ReservationService;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Routing\Redirector;
 use Throwable;
 
 class ReservationController extends Controller
@@ -25,7 +23,7 @@ class ReservationController extends Controller
     /**
      * @throws Throwable
      */
-    public function open(ReservationRequest $request): Redirector|Application|RedirectResponse|null
+    public function open(ReservationRequest $request): Application|RedirectResponse|null
     {
         $reservation = $this->service->create($request);
 
@@ -34,15 +32,15 @@ class ReservationController extends Controller
         return redirect(route('dashboard'));
     }
 
-    public function show(Request $request): Collection|array
+    public function show(): Collection|array
     {
-        return Reservation::all();
+        return $this->service->list();
     }
 
     /**
      * @throws Throwable
      */
-    public function update(ReservationRequest $request, Reservation $reservation): Redirector|RedirectResponse|Application|null
+    public function update(ReservationRequest $request, Reservation $reservation): RedirectResponse|Application|null
     {
         $reservation = $this->service->update($reservation, $request);
 
@@ -51,7 +49,7 @@ class ReservationController extends Controller
         return redirect(route('dashboard'));
     }
 
-    public function finalize(ReservationRequest $request, Reservation $reservation): Redirector|RedirectResponse|Application|null
+    public function finalize(ReservationRequest $request, Reservation $reservation): RedirectResponse|Application|null
     {
         $reservation = $this->service->finalize($reservation, $request);
 
@@ -60,7 +58,7 @@ class ReservationController extends Controller
         return redirect(route('dashboard'));
     }
 
-    public function destroy(Reservation $reservation): Redirector|Application|RedirectResponse
+    public function destroy(Reservation $reservation): Application|RedirectResponse
     {
         $reservation->forceDelete();
         return redirect(route('dashboard'));

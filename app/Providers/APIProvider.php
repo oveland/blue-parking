@@ -3,10 +3,16 @@
 namespace App\Providers;
 
 use App\Services\API\Apps\APIOperatorService;
+use App\Services\API\Apps\APIRotationService;
 use Illuminate\Support\ServiceProvider;
 
 class APIProvider extends ServiceProvider
 {
+    const NOT_FOUND_RESPONSE = [
+        'success' => false,
+        'message' => 'Platform resource not found'
+    ];
+
     /**
      * Register services.
      *
@@ -30,22 +36,23 @@ class APIProvider extends ServiceProvider
             return app("api.$platform", $params);
         });
 
-        // For API apps
+        // For API Apps
         $this->app->bind('api.app', function ($app, $params) {
             return match ($params['resource']) {
                 'operator' => new APIOperatorService($params['service'] ?? null),
-                default => abort(403),
+                'rotation' => new APIRotationService($params['service'] ?? null),
+                default => self::NOT_FOUND_RESPONSE,
             };
         });
 
         // For API Web
         $this->app->bind('api.web', function ($app, $params) {
-            return abort(403);
+            return self::NOT_FOUND_RESPONSE;
         });
 
         // For API files
         $this->app->bind('api.files', function ($app, $params) {
-            return abort(403);
+            return self::NOT_FOUND_RESPONSE;
         });
     }
 }
