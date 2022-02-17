@@ -33,6 +33,7 @@ RUN apt-get update \
 	&& apt-get install -y zip \
 	    postgresql-client
 RUN apt-get install -y ca-certificates apt-transport-https software-properties-common;
+RUN apt-get install --no-install-recommends --no-install-suggests -y curl ca-certificates
 
 RUN apt-get update  \
     && apt-get install -y language-pack-en-base  \
@@ -72,6 +73,8 @@ RUN php -r "copy('https://getcomposer.org/installer', '/tmp/composer-setup.php')
 # Install node
 RUN curl -sL https://deb.nodesource.com/setup_14.x | bash -
 RUN apt install -y nodejs
+
+COPY config/cert.pem /etc/ssl/certs/
 
 # Copy script for general congis like auto run php and nginx server
 COPY config/configure.sh /tmp/

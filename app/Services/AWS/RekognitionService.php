@@ -29,7 +29,7 @@ class RekognitionService
         return $this;
     }
 
-    public function getText(): object
+    public function getText(): array
     {
         $result = $this->rekognition->detectText([
             'Filters' => [
@@ -45,9 +45,9 @@ class RekognitionService
         return $this->castTextResponse($result);
     }
 
-    private function castTextResponse($result): object
+    private function castTextResponse($result): array
     {
-        return $result;
+        return collect($result)->get('TextDetections');
     }
 
     private function fillBox($data, $confidence = null): object

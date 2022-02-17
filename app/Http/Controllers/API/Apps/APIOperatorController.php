@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Services\API\Apps;
+namespace App\Http\Controllers\API\Apps;
 
-use App\Services\API\Apps\Contracts\APIAppsInterface;
 use App\Services\Reservations\ReservationService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
-class APIOperatorService implements APIAppsInterface
+class APIOperatorController implements APIAppsInterface
 {
     /**
      * @var Request

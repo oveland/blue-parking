@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use App\Services\API\Apps\APIOperatorService;
-use App\Services\API\Apps\APIRotationService;
+use App\Http\Controllers\API\Apps\APIOperatorController;
+use App\Http\Controllers\API\Apps\APIRotationController;
 use Illuminate\Support\ServiceProvider;
 
 class APIProvider extends ServiceProvider
@@ -39,20 +39,10 @@ class APIProvider extends ServiceProvider
         // For API Apps
         $this->app->bind('api.app', function ($app, $params) {
             return match ($params['resource']) {
-                'operator' => new APIOperatorService($params['service'] ?? null),
-                'rotation' => new APIRotationService($params['service'] ?? null),
+                'operator' => new APIOperatorController($params['service'] ?? null),
+                'rotation' => new APIRotationController($params['service'] ?? null),
                 default => self::NOT_FOUND_RESPONSE,
             };
-        });
-
-        // For API Web
-        $this->app->bind('api.web', function ($app, $params) {
-            return self::NOT_FOUND_RESPONSE;
-        });
-
-        // For API files
-        $this->app->bind('api.files', function ($app, $params) {
-            return self::NOT_FOUND_RESPONSE;
         });
     }
 }

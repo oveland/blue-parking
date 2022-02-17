@@ -10,6 +10,7 @@ use App\Models\Reservations\Reservation;
 use App\Models\User;
 use App\Models\Vehicles\Vehicle;
 use App\Models\Vehicles\VehicleType;
+use App\Services\AWS\RekognitionService;
 use Carbon\Carbon;
 use DB;
 use Illuminate\Http\Request;
@@ -25,6 +26,13 @@ class ReservationService
         return Reservation::all();
     }
 
+    function searchVehicleReservation(Vehicle $vehicle)
+    {
+        if (!$vehicle) return null;
+
+        return Reservation::where('vehicle_id', $vehicle->id)->first();
+    }
+
     /**
      * @throws Throwable
      */
@@ -33,6 +41,16 @@ class ReservationService
         Log::info("Creating reservation ", $data->toArray());
 
         $date = $data->get('date') ?? Carbon::now();
+
+        $vehicle = $this->validateVehicle($data);
+
+        $reservation = $this->searchVehicleReservation($vehicle);
+
+        if ($reservation) {
+            $reservation->updated_at = Carbon::now();
+            $reservation->save();
+            return $reservation;
+        }
 
         $reservation = new Reservation();
         $reservation->start = $date;
@@ -43,7 +61,7 @@ class ReservationService
 
         DB::beginTransaction();
 
-        $reservation->vehicle()->associate($this->validateVehicle($data));
+        $reservation->vehicle()->associate($vehicle);
         $reservation->type()->associate(ParkingType::find($data->get('type')['id']));
         $reservation->zone()->associate(ParkingZone::find($data->get('zone')['id']));
 
@@ -120,5 +138,20 @@ class ReservationService
         $vehicle->save();
 
         return $vehicle;
+    }
+
+    function decodeVehiclePlate($photo): string
+    {
+        $rekognitionService = new RekognitionService();
+
+        $textInPhoto = $rekognitionService->setPhoto($photo)->getText();
+
+        $betterDetection = collect($textInPhoto)->filter(function ($data) {
+            $text = str_replace(" ", "", $data['DetectedText']);
+
+            return strlen($text) == 6 && strtoupper($text) === $text;
+        })->sortByDesc('Confidence')->first();
+
+        return str_replace(" ", "", $betterDetection['DetectedText'] ?? "");
     }
 }
