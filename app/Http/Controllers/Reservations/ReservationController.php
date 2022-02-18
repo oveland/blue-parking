@@ -51,7 +51,7 @@ class ReservationController extends Controller
 
     public function finalize(ReservationRequest $request, Reservation $reservation): RedirectResponse|Application|null
     {
-        $reservation = $this->service->finalize($reservation, $request);
+        $reservation = $this->service->finalize($reservation);
 
         if (!$reservation) return null;
 

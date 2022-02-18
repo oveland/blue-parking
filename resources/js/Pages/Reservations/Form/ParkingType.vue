@@ -16,7 +16,7 @@
                     {{ type.available }} {{ $t('available') }}
                 </span>
             </div>
-            <div class="w-auto float-right text-right font-bold">
+            <div class="w-auto float-right text-right font-bold hidden ">
                 <span class="text-3xl">
                     ${{ type.tariff }}
                 </span>

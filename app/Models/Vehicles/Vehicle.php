@@ -50,7 +50,7 @@ class Vehicle extends Model
         return $this->belongsTo(VehicleType::class, 'vehicle_type_id');
     }
 
-    public function toArray()
+    public function toArray(): array
     {
         return [
             'id' => $this->id,
@@ -59,7 +59,7 @@ class Vehicle extends Model
             'model' => $this->model,
             'type' => $this->type->toArray(),
             'user' => [
-                'name' => $this->user->name
+                'name' => $this->user?->name
             ]
         ];
     }

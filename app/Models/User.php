@@ -35,6 +35,7 @@ use Laravel\Sanctum\PersonalAccessToken;
  * @property string|null $two_factor_recovery_codes
  * @property string|null $identity
  * @property string $phone
+ * @property int|null $role
  * @property string|null $address
  * @property Carbon|null $deleted_at
  * @property-read string $profile_photo_url

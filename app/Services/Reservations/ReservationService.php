@@ -10,7 +10,6 @@ use App\Models\Reservations\Reservation;
 use App\Models\User;
 use App\Models\Vehicles\Vehicle;
 use App\Models\Vehicles\VehicleType;
-use App\Services\AWS\RekognitionService;
 use Carbon\Carbon;
 use DB;
 use Illuminate\Http\Request;
@@ -21,16 +20,26 @@ use Throwable;
 
 class ReservationService
 {
-    function list(): Collection|array
+    /**
+     * @var RotationService
+     */
+    private $rotationCheckService;
+
+    public function __construct(RotationService $rotationCheckService)
     {
-        return Reservation::all();
+        $this->rotationCheckService = $rotationCheckService;
     }
 
-    function searchVehicleReservation(Vehicle $vehicle)
+    function list($status = 'any', $zone = 'any'): Collection|array
+    {
+        return Reservation::statusQuery($status)->zoneQuery($zone)->orderBy('start')->get();
+    }
+
+    function searchVehicleReservation(Vehicle $vehicle = null): ?Reservation
     {
         if (!$vehicle) return null;
 
-        return Reservation::where('vehicle_id', $vehicle->id)->first();
+        return Reservation::where('vehicle_id', $vehicle->id)->statusQuery('active')->first();
     }
 
     /**
@@ -43,16 +52,26 @@ class ReservationService
         $date = $data->get('date') ?? Carbon::now();
 
         $vehicle = $this->validateVehicle($data);
-
         $reservation = $this->searchVehicleReservation($vehicle);
+        $parkingZone = ParkingZone::find($data->get('zone')['id']);
 
-        if ($reservation) {
+        $currentRotationCheck = $this->rotationCheckService->getCurrentCheck('active', $parkingZone->id);
+        $prevRotationCheck = $this->rotationCheckService->getCheckPrevTo($currentRotationCheck);
+
+        if ($reservation &&
+            ($reservation->rotationCheck?->id == $currentRotationCheck?->id || $reservation->rotationCheck?->id == $prevRotationCheck?->id) &&
+            ($reservation->parking_zone_id == $prevRotationCheck?->parking_zone_id)
+        ) {
             $reservation->updated_at = Carbon::now();
+            $reservation->rotationCheck()->associate($currentRotationCheck);
             $reservation->save();
+
             return $reservation;
         }
 
         $reservation = new Reservation();
+        $reservation->rotationCheck()->associate($currentRotationCheck);
+
         $reservation->start = $date;
         $reservation->hold_start = $date;
         $reservation->hold_end = $date;
@@ -63,7 +82,7 @@ class ReservationService
 
         $reservation->vehicle()->associate($vehicle);
         $reservation->type()->associate(ParkingType::find($data->get('type')['id']));
-        $reservation->zone()->associate(ParkingZone::find($data->get('zone')['id']));
+        $reservation->zone()->associate($parkingZone);
 
         if ($reservation->save()) {
             DB::commit();
@@ -96,7 +115,7 @@ class ReservationService
         return null;
     }
 
-    function finalize(Reservation $reservation, Collection|Request $data): ?Reservation
+    function finalize(Reservation $reservation): ?Reservation
     {
         Log::info("Finalizing reservation: " . $reservation->id);
 
@@ -114,44 +133,35 @@ class ReservationService
         $vehicle = Vehicle::where('plate', $data->get('vehicle')['plate'])->first();
 
         $dataVehicle = $data->get('vehicle');
-        $dataUser = $dataVehicle['user'];
-        $nameUser = $dataUser['name'] ?? __('Internal');
+        $nameUser = $dataVehicle['user']['name'] ?? null;
 
         if (!$vehicle) {
             $vehicle = new Vehicle($dataVehicle);
-            $user = new User($dataVehicle['user']);
-            $user->name = $nameUser;
 
-            $user->email = Carbon::now()->format('y.m.d.h.i.s.u') . '@mail.com';
-            $user->password = Hash::make('12345');
+            if ($nameUser) {
+                $user = new User($dataVehicle['user']);
+                $user->name = $nameUser;
+                $user->email = Carbon::now()->format('y.m.d.h.i.s.u') . '@mail.com';
+                $user->password = Hash::make('12345');
+                $user->role = 3;
+            }
         } else {
             $user = $vehicle->user;
-            if ($update) $user->name = $nameUser;
+            if ($update && $user) $user->name = $nameUser;
 
             $vehicle->fill($dataVehicle);
         }
 
-        $user->save();
+        if ($nameUser) {
+            $user->save();
+            $vehicle->user()->associate($user);
+        } elseif (isset($user)) {
+            $user->delete();
+        }
 
-        $vehicle->user()->associate($user);
         $vehicle->type()->associate(VehicleType::find($data->get('type')['vehicleType']['id']));
         $vehicle->save();
 
         return $vehicle;
-    }
-
-    function decodeVehiclePlate($photo): string
-    {
-        $rekognitionService = new RekognitionService();
-
-        $textInPhoto = $rekognitionService->setPhoto($photo)->getText();
-
-        $betterDetection = collect($textInPhoto)->filter(function ($data) {
-            $text = str_replace(" ", "", $data['DetectedText']);
-
-            return strlen($text) == 6 && strtoupper($text) === $text;
-        })->sortByDesc('Confidence')->first();
-
-        return str_replace(" ", "", $betterDetection['DetectedText'] ?? "");
     }
 }

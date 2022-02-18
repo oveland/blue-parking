@@ -29,10 +29,16 @@ use Illuminate\Support\Carbon;
  * @property-read ParkingType $type
  * @property-read ParkingZone $zone
  * @property-read Vehicle $vehicle
+ * @property-read RotationCheck|null $rotationCheck
+ * @method static Builder|Reservation statusQuery($status = 'any')
+ * @method static Builder|Reservation zoneQuery($zone = 'any')
  * @method static Builder|Reservation newModelQuery()
  * @method static Builder|Reservation newQuery()
  * @method static Builder|Reservation query()
  * @mixin Eloquent
+ * @property int $parking_type_id
+ * @property int $parking_zone_id
+ * @property int|null $rotation_check_id
  */
 class Reservation extends Model
 {
@@ -57,6 +63,24 @@ class Reservation extends Model
         return $this->belongsTo(Vehicle::class);
     }
 
+    function scopeStatusQuery(Builder $query, $status = 'any'): Builder|Reservation
+    {
+        if ($status != 'any') {
+            $query = $query->where('active', $status == 'active');
+        }
+
+        return $query;
+    }
+
+    function scopeZoneQuery(Builder $query, $zone = 'any'): Builder|Reservation
+    {
+        if ($zone != 'any' && $zone) {
+            $query = $query->where('parking_zone_id', $zone);
+        }
+
+        return $query;
+    }
+
     function isOpen(): bool
     {
         return !$this->end;
@@ -77,8 +101,9 @@ class Reservation extends Model
         return $this;
     }
 
-    function getCharge() {
-
+    function rotationCheck(): BelongsTo|RotationCheck
+    {
+        return $this->belongsTo(RotationCheck::class);
     }
 
     function toArray(): array
@@ -87,9 +112,11 @@ class Reservation extends Model
             'id' => $this->id,
             'start' => $this->start->toDateTimeString(),
             'startHuman' => $this->start->format('Y-m-d h:i:s a'),
+            'startTime' => $this->start->format('H:i:s'),
 
             'end' => $this->end?->toDateTimeString(),
             'endHuman' => $this->end?->format('Y-m-d h:i:s a'),
+            'endTime' => $this->end?->format('H:i:s'),
 
             'holdStart' => $this->hold_start?->toDateTimeString(),
             'holdStartHuman' => $this->hold_start?->format('Y-m-d h:i:s a'),
@@ -103,25 +130,31 @@ class Reservation extends Model
             'zone' => $this->zone->toArray(),
             'vehicle' => $this->vehicle->toArray(),
             'status' => $this->status(),
-            'updatedAt' => $this->updated_at->format('Y-m-d h:i:s a')
+            'updatedAt' => $this->updated_at->format('Y-m-d h:i:s a'),
+            'check' => $this->rotationCheck?->toArray()
         ];
     }
 
     function status(): object
     {
-        $name = 'Reserved';
+        $name = __('Reserved');
         $color = 'yellow';
+        $time = '';
 
         if ($this->active) {
             if ($this->hold_end) {
-                $name = 'Parked';
+                $name = __('Parked');
                 $color = 'blue';
+
+                $time = Carbon::now()->longAbsoluteDiffForHumans($this->start, 2);
             }
         } else {
-            $name = 'Finished';
+            $name = __('Finished');
             $color = 'green';
+
+            $time = $this->end->longAbsoluteDiffForHumans($this->start, 2);
         }
 
-        return (object)compact(['name', 'color']);
+        return (object)compact(['name', 'color', 'time']);
     }
 }

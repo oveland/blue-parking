@@ -24,8 +24,8 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $deleted_at
  * @method static Builder|Parking newModelQuery()
  * @method static Builder|Parking newQuery()
- * @method static \Illuminate\Database\Query\Builder|Parking onlyTrashed()
  * @method static Builder|Parking query()
+ * @method static \Illuminate\Database\Query\Builder|Parking onlyTrashed()
  * @method static \Illuminate\Database\Query\Builder|Parking withTrashed()
  * @method static \Illuminate\Database\Query\Builder|Parking withoutTrashed()
  * @mixin Eloquent
@@ -36,4 +36,15 @@ class Parking extends Model
     use SoftDeletes;
 
     protected $table = 'parking_lots';
+
+    public function toArray(): array
+    {
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'address' => $this->address,
+            'description' => $this->description,
+            'inStreet' => $this->in_street,
+        ];
+    }
 }

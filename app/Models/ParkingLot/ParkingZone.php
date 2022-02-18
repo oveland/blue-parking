@@ -2,12 +2,15 @@
 
 namespace App\Models\ParkingLot;
 
+use App\Models\Reservations\Reservation;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Collection;
 
 /**
  * App\Models\ParkingLot\ParkingZone
@@ -19,6 +22,7 @@ use Illuminate\Support\Carbon;
  * @property bool $available
  * @property int $parking_type_id
  * @property-read ParkingType $type
+ * @method static Builder|ParkingZone forParking($id)
  * @method static Builder|ParkingZone newModelQuery()
  * @method static Builder|ParkingZone newQuery()
  * @method static Builder|ParkingZone query()
@@ -31,7 +35,12 @@ class ParkingZone extends Model
 
     function type(): BelongsTo
     {
-        return $this->belongsTo(ParkingType::class);
+        return $this->belongsTo(ParkingType::class, 'parking_type_id', 'id');
+    }
+
+    function reservations(): HasMany | Collection
+    {
+        return $this->hasMany(Reservation::class);
     }
 
     function scopeAvailable(Builder $query): Builder|ParkingZone
@@ -39,12 +48,22 @@ class ParkingZone extends Model
         return $query->where('available', true);
     }
 
+    function scopeForParking(Builder $query, $id = 'any'): Builder|ParkingZone
+    {
+        return $query->whereHas('type', function (Builder $query) use ($id) {
+            if (!$id) return $query;
+            return $query->where('parking_id', $id);
+        })->orderBy('code');
+    }
+
     public function toArray(): array
     {
         return [
             'id' => $this->id,
             'code' => $this->code,
-            'available' => $this->available
+            'available' => $this->available,
+            'parking' => $this->type->parking,
+            'totalReservations' => $this->reservations()->where('active', true)->count()
         ];
     }
 }

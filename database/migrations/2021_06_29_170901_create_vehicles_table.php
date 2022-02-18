@@ -22,7 +22,7 @@ class CreateVehiclesTable extends Migration
             $table->string('model', 45)->nullable();
 
             $table->unsignedBigInteger('vehicle_type_id');
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('user_id')->nullable();
 
             $table->foreign('vehicle_type_id')->references('id')->on('vehicle_types')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

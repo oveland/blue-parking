@@ -38,16 +38,16 @@
                         {{ $t('Dashboard') }}
                     </jet-nav-link>
 
-                    <jet-nav-link :href="route('clients')" :active="route().current('clients')" icon="passengers" class="w-full" :disabled="true">
+                    <jet-nav-link :href="route('clients')" :active="route().current('clients')" icon="passengers" class="w-full hidden" :disabled="true">
                         {{ $t('Clients') }}
                     </jet-nav-link>
 
                     <jet-nav-link :href="route('vehicles')" :active="route().current('vehicles')" icon="vehicle" class="w-full" :disabled="true">
-                        {{ $t('Vehicles') }}
+                        {{ $t('Reports') }}
                     </jet-nav-link>
 
-                    <jet-nav-link :href="route('account')" :active="route().current('account')" icon="user" class="w-full" :disabled="true">
-                        {{ $t('Account') }}
+                    <jet-nav-link :href="route('account')" :active="route().current('account')" icon="add" class="w-full" :disabled="true">
+                        {{ $t('Administration') }}
                     </jet-nav-link>
                 </div>
 

@@ -18,7 +18,7 @@
                         </div>
                     </div>
 
-                    <div class="text-right md:text-center">
+                    <div class="text-right md:text-center hidden">
                         <jet-button :disabled="disable" @click="add()" class="hidden md:block">
                             {{ $t('Create') }}
                         </jet-button>
@@ -43,7 +43,7 @@
                             <th scope="col" class="px-6 py-3 text-left text-sm text-gray-400 uppercase">
                                 {{ $t('Vehicle') }}
                             </th>
-                            <th scope="col" class="px-6 py-3 text-left text-sm text-gray-400 uppercase">
+                            <th scope="col" class="px-6 py-3 text-left text-sm text-gray-400 uppercase hidden">
                                 {{ $t('Client') }}
                             </th>
                             <th scope="col" class="px-6 py-3 text-left text-sm text-gray-400 uppercase">
@@ -56,7 +56,7 @@
                                 {{ $t('Zone') }}
                             </th>
                             <th scope="col" class="px-6 py-3 text-left text-sm text-gray-400 uppercase">
-                                {{ $t('Charges') }}
+                                {{ $t('TIEMPO') }}
                             </th>
                             <th scope="col" class="px-6 py-3 text-right text-sm  text-gray-400 uppercase">
                                 <span class="">{{ $t('Actions') }}</span>

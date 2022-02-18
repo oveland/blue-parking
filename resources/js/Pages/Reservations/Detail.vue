@@ -20,7 +20,7 @@
             </div>
         </td>
 
-        <td class="px-6 py-2 w-1/4">
+        <td class="px-6 py-2 w-1/4 hidden">
             <div class="text-sm text-gray-500 font-semibold">
                 {{ reservation.vehicle.user?.name }}
             </div>
@@ -65,17 +65,17 @@
             <div>
                 {{ reservation.zone.code }}
             </div>
-            <div class="text-gray-400">
+            <div class="text-gray-400 hidden">
                 <small>${{ reservation.type.tariff }}/min</small>
             </div>
         </td>
 
         <td class="px-6 py-2 w-1/4 text-sm text-gray-500 font-semibold">
-            <div>
+            <div class="hidden">
                 {{ $filter.currency(charges) }}
             </div>
             <div class="text-gray-400">
-                <small>{{ elapsedTime }} min</small>
+                <span>{{ elapsedTime }} min</span>
             </div>
         </td>
 
