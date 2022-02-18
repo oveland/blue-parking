@@ -24687,7 +24687,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   data: function data() {
     return {
       form: this.$inertia.form({
-        email: '',
+        username: '',
         password: '',
         remember: false
       })
@@ -24754,6 +24754,8 @@ __webpack_require__.r(__webpack_exports__);
       form: this.$inertia.form({
         name: '',
         email: '',
+        username: '',
+        role: 0,
         password: '',
         password_confirmation: '',
         terms: false
@@ -29051,17 +29053,17 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           return $options.submit && $options.submit.apply($options, arguments);
         }, ["prevent"]))
       }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
-        "for": "email",
-        value: _ctx.$t('Email')
+        "for": "username",
+        value: _ctx.$t('Username')
       }, null, 8
       /* PROPS */
       , ["value"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
-        id: "email",
-        type: "email",
+        id: "username",
+        type: "text",
         "class": "mt-1 block w-full",
-        modelValue: $data.form.email,
+        modelValue: $data.form.username,
         "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
-          return $data.form.email = $event;
+          return $data.form.username = $event;
         }),
         required: "",
         autofocus: ""
@@ -29158,28 +29160,29 @@ var _hoisted_3 = {
   "class": "mt-4"
 };
 var _hoisted_4 = {
-  key: 0,
   "class": "mt-4"
 };
 var _hoisted_5 = {
-  "class": "flex items-center"
+  "class": "mt-4"
 };
 var _hoisted_6 = {
+  key: 0,
+  "class": "mt-4"
+};
+var _hoisted_7 = {
+  "class": "flex items-center"
+};
+var _hoisted_8 = {
   "class": "ml-2"
 };
 
-var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" I agree to the ");
+var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" I agree to the ");
 
-var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" and ");
+var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" and ");
 
-var _hoisted_9 = {
+var _hoisted_11 = {
   "class": "flex items-center justify-end mt-4"
 };
-
-var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Already registered? ");
-
-var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Register ");
-
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_jet_authentication_card_logo = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("jet-authentication-card-logo");
 
@@ -29205,13 +29208,15 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_validation_errors, {
         "class": "mb-4"
       }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("form", {
-        onSubmit: _cache[6] || (_cache[6] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
+        onSubmit: _cache[8] || (_cache[8] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
           return $options.submit && $options.submit.apply($options, arguments);
         }, ["prevent"]))
       }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
         "for": "name",
-        value: "Name"
-      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
+        value: _ctx.$t('Name')
+      }, null, 8
+      /* PROPS */
+      , ["value"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
         id: "name",
         type: "text",
         "class": "mt-1 block w-full",
@@ -29225,6 +29230,22 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }, null, 8
       /* PROPS */
       , ["modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+        "for": "username",
+        value: _ctx.$t('Username')
+      }, null, 8
+      /* PROPS */
+      , ["value"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
+        id: "username",
+        type: "text",
+        "class": "mt-1 block w-full",
+        modelValue: $data.form.username,
+        "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
+          return $data.form.username = $event;
+        }),
+        required: ""
+      }, null, 8
+      /* PROPS */
+      , ["modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
         "for": "email",
         value: "Email"
       }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
@@ -29232,62 +29253,82 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         type: "email",
         "class": "mt-1 block w-full",
         modelValue: $data.form.email,
-        "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
+        "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
           return $data.form.email = $event;
         }),
         required: ""
       }, null, 8
       /* PROPS */
-      , ["modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+      , ["modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
         "for": "password",
-        value: "Password"
-      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
+        value: _ctx.$t('Password')
+      }, null, 8
+      /* PROPS */
+      , ["value"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
         id: "password",
         type: "password",
         "class": "mt-1 block w-full",
         modelValue: $data.form.password,
-        "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
+        "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
           return $data.form.password = $event;
         }),
         required: "",
         autocomplete: "new-password"
       }, null, 8
       /* PROPS */
-      , ["modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+      , ["modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
         "for": "password_confirmation",
-        value: "Confirm Password"
-      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
+        value: _ctx.$t('Confirm password')
+      }, null, 8
+      /* PROPS */
+      , ["value"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
         id: "password_confirmation",
         type: "password",
         "class": "mt-1 block w-full",
         modelValue: $data.form.password_confirmation,
-        "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
+        "onUpdate:modelValue": _cache[5] || (_cache[5] = function ($event) {
           return $data.form.password_confirmation = $event;
         }),
         required: "",
         autocomplete: "new-password"
       }, null, 8
       /* PROPS */
-      , ["modelValue"])]), _ctx.$page.props.jetstream.hasTermsAndPrivacyPolicyFeature ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+      , ["modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+        "for": "role",
+        value: _ctx.$t('Role')
+      }, null, 8
+      /* PROPS */
+      , ["value"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
+        id: "role",
+        type: "number",
+        "class": "mt-1 block w-full",
+        modelValue: $data.form.role,
+        "onUpdate:modelValue": _cache[6] || (_cache[6] = function ($event) {
+          return $data.form.role = $event;
+        }),
+        required: ""
+      }, null, 8
+      /* PROPS */
+      , ["modelValue"])]), _ctx.$page.props.jetstream.hasTermsAndPrivacyPolicyFeature ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
         "for": "terms"
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_checkbox, {
+          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_checkbox, {
             name: "terms",
             id: "terms",
             checked: $data.form.terms,
-            "onUpdate:checked": _cache[5] || (_cache[5] = function ($event) {
+            "onUpdate:checked": _cache[7] || (_cache[7] = function ($event) {
               return $data.form.terms = $event;
             })
           }, null, 8
           /* PROPS */
-          , ["checked"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_6, [_hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", {
+          , ["checked"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_8, [_hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", {
             target: "_blank",
             href: _ctx.route('terms.show'),
             "class": "underline text-sm text-gray-600 hover:text-gray-900"
           }, "Terms of Service", 8
           /* PROPS */
-          , ["href"]), _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", {
+          , ["href"]), _hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", {
             target: "_blank",
             href: _ctx.route('policy.show'),
             "class": "underline text-sm text-gray-600 hover:text-gray-900"
@@ -29298,12 +29339,14 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         _: 1
         /* STABLE */
 
-      })])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_inertia_link, {
+      })])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_inertia_link, {
         href: _ctx.route('login'),
         "class": "underline text-sm text-gray-600 hover:text-gray-900"
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [_hoisted_10];
+          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$t('Already registered?')), 1
+          /* TEXT */
+          )];
         }),
         _: 1
         /* STABLE */
@@ -29317,7 +29360,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         disabled: $data.form.processing
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [_hoisted_11];
+          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$t('Register')), 1
+          /* TEXT */
+          )];
         }),
         _: 1
         /* STABLE */
@@ -81958,7 +82003,7 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('{"Home":"Inicio","Create":"Crear","Created":"Creado","Update":"Actualizar","Save":"Guardar","Saved":"Guardado","save":"guardar","Delete":"Eliminar","delete":"eliminar","Cancel":"Cancelar","Close":"Cerrar","Route":"Ruta","Company":"Empresa","company":"empresa","Routes":"Rutas","Reports":"Reportes","Report":"Reporte","report":"reporte","Search report":"Consultar reporte","Date report":"Fecha de Reporte","Search":"Buscar","Query":"Consultar","Vehicle":"Vehículo","vehicle":"vehículo","Vehicles":"Vehículos","vehicles":"vehículos","Round Trip":"Vuelta","round trip":"vuelta","Turn":"Turno","Turns":"Turnos","turn":"turnos","turns":"turnos","No registers found":"No se encontraron registros","No dispatch registers found":"No se encontraron despachos","Select an option":"Seleccione","Select a route":"Seleccione una ruta","Select a vehicle":"Seleccione un vehículo","Select an vehicle":"Seleccione un vehículo","Select a company":"Seleccione una empresa","Loading...":"Cargando...","No routes found":"Sin rutas","No vehicles found":"Sin vehículos","Actions":"Acciones","Detail":"Ver detalle","Report detail":"Ver reporte","Hide / Show":"Ocultar / Mostrar","Remove":"Eliminar","Round trip":"Vuelta","Track on map":"Seguimiento en el mapa","List":"Lista","Oops, something went wrong!":"Opps, parece que algo anda mal :(","of the route":"de la ruta","No report found for this vehicle":"No se ha encontrado ningún reporte para este vehículo","No passengers report found for this vehicle":"No se ha encontrado ningún reporte de pasajeros para este vehículo","Route info":"Información de la ruta","Route report":"Reporte de ruta","Control point going":"Ida","Control point return":"Regreso","Passengers report":"Reporte de pasajeros","Register historic":"Histórico de registro","Passengers":"Pasajeros","Seat":"Asiento","Seats":"Asientos","seat":"asiento","seats":"asientos","Time":"Hora","Event active time":"Ocupado a las","Event inactive time":"Libre a las","Active time":"Activo durante","Active kilometers":"Kilómetros","Feature on development":"Funcionalidad en desarrollo","Still busy":"Ocupado aún","Username":"Usuario","Password":"Contraseña","Remember Me":"Recuérdame","Login":"Ingresar","Log In":"Inicia sesión","Type your credentials":"Ingresa tus credenciales","Confirm Password":"Confirma Contraseña","Register":"Registro","Name":"Nombre","Logout":"Cerrar Sesión","Passengers_Report_":"Reporte_Pasajeros_","Passengers Report":"Reporte de pasajeros","Export excel":"Exportar a excel","Export":"Exportar","Date":"Fecha","All Routes":"Todas las rutas","All routes":"Todas las rutas","passengers":"pasajeros","Status":"Estado","status":"estado","Address":"Dirección","Users":"Usuarios","All":"Todos","all":"todos","reports":"reportes","routes":"rutas","route":"ruta","users":"usuarios","Plate":"Placa","Departure time":"Hora despachado","Departure":"Salida","Arrived":"Llegada","Arrival time":"Hora de llegada","Driver":"Operador","Drivers":"Operadores","driver":"operador","drivers":"operadores","Dispatchers":"Despachadores","dispatchers":"despachadores","Options":"Opciones","Edit":"Modificar","Clear":"Limpiar","Number":"Número","Profile":"Perfil","Profile information":"Información del perfil","Update the profile information associated with your account":"Actualice la información del perfil asociada a su cuenta","Make sure your account is using a long, random password for added security":"Asegúrese de que su cuenta esté usando una contraseña larga y aleatoria para mayor seguridad","Manage and logout your active sessions on other browsers and devices":"Administre y cierre sus sus sesiones activas en otros navegadores y dispositivos","If necessary, you may logout of all of your other browser sessions across all of your devices":"Si es necesario, puede cerrar las sesiones de su navegador en todos sus dispositivos","If you feel your account has been compromised, you should also update your password":"Si cree que su cuenta se ha visto comprometida, considere actualizar su contraseña","Are you sure you want to delete this register?":"Está seguro de que desea eliminar este registro?","Are you sure you want to delete your account?":"Está seguro de que desea eliminar su cuenta?","Are you sure you want to delete this turn?":"Está seguro de que desea eliminar este turno?","Are you sure you want to annul this dispatch?":"Está seguro de que desea anular este despacho?","Are you sure you want to delete this bearing?":"Está seguro de que desea eliminar esta programación?","Are you sure you want to delete this reservation?":"Está seguro de que desea eliminar este parqueo?","Once your account is deleted, all of its resources and data will be permanently deleted":"Una vez que se elimine su cuenta, todos sus recursos y datos se eliminarán permanentemente","Please enter your password to confirm you would like to permanently delete your account":"Ingrese su contraseña para confirmar que desea eliminar permanentemente su cuenta","Before deleting your account, please download any data or information that you wish to retain":"Antes de eliminar su cuenta, descargue cualquier dato o información que desee conservar","Add additional security to your account using two factor authentication":"Agregue seguridad adicional a su cuenta mediante el factor de autenticación doble","You have not enabled two factor authentication":"Aún no ha habilitado el factor de autenticación doble","You have enabled two factor authentication":"El factor de autenticación doble está habilitado","When two factor authentication is enabled, you will be prompted for a secure, random token during authentication":"Cuando el factor de autenticación doble está habilitado, se le pedirá un token aleatorio y seguro durante el inicio de sesión","You may retrieve this token from your phone\'s Google Authenticator application":"Puede recuperar este token por medio de la aplicación Google Authenticator instalada en su teléfono","Two factor authentication is now enabled. Scan the following QR code using your phone\'s authenticator application":"La autenticación de doble factor se ha habilitado. Escanee el siguiente código QR usando la aplicación Google Authenticator instalada en su teléfono","Store these recovery codes in a secure password manager. They can be used to recover access to your account if your two factor authentication device is lost":"Guarde estos códigos de restauración en un administrador de contraseñas seguro. Se pueden usar para recuperar el acceso a su cuenta si pierde su dispositivo de autenitcación","For security, please confirm your password to continue":"Por seguridad, porfavor confirme su contraseña para continuar","Please enter your password to confirm you would like to logout of your other browser sessions across all of your devices":"Ingrese su contraseña para confirmar que desea cerrar las otras sesiones en todos sus dispositivos","This password does not match our records":"Esta contraseña no coincide con nuestros registros","Photo":"Foto","Select a new photo":"Seleccionar una nueva foto","Email":"Correo","Current password":"Contraseña actual","Remove photo":"Eliminar foto","Switch teams":"Seleccionar equipos","Team settings":"Ajuste de equipos","Manage team":"Administrar equipos","Create new team":"Crear equipo","API tokens":"Llaves de acceso","Manage account":"Administrar cuenta","Update password":"Actualizar contraseña","New password":"Nueva contraseña","Confirm password":"Confirmar contraseña","User sessions":"Sesiones de usuario","This device":"Este dispositivo","Last active :hours hours ago":"Last active :hours hours ago","Active":"Activo","Logout all sessions":"Cerrar todas las sesiones","Enable":"Habilitar","Delete account":"Eliminar cuenta","Permanently delete your account":"Elimina la cuenta permanentemente","Two factor authentication":"Factor de autenticación doble","Regenerate recovery codes":"Generar nuevos códigos de restauración","Show recovery codes":"Mostrar códigos de restauración","Disable":"Deshabilitar","Confirm":"Confirmar","Bearing":"Rodamiento","bearing":"rodamiento","Operation":"Operación","Dispatch of vehicles":"Despacho de vehículos","Dispatches":"Despachos","Dispatch":"Despacho","To dispatch":"Despachar","Administration":"Administración","Companies":"Empresas","No registers":"Sin registros","Main":"Principal","Are you sure you want to delete this company?":"Está seguro que desea eliminar esta empresa?","Are you sure you want to delete this vehicle?":"Está seguro que desea eliminar este vehículo?","Are you sure you want to delete this route?":"Está seguro que desea eliminar esta ruta?","Are you sure you want to delete this associated?":"Está seguro que desea eliminar este asociado?","Are you sure you want to delete this driver?":"Está seguro que desea eliminar este Operador?","Are you sure you want to delete this city?":"Está seguro que desea eliminar esta ciudad?","Are you sure you want to delete this passenger?":"Está seguro que desea eliminar este pasajero?","Are you sure you want to delete this office?":"Está seguro que desea eliminar esta oficina?","Are you sure you want to delete this service type?":"Está seguro que desea eliminar este tipo de servicio?","For security enter the company name":"Por seguridad ingrese el nombre de la empresa","For security enter the vehicle plate":"Por seguridad ingrese la placa del vehículo","For security enter the route name":"Por seguridad ingrese el nombre de la ruta","For security enter the office name":"Por seguridad ingrese el nombre de la oficina","For security enter the service type name":"Por seguridad ingrese el nombre del tipo de servicio","capacity":"capacidad","Associates":"Asociados","Associated":"Asociado","associated":"asociado","Office":"Oficina","Offices":"Oficinas","office":"oficina","offices":"oficinas","Last name":"Apellido","Identity":"Identificación","Capacity":"Capacidad","Select":"Seleccione","Updated at":"Modificado","Description":"Descripción","Global":"Global","Dashboard":"Panel de Control","Code":"Código","days":"días","associates":"associados","destinations":"destinos","No elements found":"No encontrado","current":"actual","City":"Ciudad","city":"ciudad","Cities":"Ciudades","cities":"ciudades","Tariff":"Tarifa","tariff":"tarifa","Destination":"Destino","Service type":"Tipo de servicio","Updated":"Actualizado","Type":"Tipo","Service types":"Tipos de servicio","service type":"tipo de servicio","service types":"tipos de servicio","Type at least 3 chars":"Escriba al menos 3 caractéres","Type at least 2 chars":"Escriba al menos 2 caractéres","Current turn":"Turno actual","Generate":"Generar","Open":"Abrir","Closed":"Cerrado","Active turn":"Turno activo","Closed turn":"Turno cerrado","Start date":"Fecha inicio","End date":"Fecha fin","User":"Usuario","Manage bearing":"Administrar rodamiento","Manage":"Administrar","Unassigned":"No asignado","Empty":"Vacío","Reserved":"Parqueado","Details":"Detalles","Usage rate":"Tasa de uso","Usage r.":"T. de uso","Ramp":"Rampa","Dispatched":"Despachado","In ramp":"En rampa","dispatch":"despacho","Sell":"Vender","Seating":"Asientos","seating":"asientos","available":"disponibles","Today":"Hoy","Now":"Ahora","Yesterday":"Ayer","Tomorrow":"Mañana","Passenger":"Pasajero","Origin":"Origen","In ramp from":"En rampa desde","Remember me":"Mantener sesión abierta","Redirecting":"Redireccionando","Only one active session is allowed":"Solo se permite una sesión activa","Log out of the following devices":"Cierre la session en los siguientes dispositivos","Logout other sessions":"Cerrar otras sessiones","Register new passenger":"Registrar nuevo pasajero","Print":"Imprimir","Register dispatch":"Despachar vehículo","Are you sure you want to dispatch this vehicle?":"Confirme el despacho del siguiente vehículo","dispatches":"despachos","STQ":"Sistema de tiquetes QR","Department":"Departamento","NIT":"NIT","In 15 minutes":"En 15 min.","In 30 minutes":"En 30 min.","In 1 hour":"En 1 hora","Dispatcher":"Despachador","System":"Sistema","Administrator":"Administrador","Administrator users can perform any action":"Los usuarios administradores tienen acceso total","Supervisor users have the ability to read, create, and update":"Los usuarios Supervisores pueden realizar acciones de Lectura, Creación y Modificación","Dispatcher users have the ability to read and update":"Los usuarios Despachadores pueden realizar acciones de Lectura y Modificación","Team members":"Miembros del equipo","Team Settings":"Ajuste","Please provide the an existing email to add to this team":"Porfavor ingresa un correo existente para asociarlo a este equipo","Add team member":"Agregar usuario","Add a new user to your team":"Agrega un nuevo usuario a tu equipo","This user already belongs to the team.":"Este usuario ya se encuentra en el equipo","Added":"Agregado","Add":"Agregar","All of the people that are part of this team":"Todas las personas que forman parte del equipo","Role":"Rol","Team name":"Nombre del equipo","The team\'s name and owner information":"Nombre del equipo e información del propietario","Owner":"Propietario","Manage role":"Administar rol","Remove team member":"Eliminar miembro del equipo","Are you sure you would like to remove this person from the team?":"Está seguro que desea eliminar este miembro del equipo?","Leave":"Abandonar","Leave team":"Abandonar equipo","Are you sure you would like to leave this team?":"Está seguro que desea abandonar este equipo?","We were unable to find a registered user with this email address.":"No pudimos encontrar un usuario registrado con este correo","Delete team":"Eliminar equipo","Permanently delete this team":"Elimina este equipo de manera permanente","Once a team is deleted, all of its resources and data will be permanently deleted. Before deleting this team, please download any data or information that you wish to retain":"Una vez que se elimina un equipo, todos sus recursos y datos se eliminarán de forma permanente. Antes de eliminar este equipo, descargue cualquier dato o información que desee conservar","Are you sure you want to delete this team? Once a team is deleted, all of its resources and data will be permanently deleted":"¿Estás seguro de que deseas eliminar este equipo? Una vez que se elimina un equipo, todos sus recursos y datos se eliminarán de forma permanente","Team details":"Detalles del equipo","Team":"Equipo","Whoops! Something went wrong":"Whoops! algo salió mal","The :attribute must be at least :min characters":"Al menos  :min caracteres","Forbidden":"Acceso no autorizado","This action is unauthorized.":"Esta acción no está autorizada","Team of":"Equipo de","Manage users":"Administrar usuarios","Teams":"Equipos","username":"usuario","Admin users":"Administrar usuarios","The password confirmation does not match.":"Las constraseñas no coinciden","dispatcher":"despachador","system":"analista","Analyst":"Analista","analyst":"analista","admin":"administrator","owner":"administrador","Unassigned rol":"Sin rol","« Previous":"« Anterior","Next »":"« Siguiente","Parent route":"Ruta padre","annul":"anular","Annul":"Anular","Type a description":"Ingrese una descripción","Print driver report":"Imprimir reporte para operador","The time departure should be greater than current time":"La hora de salida debe ser mayor que la hora actual","Transactions":"Transacciones","Service":"Servicio","My dispatches":"Mis despachos","Value":"Valor","TOTAL":"TOTAL","Vehicle associates":"Asociados del vehículo","Vehicle associated":"Asociado del vehículo","Initial date":"Fecha inicial","Current":"Actual","Info":"Info","Total":"Total","By range":"Por rango","By day":"Por día","Last week":"-1 semana","Last month":"-1 mes","Charge":"Valor","Clear filters":"Borrar filtros","Turn number":"# Turno","to":"a","Clients":"Clientes","Account":"Cuenta","Reservations":"Parqueos","Reservation":"Parqueo","Model":"Modelo","Client":"Cliente","Zone":"Zona","Color":"Color","minute":"minuto","Id":"Id","Parked":"Parqueado","Log in":"Ingresar","Finished":"Finalizado","In total":"En total","Vehicle plate is required":"Se requiere la placa del vehículo","Zone is required":"Especifique la zona de parqueo","hours":"horas","minutes":"minutos","Internal":"Interno","reservation":"parqueo","Finalize":"Finalizar","Terminate":"Cerrar","Entry":"Ingreso","Exit":"Salida","Charges":"Cargos","h":"h","m":"m","#":"#"}');
+module.exports = JSON.parse('{"Home":"Inicio","Create":"Crear","Created":"Creado","Update":"Actualizar","Save":"Guardar","Saved":"Guardado","save":"guardar","Delete":"Eliminar","delete":"eliminar","Cancel":"Cancelar","Close":"Cerrar","Route":"Ruta","Company":"Empresa","company":"empresa","Routes":"Rutas","Reports":"Reportes","Report":"Reporte","report":"reporte","Search report":"Consultar reporte","Date report":"Fecha de Reporte","Search":"Buscar","Query":"Consultar","Vehicle":"Vehículo","vehicle":"vehículo","Vehicles":"Vehículos","vehicles":"vehículos","Round Trip":"Vuelta","round trip":"vuelta","Turn":"Turno","Turns":"Turnos","turn":"turnos","turns":"turnos","No registers found":"No se encontraron registros","No dispatch registers found":"No se encontraron despachos","Select an option":"Seleccione","Select a route":"Seleccione una ruta","Select a vehicle":"Seleccione un vehículo","Select an vehicle":"Seleccione un vehículo","Select a company":"Seleccione una empresa","Loading...":"Cargando...","No routes found":"Sin rutas","No vehicles found":"Sin vehículos","Actions":"Acciones","Detail":"Ver detalle","Report detail":"Ver reporte","Hide / Show":"Ocultar / Mostrar","Remove":"Eliminar","Round trip":"Vuelta","Track on map":"Seguimiento en el mapa","List":"Lista","Oops, something went wrong!":"Opps, parece que algo anda mal :(","of the route":"de la ruta","No report found for this vehicle":"No se ha encontrado ningún reporte para este vehículo","No passengers report found for this vehicle":"No se ha encontrado ningún reporte de pasajeros para este vehículo","Route info":"Información de la ruta","Route report":"Reporte de ruta","Control point going":"Ida","Control point return":"Regreso","Passengers report":"Reporte de pasajeros","Register historic":"Histórico de registro","Passengers":"Pasajeros","Seat":"Asiento","Seats":"Asientos","seat":"asiento","seats":"asientos","Time":"Hora","Event active time":"Ocupado a las","Event inactive time":"Libre a las","Active time":"Activo durante","Active kilometers":"Kilómetros","Feature on development":"Funcionalidad en desarrollo","Still busy":"Ocupado aún","Username":"Usuario","Password":"Contraseña","Remember Me":"Recuérdame","Login":"Ingresar","Log In":"Inicia sesión","Type your credentials":"Ingresa tus credenciales","Confirm Password":"Confirma Contraseña","Register":"Registro","Name":"Nombre","Logout":"Cerrar Sesión","Passengers_Report_":"Reporte_Pasajeros_","Passengers Report":"Reporte de pasajeros","Export excel":"Exportar a excel","Export":"Exportar","Date":"Fecha","All Routes":"Todas las rutas","All routes":"Todas las rutas","passengers":"pasajeros","Status":"Estado","status":"estado","Address":"Dirección","Users":"Usuarios","All":"Todos","all":"todos","reports":"reportes","routes":"rutas","route":"ruta","users":"usuarios","Plate":"Placa","Departure time":"Hora despachado","Departure":"Salida","Arrived":"Llegada","Arrival time":"Hora de llegada","Driver":"Operador","Drivers":"Operadores","driver":"operador","drivers":"operadores","Dispatchers":"Despachadores","dispatchers":"despachadores","Options":"Opciones","Edit":"Modificar","Clear":"Limpiar","Number":"Número","Profile":"Perfil","Profile information":"Información del perfil","Update the profile information associated with your account":"Actualice la información del perfil asociada a su cuenta","Make sure your account is using a long, random password for added security":"Asegúrese de que su cuenta esté usando una contraseña larga y aleatoria para mayor seguridad","Manage and logout your active sessions on other browsers and devices":"Administre y cierre sus sus sesiones activas en otros navegadores y dispositivos","If necessary, you may logout of all of your other browser sessions across all of your devices":"Si es necesario, puede cerrar las sesiones de su navegador en todos sus dispositivos","If you feel your account has been compromised, you should also update your password":"Si cree que su cuenta se ha visto comprometida, considere actualizar su contraseña","Are you sure you want to delete this register?":"Está seguro de que desea eliminar este registro?","Are you sure you want to delete your account?":"Está seguro de que desea eliminar su cuenta?","Are you sure you want to delete this turn?":"Está seguro de que desea eliminar este turno?","Are you sure you want to annul this dispatch?":"Está seguro de que desea anular este despacho?","Are you sure you want to delete this bearing?":"Está seguro de que desea eliminar esta programación?","Are you sure you want to delete this reservation?":"Está seguro de que desea eliminar este parqueo?","Once your account is deleted, all of its resources and data will be permanently deleted":"Una vez que se elimine su cuenta, todos sus recursos y datos se eliminarán permanentemente","Please enter your password to confirm you would like to permanently delete your account":"Ingrese su contraseña para confirmar que desea eliminar permanentemente su cuenta","Before deleting your account, please download any data or information that you wish to retain":"Antes de eliminar su cuenta, descargue cualquier dato o información que desee conservar","Add additional security to your account using two factor authentication":"Agregue seguridad adicional a su cuenta mediante el factor de autenticación doble","You have not enabled two factor authentication":"Aún no ha habilitado el factor de autenticación doble","You have enabled two factor authentication":"El factor de autenticación doble está habilitado","When two factor authentication is enabled, you will be prompted for a secure, random token during authentication":"Cuando el factor de autenticación doble está habilitado, se le pedirá un token aleatorio y seguro durante el inicio de sesión","You may retrieve this token from your phone\'s Google Authenticator application":"Puede recuperar este token por medio de la aplicación Google Authenticator instalada en su teléfono","Two factor authentication is now enabled. Scan the following QR code using your phone\'s authenticator application":"La autenticación de doble factor se ha habilitado. Escanee el siguiente código QR usando la aplicación Google Authenticator instalada en su teléfono","Store these recovery codes in a secure password manager. They can be used to recover access to your account if your two factor authentication device is lost":"Guarde estos códigos de restauración en un administrador de contraseñas seguro. Se pueden usar para recuperar el acceso a su cuenta si pierde su dispositivo de autenitcación","For security, please confirm your password to continue":"Por seguridad, porfavor confirme su contraseña para continuar","Please enter your password to confirm you would like to logout of your other browser sessions across all of your devices":"Ingrese su contraseña para confirmar que desea cerrar las otras sesiones en todos sus dispositivos","This password does not match our records":"Esta contraseña no coincide con nuestros registros","Photo":"Foto","Select a new photo":"Seleccionar una nueva foto","Email":"Correo","Current password":"Contraseña actual","Remove photo":"Eliminar foto","Switch teams":"Seleccionar equipos","Team settings":"Ajuste de equipos","Manage team":"Administrar equipos","Create new team":"Crear equipo","API tokens":"Llaves de acceso","Manage account":"Administrar cuenta","Update password":"Actualizar contraseña","New password":"Nueva contraseña","Confirm password":"Confirmar contraseña","User sessions":"Sesiones de usuario","This device":"Este dispositivo","Last active :hours hours ago":"Last active :hours hours ago","Active":"Activo","Logout all sessions":"Cerrar todas las sesiones","Enable":"Habilitar","Delete account":"Eliminar cuenta","Permanently delete your account":"Elimina la cuenta permanentemente","Two factor authentication":"Factor de autenticación doble","Regenerate recovery codes":"Generar nuevos códigos de restauración","Show recovery codes":"Mostrar códigos de restauración","Disable":"Deshabilitar","Confirm":"Confirmar","Bearing":"Rodamiento","bearing":"rodamiento","Operation":"Operación","Dispatch of vehicles":"Despacho de vehículos","Dispatches":"Despachos","Dispatch":"Despacho","To dispatch":"Despachar","Administration":"Administración","Companies":"Empresas","No registers":"Sin registros","Main":"Principal","Are you sure you want to delete this company?":"Está seguro que desea eliminar esta empresa?","Are you sure you want to delete this vehicle?":"Está seguro que desea eliminar este vehículo?","Are you sure you want to delete this route?":"Está seguro que desea eliminar esta ruta?","Are you sure you want to delete this associated?":"Está seguro que desea eliminar este asociado?","Are you sure you want to delete this driver?":"Está seguro que desea eliminar este Operador?","Are you sure you want to delete this city?":"Está seguro que desea eliminar esta ciudad?","Are you sure you want to delete this passenger?":"Está seguro que desea eliminar este pasajero?","Are you sure you want to delete this office?":"Está seguro que desea eliminar esta oficina?","Are you sure you want to delete this service type?":"Está seguro que desea eliminar este tipo de servicio?","For security enter the company name":"Por seguridad ingrese el nombre de la empresa","For security enter the vehicle plate":"Por seguridad ingrese la placa del vehículo","For security enter the route name":"Por seguridad ingrese el nombre de la ruta","For security enter the office name":"Por seguridad ingrese el nombre de la oficina","For security enter the service type name":"Por seguridad ingrese el nombre del tipo de servicio","capacity":"capacidad","Associates":"Asociados","Associated":"Asociado","associated":"asociado","Office":"Oficina","Offices":"Oficinas","office":"oficina","offices":"oficinas","Last name":"Apellido","Identity":"Identificación","Capacity":"Capacidad","Select":"Seleccione","Updated at":"Modificado","Description":"Descripción","Global":"Global","Dashboard":"Panel de Control","Code":"Código","days":"días","associates":"associados","destinations":"destinos","No elements found":"No encontrado","current":"actual","City":"Ciudad","city":"ciudad","Cities":"Ciudades","cities":"ciudades","Tariff":"Tarifa","tariff":"tarifa","Destination":"Destino","Service type":"Tipo de servicio","Updated":"Actualizado","Type":"Tipo","Service types":"Tipos de servicio","service type":"tipo de servicio","service types":"tipos de servicio","Type at least 3 chars":"Escriba al menos 3 caractéres","Type at least 2 chars":"Escriba al menos 2 caractéres","Current turn":"Turno actual","Generate":"Generar","Open":"Abrir","Closed":"Cerrado","Active turn":"Turno activo","Closed turn":"Turno cerrado","Start date":"Fecha inicio","End date":"Fecha fin","User":"Usuario","Manage bearing":"Administrar rodamiento","Manage":"Administrar","Unassigned":"No asignado","Empty":"Vacío","Reserved":"Parqueado","Details":"Detalles","Usage rate":"Tasa de uso","Usage r.":"T. de uso","Ramp":"Rampa","Dispatched":"Despachado","In ramp":"En rampa","dispatch":"despacho","Sell":"Vender","Seating":"Asientos","seating":"asientos","available":"disponibles","Today":"Hoy","Now":"Ahora","Yesterday":"Ayer","Tomorrow":"Mañana","Passenger":"Pasajero","Origin":"Origen","In ramp from":"En rampa desde","Remember me":"Mantener sesión abierta","Redirecting":"Redireccionando","Only one active session is allowed":"Solo se permite una sesión activa","Log out of the following devices":"Cierre la session en los siguientes dispositivos","Logout other sessions":"Cerrar otras sessiones","Register new passenger":"Registrar nuevo pasajero","Print":"Imprimir","Register dispatch":"Despachar vehículo","Are you sure you want to dispatch this vehicle?":"Confirme el despacho del siguiente vehículo","dispatches":"despachos","STQ":"Sistema de tiquetes QR","Department":"Departamento","NIT":"NIT","In 15 minutes":"En 15 min.","In 30 minutes":"En 30 min.","In 1 hour":"En 1 hora","Dispatcher":"Despachador","System":"Sistema","Administrator":"Administrador","Administrator users can perform any action":"Los usuarios administradores tienen acceso total","Supervisor users have the ability to read, create, and update":"Los usuarios Supervisores pueden realizar acciones de Lectura, Creación y Modificación","Dispatcher users have the ability to read and update":"Los usuarios Despachadores pueden realizar acciones de Lectura y Modificación","Team members":"Miembros del equipo","Team Settings":"Ajuste","Please provide the an existing email to add to this team":"Porfavor ingresa un correo existente para asociarlo a este equipo","Add team member":"Agregar usuario","Add a new user to your team":"Agrega un nuevo usuario a tu equipo","This user already belongs to the team.":"Este usuario ya se encuentra en el equipo","Added":"Agregado","Add":"Agregar","All of the people that are part of this team":"Todas las personas que forman parte del equipo","Role":"Rol","Team name":"Nombre del equipo","The team\'s name and owner information":"Nombre del equipo e información del propietario","Owner":"Propietario","Manage role":"Administar rol","Remove team member":"Eliminar miembro del equipo","Are you sure you would like to remove this person from the team?":"Está seguro que desea eliminar este miembro del equipo?","Leave":"Abandonar","Leave team":"Abandonar equipo","Are you sure you would like to leave this team?":"Está seguro que desea abandonar este equipo?","We were unable to find a registered user with this email address.":"No pudimos encontrar un usuario registrado con este correo","Delete team":"Eliminar equipo","Permanently delete this team":"Elimina este equipo de manera permanente","Once a team is deleted, all of its resources and data will be permanently deleted. Before deleting this team, please download any data or information that you wish to retain":"Una vez que se elimina un equipo, todos sus recursos y datos se eliminarán de forma permanente. Antes de eliminar este equipo, descargue cualquier dato o información que desee conservar","Are you sure you want to delete this team? Once a team is deleted, all of its resources and data will be permanently deleted":"¿Estás seguro de que deseas eliminar este equipo? Una vez que se elimina un equipo, todos sus recursos y datos se eliminarán de forma permanente","Team details":"Detalles del equipo","Team":"Equipo","Whoops! Something went wrong":"Whoops! algo salió mal","The :attribute must be at least :min characters":"Al menos  :min caracteres","Forbidden":"Acceso no autorizado","This action is unauthorized.":"Esta acción no está autorizada","Team of":"Equipo de","Manage users":"Administrar usuarios","Teams":"Equipos","username":"usuario","Admin users":"Administrar usuarios","The password confirmation does not match.":"Las constraseñas no coinciden","dispatcher":"despachador","system":"analista","Analyst":"Analista","analyst":"analista","admin":"administrator","owner":"administrador","Unassigned rol":"Sin rol","« Previous":"« Anterior","Next »":"« Siguiente","Parent route":"Ruta padre","annul":"anular","Annul":"Anular","Type a description":"Ingrese una descripción","Print driver report":"Imprimir reporte para operador","The time departure should be greater than current time":"La hora de salida debe ser mayor que la hora actual","Transactions":"Transacciones","Service":"Servicio","My dispatches":"Mis despachos","Value":"Valor","TOTAL":"TOTAL","Vehicle associates":"Asociados del vehículo","Vehicle associated":"Asociado del vehículo","Initial date":"Fecha inicial","Current":"Actual","Info":"Info","Total":"Total","By range":"Por rango","By day":"Por día","Last week":"-1 semana","Last month":"-1 mes","Charge":"Valor","Clear filters":"Borrar filtros","Turn number":"# Turno","to":"a","Clients":"Clientes","Account":"Cuenta","Reservations":"Parqueos","Reservation":"Parqueo","Model":"Modelo","Client":"Cliente","Zone":"Zona","Color":"Color","minute":"minuto","Id":"Id","Parked":"Parqueado","Log in":"Ingresar","Finished":"Finalizado","In total":"En total","Vehicle plate is required":"Se requiere la placa del vehículo","Zone is required":"Especifique la zona de parqueo","hours":"horas","minutes":"minutos","Internal":"Interno","reservation":"parqueo","Finalize":"Finalizar","Terminate":"Cerrar","Entry":"Ingreso","Exit":"Salida","Charges":"Cargos","h":"h","m":"m","#":"#","Already registered?":"Inicia sesión"}');
 
 /***/ })
 

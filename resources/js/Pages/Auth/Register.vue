@@ -8,8 +8,13 @@
 
         <form @submit.prevent="submit">
             <div>
-                <jet-label for="name" value="Name" />
+                <jet-label for="name" :value="$t('Name')" />
                 <jet-input id="name" type="text" class="mt-1 block w-full" v-model="form.name" required autofocus autocomplete="name" />
+            </div>
+
+            <div class="mt-4">
+                <jet-label for="username" :value="$t('Username')" />
+                <jet-input id="username" type="text" class="mt-1 block w-full" v-model="form.username" required />
             </div>
 
             <div class="mt-4">
@@ -18,13 +23,18 @@
             </div>
 
             <div class="mt-4">
-                <jet-label for="password" value="Password" />
+                <jet-label for="password" :value="$t('Password')" />
                 <jet-input id="password" type="password" class="mt-1 block w-full" v-model="form.password" required autocomplete="new-password" />
             </div>
 
             <div class="mt-4">
-                <jet-label for="password_confirmation" value="Confirm Password" />
+                <jet-label for="password_confirmation" :value="$t('Confirm password')" />
                 <jet-input id="password_confirmation" type="password" class="mt-1 block w-full" v-model="form.password_confirmation" required autocomplete="new-password" />
+            </div>
+
+            <div class="mt-4">
+                <jet-label for="role" :value="$t('Role')" />
+                <jet-input id="role" type="number" class="mt-1 block w-full" v-model="form.role" required/>
             </div>
 
             <div class="mt-4" v-if="$page.props.jetstream.hasTermsAndPrivacyPolicyFeature">
@@ -41,11 +51,11 @@
 
             <div class="flex items-center justify-end mt-4">
                 <inertia-link :href="route('login')" class="underline text-sm text-gray-600 hover:text-gray-900">
-                    Already registered?
+                    {{ $t('Already registered?') }}
                 </inertia-link>
 
                 <jet-button class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    Register
+                    {{ $t('Register') }}
                 </jet-button>
             </div>
         </form>
@@ -77,6 +87,8 @@
                 form: this.$inertia.form({
                     name: '',
                     email: '',
+                    username: '',
+                    role: 0,
                     password: '',
                     password_confirmation: '',
                     terms: false,

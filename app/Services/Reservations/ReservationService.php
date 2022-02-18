@@ -141,7 +141,8 @@ class ReservationService
             if ($nameUser) {
                 $user = new User($dataVehicle['user']);
                 $user->name = $nameUser;
-                $user->email = Carbon::now()->format('y.m.d.h.i.s.u') . '@mail.com';
+                $user->username = Carbon::now()->format('y.m.d.h.i.s.u');
+                $user->email = $user->username . '@mail.com';
                 $user->password = Hash::make('12345');
                 $user->role = 3;
             }
