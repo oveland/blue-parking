@@ -27946,25 +27946,17 @@ var _hoisted_53 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(
 /* HOISTED */
 );
 
-var _hoisted_54 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+var _hoisted_54 = {
   "class": "block px-4 py-2 text-xs text-gray-400"
-}, " Manage Account ", -1
-/* HOISTED */
-);
+};
 
-var _hoisted_55 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Profile ");
-
-var _hoisted_56 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" API Tokens ");
-
-var _hoisted_57 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+var _hoisted_55 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
   "class": "border-t border-gray-100"
 }, null, -1
 /* HOISTED */
 );
 
-var _hoisted_58 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Log Out ");
-
-var _hoisted_59 = {
+var _hoisted_56 = {
   "class": ""
 };
 
@@ -28300,11 +28292,15 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
       ), _hoisted_53])]))];
     }),
     content: _withId(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Account Management "), _hoisted_54, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_dropdown_link, {
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Account Management "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_54, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$t('Manage account')), 1
+      /* TEXT */
+      ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_dropdown_link, {
         href: _ctx.route('profile.show')
       }, {
         "default": _withId(function () {
-          return [_hoisted_55];
+          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$t('Profile')), 1
+          /* TEXT */
+          )];
         }),
         _: 1
         /* STABLE */
@@ -28316,14 +28312,16 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
         href: _ctx.route('api-tokens.index')
       }, {
         "default": _withId(function () {
-          return [_hoisted_56];
+          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$t('API Tokens')), 1
+          /* TEXT */
+          )];
         }),
         _: 1
         /* STABLE */
 
       }, 8
       /* PROPS */
-      , ["href"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _hoisted_57, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Authentication "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("form", {
+      , ["href"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _hoisted_55, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Authentication "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("form", {
         onSubmit: _cache[4] || (_cache[4] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
           return $options.logout && $options.logout.apply($options, arguments);
         }, ["prevent"]))
@@ -28331,7 +28329,9 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
         as: "button"
       }, {
         "default": _withId(function () {
-          return [_hoisted_58];
+          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$t('Logout')), 1
+          /* TEXT */
+          )];
         }),
         _: 1
         /* STABLE */
@@ -28343,7 +28343,7 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
     _: 1
     /* STABLE */
 
-  })])])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_59, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "default", {}, undefined, true)])])])]);
+  })])])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_56, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "default", {}, undefined, true)])])])]);
 });
 
 /***/ }),
@@ -29963,22 +29963,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
-
-var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Browser Sessions ");
-
-var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Manage and log out your active sessions on other browsers and devices. ");
-
-var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+var _hoisted_1 = {
   "class": "max-w-xl text-sm text-gray-600"
-}, " If necessary, you may log out of all of your other browser sessions across all of your devices. Some of your recent sessions are listed below; however, this list may not be exhaustive. If you feel your account has been compromised, you should also update your password. ", -1
-/* HOISTED */
-);
-
-var _hoisted_4 = {
+};
+var _hoisted_2 = {
   key: 0,
   "class": "mt-5 space-y-6"
 };
-var _hoisted_5 = {
+var _hoisted_3 = {
   key: 0,
   fill: "none",
   "stroke-linecap": "round",
@@ -29989,13 +29981,13 @@ var _hoisted_5 = {
   "class": "w-8 h-8 text-gray-500"
 };
 
-var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("path", {
+var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("path", {
   d: "M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
 }, null, -1
 /* HOISTED */
 );
 
-var _hoisted_7 = {
+var _hoisted_5 = {
   key: 1,
   xmlns: "http://www.w3.org/2000/svg",
   viewBox: "0 0 24 24",
@@ -30007,14 +29999,14 @@ var _hoisted_7 = {
   "class": "w-8 h-8 text-gray-500"
 };
 
-var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("path", {
+var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("path", {
   d: "M0 0h24v24H0z",
   stroke: "none"
 }, null, -1
 /* HOISTED */
 );
 
-var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("rect", {
+var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("rect", {
   x: "7",
   y: "4",
   width: "10",
@@ -30024,47 +30016,43 @@ var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("
 /* HOISTED */
 );
 
-var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("path", {
+var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("path", {
   d: "M11 5h2M12 17v.01"
 }, null, -1
 /* HOISTED */
 );
 
-var _hoisted_11 = {
+var _hoisted_9 = {
   "class": "ml-3"
 };
-var _hoisted_12 = {
+var _hoisted_10 = {
   "class": "text-sm text-gray-600"
 };
-var _hoisted_13 = {
+var _hoisted_11 = {
   "class": "text-xs text-gray-500"
 };
-var _hoisted_14 = {
+var _hoisted_12 = {
   key: 0,
   "class": "text-green-500 font-semibold"
 };
-var _hoisted_15 = {
+var _hoisted_13 = {
   key: 1
 };
-var _hoisted_16 = {
+var _hoisted_14 = {
   "class": "flex items-center mt-5"
 };
 
-var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Log Out Other Browser Sessions ");
+var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Log Out Other Browser Sessions ");
 
-var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Done. ");
+var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Please enter your password to confirm you would like to log out of your other browser sessions across all of your devices. ");
 
-var _hoisted_19 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Log Out Other Browser Sessions ");
-
-var _hoisted_20 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Please enter your password to confirm you would like to log out of your other browser sessions across all of your devices. ");
-
-var _hoisted_21 = {
+var _hoisted_17 = {
   "class": "mt-4"
 };
 
-var _hoisted_22 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Cancel ");
+var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Cancel ");
 
-var _hoisted_23 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Log Out Other Browser Sessions ");
+var _hoisted_19 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Log Out Other Browser Sessions ");
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_jet_button = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("jet-button");
@@ -30083,30 +30071,40 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_jet_action_section, null, {
     title: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_1];
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$t('Browser sessions')), 1
+      /* TEXT */
+      )];
     }),
     description: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_2];
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$t('Manage and logout your active sessions on other browsers and devices')) + ". ", 1
+      /* TEXT */
+      )];
     }),
     content: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Other Browser Sessions "), $props.sessions.length > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_4, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.sessions, function (session, i) {
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$t('If necessary, you may logout of all of your other browser sessions across all of your devices')), 1
+      /* TEXT */
+      ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Other Browser Sessions "), $props.sessions.length > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_2, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.sessions, function (session, i) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
           "class": "flex items-center",
           key: i
-        }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", null, [session.agent.is_desktop ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("svg", _hoisted_5, [_hoisted_6])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("svg", _hoisted_7, [_hoisted_8, _hoisted_9, _hoisted_10]))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(session.agent.platform) + " - " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(session.agent.browser), 1
+        }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", null, [session.agent.is_desktop ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("svg", _hoisted_3, [_hoisted_4])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("svg", _hoisted_5, [_hoisted_6, _hoisted_7, _hoisted_8]))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(session.agent.platform) + " - " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(session.agent.browser), 1
         /* TEXT */
-        ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(session.ip_address) + ", ", 1
+        ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(session.ip_address) + ", ", 1
         /* TEXT */
-        ), session.is_current_device ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("span", _hoisted_14, "This device")) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("span", _hoisted_15, "Last active " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(session.last_active), 1
+        ), session.is_current_device ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("span", _hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$t('This device')), 1
+        /* TEXT */
+        )) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("span", _hoisted_13, "Last active " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(session.last_active), 1
         /* TEXT */
         ))])])])]);
       }), 128
       /* KEYED_FRAGMENT */
-      ))])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_button, {
+      ))])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_button, {
         onClick: $options.confirmLogout
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [_hoisted_17];
+          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$t('Logout other all sessions')), 1
+          /* TEXT */
+          )];
         }),
         _: 1
         /* STABLE */
@@ -30118,7 +30116,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "class": "ml-3"
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [_hoisted_18];
+          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$t('Done')), 1
+          /* TEXT */
+          )];
         }),
         _: 1
         /* STABLE */
@@ -30130,10 +30130,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         onClose: $options.closeModal
       }, {
         title: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [_hoisted_19];
+          return [_hoisted_15];
         }),
         content: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [_hoisted_20, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
+          return [_hoisted_16, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
             type: "password",
             "class": "mt-1 block w-3/4",
             placeholder: "Password",
@@ -30157,7 +30157,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             onClick: $options.closeModal
           }, {
             "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-              return [_hoisted_22];
+              return [_hoisted_18];
             }),
             _: 1
             /* STABLE */
@@ -30172,7 +30172,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             disabled: $data.form.processing
           }, {
             "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-              return [_hoisted_23];
+              return [_hoisted_19];
             }),
             _: 1
             /* STABLE */
@@ -30209,13 +30209,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
-
-var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h2", {
+var _hoisted_1 = {
   "class": "font-semibold text-xl text-gray-800 leading-tight"
-}, " Profile ", -1
-/* HOISTED */
-);
-
+};
 var _hoisted_2 = {
   "class": "max-w-7xl mx-auto py-10 sm:px-6 lg:px-8"
 };
@@ -30245,7 +30241,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_app_layout, null, {
     header: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_1];
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h2", _hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$t('Profile')), 1
+      /* TEXT */
+      )];
     }),
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [_ctx.$page.props.jetstream.canUpdateProfileInformation ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_update_profile_information_form, {
@@ -30254,9 +30252,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       /* PROPS */
       , ["user"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_section_border)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _ctx.$page.props.jetstream.canUpdatePassword ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_update_password_form, {
         "class": "mt-10 sm:mt-0"
-      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_section_border)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _ctx.$page.props.jetstream.canManageTwoFactorAuthentication ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_two_factor_authentication_form, {
-        "class": "mt-10 sm:mt-0"
-      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_section_border)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_logout_other_browser_sessions_form, {
+      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_section_border)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _ctx.$page.props.jetstream.canManageTwoFactorAuthentication && false ? (0) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_logout_other_browser_sessions_form, {
         sessions: $props.sessions,
         "class": "mt-10 sm:mt-0"
       }, null, 8
@@ -30507,25 +30503,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
-
-var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Update Password ");
-
-var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Ensure your account is using a long, random password to stay secure. ");
-
+var _hoisted_1 = {
+  "class": "col-span-6 sm:col-span-4"
+};
+var _hoisted_2 = {
+  "class": "col-span-6 sm:col-span-4"
+};
 var _hoisted_3 = {
   "class": "col-span-6 sm:col-span-4"
 };
-var _hoisted_4 = {
-  "class": "col-span-6 sm:col-span-4"
-};
-var _hoisted_5 = {
-  "class": "col-span-6 sm:col-span-4"
-};
-
-var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Saved. ");
-
-var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Save ");
-
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_jet_label = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("jet-label");
 
@@ -30543,16 +30529,22 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onSubmitted: $options.updatePassword
   }, {
     title: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_1];
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$t('Update password')), 1
+      /* TEXT */
+      )];
     }),
     description: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_2];
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$t('Manage your access credentials')), 1
+      /* TEXT */
+      )];
     }),
     form: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
         "for": "current_password",
-        value: "Current Password"
-      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
+        value: _ctx.$t('Current password')
+      }, null, 8
+      /* PROPS */
+      , ["value"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
         id: "current_password",
         type: "password",
         "class": "mt-1 block w-full",
@@ -30569,10 +30561,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "class": "mt-2"
       }, null, 8
       /* PROPS */
-      , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+      , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
         "for": "password",
-        value: "New Password"
-      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
+        value: _ctx.$t('New password')
+      }, null, 8
+      /* PROPS */
+      , ["value"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
         id: "password",
         type: "password",
         "class": "mt-1 block w-full",
@@ -30589,10 +30583,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "class": "mt-2"
       }, null, 8
       /* PROPS */
-      , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+      , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
         "for": "password_confirmation",
-        value: "Confirm Password"
-      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
+        value: _ctx.$t('Confirm password')
+      }, null, 8
+      /* PROPS */
+      , ["value"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
         id: "password_confirmation",
         type: "password",
         "class": "mt-1 block w-full",
@@ -30616,7 +30612,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "class": "mr-3"
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [_hoisted_6];
+          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$t('Saved')), 1
+          /* TEXT */
+          )];
         }),
         _: 1
         /* STABLE */
@@ -30630,7 +30628,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         disabled: $data.form.processing
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [_hoisted_7];
+          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$t('Save')), 1
+          /* TEXT */
+          )];
         }),
         _: 1
         /* STABLE */
@@ -30662,37 +30662,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
-
-var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Profile Information ");
-
-var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Update your account's profile information and email address. ");
-
-var _hoisted_3 = {
+var _hoisted_1 = {
   key: 0,
   "class": "col-span-6 sm:col-span-4"
 };
-var _hoisted_4 = {
+var _hoisted_2 = {
   "class": "mt-2"
+};
+var _hoisted_3 = {
+  "class": "mt-2"
+};
+var _hoisted_4 = {
+  "class": "col-span-6 sm:col-span-4"
 };
 var _hoisted_5 = {
-  "class": "mt-2"
-};
-
-var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Select A New Photo ");
-
-var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Remove Photo ");
-
-var _hoisted_8 = {
   "class": "col-span-6 sm:col-span-4"
 };
-var _hoisted_9 = {
-  "class": "col-span-6 sm:col-span-4"
-};
-
-var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Saved. ");
-
-var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Save ");
-
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_jet_label = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("jet-label");
 
@@ -30712,13 +30697,17 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onSubmitted: $options.updateProfileInformation
   }, {
     title: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_1];
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$t('Profile information')), 1
+      /* TEXT */
+      )];
     }),
     description: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_2];
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$t('Update the profile information associated with your account')), 1
+      /* TEXT */
+      )];
     }),
     form: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Profile Photo "), _ctx.$page.props.jetstream.managesProfilePhotos ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Profile Photo File Input "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Profile Photo "), _ctx.$page.props.jetstream.managesProfilePhotos ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Profile Photo File Input "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
         type: "file",
         "class": "hidden",
         ref: "photo",
@@ -30730,7 +30719,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
         "for": "photo",
         value: "Photo"
-      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Current Profile Photo "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("img", {
+      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Current Profile Photo "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("img", {
         src: $props.user.profile_photo_url,
         alt: $props.user.name,
         "class": "rounded-full h-20 w-20 object-cover"
@@ -30738,7 +30727,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       /* PROPS */
       , ["src", "alt"])], 512
       /* NEED_PATCH */
-      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, !$data.photoPreview]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" New Profile Photo Preview "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", {
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, !$data.photoPreview]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" New Profile Photo Preview "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", {
         "class": "block rounded-full w-20 h-20",
         style: 'background-size: cover; background-repeat: no-repeat; background-position: center center; background-image: url(\'' + $data.photoPreview + '\');'
       }, null, 4
@@ -30751,7 +30740,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         onClick: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)($options.selectNewPhoto, ["prevent"])
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [_hoisted_6];
+          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$t('Select a new photo')), 1
+          /* TEXT */
+          )];
         }),
         _: 1
         /* STABLE */
@@ -30765,7 +30756,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         onClick: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)($options.deletePhoto, ["prevent"])
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [_hoisted_7];
+          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$t('Remove')), 1
+          /* TEXT */
+          )];
         }),
         _: 1
         /* STABLE */
@@ -30777,7 +30770,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "class": "mt-2"
       }, null, 8
       /* PROPS */
-      , ["message"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Name "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+      , ["message"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Name "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
         "for": "name",
         value: "Name"
       }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
@@ -30796,7 +30789,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "class": "mt-2"
       }, null, 8
       /* PROPS */
-      , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Email "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+      , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Email "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
         "for": "email",
         value: "Email"
       }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
@@ -30822,7 +30815,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "class": "mr-3"
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [_hoisted_10];
+          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$t('Saved')), 1
+          /* TEXT */
+          )];
         }),
         _: 1
         /* STABLE */
@@ -30836,7 +30831,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         disabled: $data.form.processing
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [_hoisted_11];
+          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$t('Save')), 1
+          /* TEXT */
+          )];
         }),
         _: 1
         /* STABLE */
@@ -82003,7 +82000,7 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('{"Home":"Inicio","Create":"Crear","Created":"Creado","Update":"Actualizar","Save":"Guardar","Saved":"Guardado","save":"guardar","Delete":"Eliminar","delete":"eliminar","Cancel":"Cancelar","Close":"Cerrar","Route":"Ruta","Company":"Empresa","company":"empresa","Routes":"Rutas","Reports":"Reportes","Report":"Reporte","report":"reporte","Search report":"Consultar reporte","Date report":"Fecha de Reporte","Search":"Buscar","Query":"Consultar","Vehicle":"Vehículo","vehicle":"vehículo","Vehicles":"Vehículos","vehicles":"vehículos","Round Trip":"Vuelta","round trip":"vuelta","Turn":"Turno","Turns":"Turnos","turn":"turnos","turns":"turnos","No registers found":"No se encontraron registros","No dispatch registers found":"No se encontraron despachos","Select an option":"Seleccione","Select a route":"Seleccione una ruta","Select a vehicle":"Seleccione un vehículo","Select an vehicle":"Seleccione un vehículo","Select a company":"Seleccione una empresa","Loading...":"Cargando...","No routes found":"Sin rutas","No vehicles found":"Sin vehículos","Actions":"Acciones","Detail":"Ver detalle","Report detail":"Ver reporte","Hide / Show":"Ocultar / Mostrar","Remove":"Eliminar","Round trip":"Vuelta","Track on map":"Seguimiento en el mapa","List":"Lista","Oops, something went wrong!":"Opps, parece que algo anda mal :(","of the route":"de la ruta","No report found for this vehicle":"No se ha encontrado ningún reporte para este vehículo","No passengers report found for this vehicle":"No se ha encontrado ningún reporte de pasajeros para este vehículo","Route info":"Información de la ruta","Route report":"Reporte de ruta","Control point going":"Ida","Control point return":"Regreso","Passengers report":"Reporte de pasajeros","Register historic":"Histórico de registro","Passengers":"Pasajeros","Seat":"Asiento","Seats":"Asientos","seat":"asiento","seats":"asientos","Time":"Hora","Event active time":"Ocupado a las","Event inactive time":"Libre a las","Active time":"Activo durante","Active kilometers":"Kilómetros","Feature on development":"Funcionalidad en desarrollo","Still busy":"Ocupado aún","Username":"Usuario","Password":"Contraseña","Remember Me":"Recuérdame","Login":"Ingresar","Log In":"Inicia sesión","Type your credentials":"Ingresa tus credenciales","Confirm Password":"Confirma Contraseña","Register":"Registro","Name":"Nombre","Logout":"Cerrar Sesión","Passengers_Report_":"Reporte_Pasajeros_","Passengers Report":"Reporte de pasajeros","Export excel":"Exportar a excel","Export":"Exportar","Date":"Fecha","All Routes":"Todas las rutas","All routes":"Todas las rutas","passengers":"pasajeros","Status":"Estado","status":"estado","Address":"Dirección","Users":"Usuarios","All":"Todos","all":"todos","reports":"reportes","routes":"rutas","route":"ruta","users":"usuarios","Plate":"Placa","Departure time":"Hora despachado","Departure":"Salida","Arrived":"Llegada","Arrival time":"Hora de llegada","Driver":"Operador","Drivers":"Operadores","driver":"operador","drivers":"operadores","Dispatchers":"Despachadores","dispatchers":"despachadores","Options":"Opciones","Edit":"Modificar","Clear":"Limpiar","Number":"Número","Profile":"Perfil","Profile information":"Información del perfil","Update the profile information associated with your account":"Actualice la información del perfil asociada a su cuenta","Make sure your account is using a long, random password for added security":"Asegúrese de que su cuenta esté usando una contraseña larga y aleatoria para mayor seguridad","Manage and logout your active sessions on other browsers and devices":"Administre y cierre sus sus sesiones activas en otros navegadores y dispositivos","If necessary, you may logout of all of your other browser sessions across all of your devices":"Si es necesario, puede cerrar las sesiones de su navegador en todos sus dispositivos","If you feel your account has been compromised, you should also update your password":"Si cree que su cuenta se ha visto comprometida, considere actualizar su contraseña","Are you sure you want to delete this register?":"Está seguro de que desea eliminar este registro?","Are you sure you want to delete your account?":"Está seguro de que desea eliminar su cuenta?","Are you sure you want to delete this turn?":"Está seguro de que desea eliminar este turno?","Are you sure you want to annul this dispatch?":"Está seguro de que desea anular este despacho?","Are you sure you want to delete this bearing?":"Está seguro de que desea eliminar esta programación?","Are you sure you want to delete this reservation?":"Está seguro de que desea eliminar este parqueo?","Once your account is deleted, all of its resources and data will be permanently deleted":"Una vez que se elimine su cuenta, todos sus recursos y datos se eliminarán permanentemente","Please enter your password to confirm you would like to permanently delete your account":"Ingrese su contraseña para confirmar que desea eliminar permanentemente su cuenta","Before deleting your account, please download any data or information that you wish to retain":"Antes de eliminar su cuenta, descargue cualquier dato o información que desee conservar","Add additional security to your account using two factor authentication":"Agregue seguridad adicional a su cuenta mediante el factor de autenticación doble","You have not enabled two factor authentication":"Aún no ha habilitado el factor de autenticación doble","You have enabled two factor authentication":"El factor de autenticación doble está habilitado","When two factor authentication is enabled, you will be prompted for a secure, random token during authentication":"Cuando el factor de autenticación doble está habilitado, se le pedirá un token aleatorio y seguro durante el inicio de sesión","You may retrieve this token from your phone\'s Google Authenticator application":"Puede recuperar este token por medio de la aplicación Google Authenticator instalada en su teléfono","Two factor authentication is now enabled. Scan the following QR code using your phone\'s authenticator application":"La autenticación de doble factor se ha habilitado. Escanee el siguiente código QR usando la aplicación Google Authenticator instalada en su teléfono","Store these recovery codes in a secure password manager. They can be used to recover access to your account if your two factor authentication device is lost":"Guarde estos códigos de restauración en un administrador de contraseñas seguro. Se pueden usar para recuperar el acceso a su cuenta si pierde su dispositivo de autenitcación","For security, please confirm your password to continue":"Por seguridad, porfavor confirme su contraseña para continuar","Please enter your password to confirm you would like to logout of your other browser sessions across all of your devices":"Ingrese su contraseña para confirmar que desea cerrar las otras sesiones en todos sus dispositivos","This password does not match our records":"Esta contraseña no coincide con nuestros registros","Photo":"Foto","Select a new photo":"Seleccionar una nueva foto","Email":"Correo","Current password":"Contraseña actual","Remove photo":"Eliminar foto","Switch teams":"Seleccionar equipos","Team settings":"Ajuste de equipos","Manage team":"Administrar equipos","Create new team":"Crear equipo","API tokens":"Llaves de acceso","Manage account":"Administrar cuenta","Update password":"Actualizar contraseña","New password":"Nueva contraseña","Confirm password":"Confirmar contraseña","User sessions":"Sesiones de usuario","This device":"Este dispositivo","Last active :hours hours ago":"Last active :hours hours ago","Active":"Activo","Logout all sessions":"Cerrar todas las sesiones","Enable":"Habilitar","Delete account":"Eliminar cuenta","Permanently delete your account":"Elimina la cuenta permanentemente","Two factor authentication":"Factor de autenticación doble","Regenerate recovery codes":"Generar nuevos códigos de restauración","Show recovery codes":"Mostrar códigos de restauración","Disable":"Deshabilitar","Confirm":"Confirmar","Bearing":"Rodamiento","bearing":"rodamiento","Operation":"Operación","Dispatch of vehicles":"Despacho de vehículos","Dispatches":"Despachos","Dispatch":"Despacho","To dispatch":"Despachar","Administration":"Administración","Companies":"Empresas","No registers":"Sin registros","Main":"Principal","Are you sure you want to delete this company?":"Está seguro que desea eliminar esta empresa?","Are you sure you want to delete this vehicle?":"Está seguro que desea eliminar este vehículo?","Are you sure you want to delete this route?":"Está seguro que desea eliminar esta ruta?","Are you sure you want to delete this associated?":"Está seguro que desea eliminar este asociado?","Are you sure you want to delete this driver?":"Está seguro que desea eliminar este Operador?","Are you sure you want to delete this city?":"Está seguro que desea eliminar esta ciudad?","Are you sure you want to delete this passenger?":"Está seguro que desea eliminar este pasajero?","Are you sure you want to delete this office?":"Está seguro que desea eliminar esta oficina?","Are you sure you want to delete this service type?":"Está seguro que desea eliminar este tipo de servicio?","For security enter the company name":"Por seguridad ingrese el nombre de la empresa","For security enter the vehicle plate":"Por seguridad ingrese la placa del vehículo","For security enter the route name":"Por seguridad ingrese el nombre de la ruta","For security enter the office name":"Por seguridad ingrese el nombre de la oficina","For security enter the service type name":"Por seguridad ingrese el nombre del tipo de servicio","capacity":"capacidad","Associates":"Asociados","Associated":"Asociado","associated":"asociado","Office":"Oficina","Offices":"Oficinas","office":"oficina","offices":"oficinas","Last name":"Apellido","Identity":"Identificación","Capacity":"Capacidad","Select":"Seleccione","Updated at":"Modificado","Description":"Descripción","Global":"Global","Dashboard":"Panel de Control","Code":"Código","days":"días","associates":"associados","destinations":"destinos","No elements found":"No encontrado","current":"actual","City":"Ciudad","city":"ciudad","Cities":"Ciudades","cities":"ciudades","Tariff":"Tarifa","tariff":"tarifa","Destination":"Destino","Service type":"Tipo de servicio","Updated":"Actualizado","Type":"Tipo","Service types":"Tipos de servicio","service type":"tipo de servicio","service types":"tipos de servicio","Type at least 3 chars":"Escriba al menos 3 caractéres","Type at least 2 chars":"Escriba al menos 2 caractéres","Current turn":"Turno actual","Generate":"Generar","Open":"Abrir","Closed":"Cerrado","Active turn":"Turno activo","Closed turn":"Turno cerrado","Start date":"Fecha inicio","End date":"Fecha fin","User":"Usuario","Manage bearing":"Administrar rodamiento","Manage":"Administrar","Unassigned":"No asignado","Empty":"Vacío","Reserved":"Parqueado","Details":"Detalles","Usage rate":"Tasa de uso","Usage r.":"T. de uso","Ramp":"Rampa","Dispatched":"Despachado","In ramp":"En rampa","dispatch":"despacho","Sell":"Vender","Seating":"Asientos","seating":"asientos","available":"disponibles","Today":"Hoy","Now":"Ahora","Yesterday":"Ayer","Tomorrow":"Mañana","Passenger":"Pasajero","Origin":"Origen","In ramp from":"En rampa desde","Remember me":"Mantener sesión abierta","Redirecting":"Redireccionando","Only one active session is allowed":"Solo se permite una sesión activa","Log out of the following devices":"Cierre la session en los siguientes dispositivos","Logout other sessions":"Cerrar otras sessiones","Register new passenger":"Registrar nuevo pasajero","Print":"Imprimir","Register dispatch":"Despachar vehículo","Are you sure you want to dispatch this vehicle?":"Confirme el despacho del siguiente vehículo","dispatches":"despachos","STQ":"Sistema de tiquetes QR","Department":"Departamento","NIT":"NIT","In 15 minutes":"En 15 min.","In 30 minutes":"En 30 min.","In 1 hour":"En 1 hora","Dispatcher":"Despachador","System":"Sistema","Administrator":"Administrador","Administrator users can perform any action":"Los usuarios administradores tienen acceso total","Supervisor users have the ability to read, create, and update":"Los usuarios Supervisores pueden realizar acciones de Lectura, Creación y Modificación","Dispatcher users have the ability to read and update":"Los usuarios Despachadores pueden realizar acciones de Lectura y Modificación","Team members":"Miembros del equipo","Team Settings":"Ajuste","Please provide the an existing email to add to this team":"Porfavor ingresa un correo existente para asociarlo a este equipo","Add team member":"Agregar usuario","Add a new user to your team":"Agrega un nuevo usuario a tu equipo","This user already belongs to the team.":"Este usuario ya se encuentra en el equipo","Added":"Agregado","Add":"Agregar","All of the people that are part of this team":"Todas las personas que forman parte del equipo","Role":"Rol","Team name":"Nombre del equipo","The team\'s name and owner information":"Nombre del equipo e información del propietario","Owner":"Propietario","Manage role":"Administar rol","Remove team member":"Eliminar miembro del equipo","Are you sure you would like to remove this person from the team?":"Está seguro que desea eliminar este miembro del equipo?","Leave":"Abandonar","Leave team":"Abandonar equipo","Are you sure you would like to leave this team?":"Está seguro que desea abandonar este equipo?","We were unable to find a registered user with this email address.":"No pudimos encontrar un usuario registrado con este correo","Delete team":"Eliminar equipo","Permanently delete this team":"Elimina este equipo de manera permanente","Once a team is deleted, all of its resources and data will be permanently deleted. Before deleting this team, please download any data or information that you wish to retain":"Una vez que se elimina un equipo, todos sus recursos y datos se eliminarán de forma permanente. Antes de eliminar este equipo, descargue cualquier dato o información que desee conservar","Are you sure you want to delete this team? Once a team is deleted, all of its resources and data will be permanently deleted":"¿Estás seguro de que deseas eliminar este equipo? Una vez que se elimina un equipo, todos sus recursos y datos se eliminarán de forma permanente","Team details":"Detalles del equipo","Team":"Equipo","Whoops! Something went wrong":"Whoops! algo salió mal","The :attribute must be at least :min characters":"Al menos  :min caracteres","Forbidden":"Acceso no autorizado","This action is unauthorized.":"Esta acción no está autorizada","Team of":"Equipo de","Manage users":"Administrar usuarios","Teams":"Equipos","username":"usuario","Admin users":"Administrar usuarios","The password confirmation does not match.":"Las constraseñas no coinciden","dispatcher":"despachador","system":"analista","Analyst":"Analista","analyst":"analista","admin":"administrator","owner":"administrador","Unassigned rol":"Sin rol","« Previous":"« Anterior","Next »":"« Siguiente","Parent route":"Ruta padre","annul":"anular","Annul":"Anular","Type a description":"Ingrese una descripción","Print driver report":"Imprimir reporte para operador","The time departure should be greater than current time":"La hora de salida debe ser mayor que la hora actual","Transactions":"Transacciones","Service":"Servicio","My dispatches":"Mis despachos","Value":"Valor","TOTAL":"TOTAL","Vehicle associates":"Asociados del vehículo","Vehicle associated":"Asociado del vehículo","Initial date":"Fecha inicial","Current":"Actual","Info":"Info","Total":"Total","By range":"Por rango","By day":"Por día","Last week":"-1 semana","Last month":"-1 mes","Charge":"Valor","Clear filters":"Borrar filtros","Turn number":"# Turno","to":"a","Clients":"Clientes","Account":"Cuenta","Reservations":"Parqueos","Reservation":"Parqueo","Model":"Modelo","Client":"Cliente","Zone":"Zona","Color":"Color","minute":"minuto","Id":"Id","Parked":"Parqueado","Log in":"Ingresar","Finished":"Finalizado","In total":"En total","Vehicle plate is required":"Se requiere la placa del vehículo","Zone is required":"Especifique la zona de parqueo","hours":"horas","minutes":"minutos","Internal":"Interno","reservation":"parqueo","Finalize":"Finalizar","Terminate":"Cerrar","Entry":"Ingreso","Exit":"Salida","Charges":"Cargos","h":"h","m":"m","#":"#","Already registered?":"Inicia sesión"}');
+module.exports = JSON.parse('{"Home":"Inicio","Create":"Crear","Created":"Creado","Update":"Actualizar","Save":"Guardar","Saved":"Guardado","save":"guardar","Delete":"Eliminar","delete":"eliminar","Cancel":"Cancelar","Close":"Cerrar","Route":"Ruta","Company":"Empresa","company":"empresa","Routes":"Rutas","Reports":"Reportes","Report":"Reporte","report":"reporte","Search report":"Consultar reporte","Date report":"Fecha de Reporte","Search":"Buscar","Query":"Consultar","Vehicle":"Vehículo","vehicle":"vehículo","Vehicles":"Vehículos","vehicles":"vehículos","Round Trip":"Vuelta","round trip":"vuelta","Turn":"Turno","Turns":"Turnos","turn":"turnos","turns":"turnos","No registers found":"No se encontraron registros","No dispatch registers found":"No se encontraron despachos","Select an option":"Seleccione","Select a route":"Seleccione una ruta","Select a vehicle":"Seleccione un vehículo","Select an vehicle":"Seleccione un vehículo","Select a company":"Seleccione una empresa","Loading...":"Cargando...","No routes found":"Sin rutas","No vehicles found":"Sin vehículos","Actions":"Acciones","Detail":"Ver detalle","Report detail":"Ver reporte","Hide / Show":"Ocultar / Mostrar","Remove":"Eliminar","Round trip":"Vuelta","Track on map":"Seguimiento en el mapa","List":"Lista","Oops, something went wrong!":"Opps, parece que algo anda mal :(","of the route":"de la ruta","No report found for this vehicle":"No se ha encontrado ningún reporte para este vehículo","No passengers report found for this vehicle":"No se ha encontrado ningún reporte de pasajeros para este vehículo","Route info":"Información de la ruta","Route report":"Reporte de ruta","Control point going":"Ida","Control point return":"Regreso","Passengers report":"Reporte de pasajeros","Register historic":"Histórico de registro","Passengers":"Pasajeros","Seat":"Asiento","Seats":"Asientos","seat":"asiento","seats":"asientos","Time":"Hora","Event active time":"Ocupado a las","Event inactive time":"Libre a las","Active time":"Activo durante","Active kilometers":"Kilómetros","Feature on development":"Funcionalidad en desarrollo","Still busy":"Ocupado aún","Username":"Usuario","Password":"Contraseña","Remember Me":"Recuérdame","Login":"Ingresar","Log In":"Inicia sesión","Type your credentials":"Ingresa tus credenciales","Confirm Password":"Confirma Contraseña","Register":"Registro","Name":"Nombre","Logout":"Cerrar sesión","Passengers_Report_":"Reporte_Pasajeros_","Passengers Report":"Reporte de pasajeros","Export excel":"Exportar a excel","Export":"Exportar","Date":"Fecha","All Routes":"Todas las rutas","All routes":"Todas las rutas","passengers":"pasajeros","Status":"Estado","status":"estado","Address":"Dirección","Users":"Usuarios","All":"Todos","all":"todos","reports":"reportes","routes":"rutas","route":"ruta","users":"usuarios","Plate":"Placa","Departure time":"Hora despachado","Departure":"Salida","Arrived":"Llegada","Arrival time":"Hora de llegada","Driver":"Operador","Drivers":"Operadores","driver":"operador","drivers":"operadores","Dispatchers":"Despachadores","dispatchers":"despachadores","Options":"Opciones","Edit":"Modificar","Clear":"Limpiar","Number":"Número","Profile":"Perfil","Profile information":"Información del perfil","Browser sessions":"Sesiones activas","Manage your access credentials":"Administre sus credenciales de acceso","Update the profile information associated with your account":"Actualice la información del perfil asociada a su cuenta","Make sure your account is using a long, random password for added security":"Asegúrese de que su cuenta esté usando una contraseña larga y aleatoria para mayor seguridad","Manage and logout your active sessions on other browsers and devices":"Administre y cierre sus sus sesiones activas en otros navegadores y dispositivos","If necessary, you may logout of all of your other browser sessions across all of your devices":"Si es necesario, puede cerrar las sesiones de su navegador en todos sus dispositivos","If you feel your account has been compromised, you should also update your password":"Si cree que su cuenta se ha visto comprometida, considere actualizar su contraseña","Are you sure you want to delete this register?":"Está seguro de que desea eliminar este registro?","Are you sure you want to delete your account?":"Está seguro de que desea eliminar su cuenta?","Are you sure you want to delete this turn?":"Está seguro de que desea eliminar este turno?","Are you sure you want to annul this dispatch?":"Está seguro de que desea anular este despacho?","Are you sure you want to delete this bearing?":"Está seguro de que desea eliminar esta programación?","Are you sure you want to delete this reservation?":"Está seguro de que desea eliminar este parqueo?","Once your account is deleted, all of its resources and data will be permanently deleted":"Una vez que se elimine su cuenta, todos sus recursos y datos se eliminarán permanentemente","Please enter your password to confirm you would like to permanently delete your account":"Ingrese su contraseña para confirmar que desea eliminar permanentemente su cuenta","Before deleting your account, please download any data or information that you wish to retain":"Antes de eliminar su cuenta, descargue cualquier dato o información que desee conservar","Add additional security to your account using two factor authentication":"Agregue seguridad adicional a su cuenta mediante el factor de autenticación doble","You have not enabled two factor authentication":"Aún no ha habilitado el factor de autenticación doble","You have enabled two factor authentication":"El factor de autenticación doble está habilitado","When two factor authentication is enabled, you will be prompted for a secure, random token during authentication":"Cuando el factor de autenticación doble está habilitado, se le pedirá un token aleatorio y seguro durante el inicio de sesión","You may retrieve this token from your phone\'s Google Authenticator application":"Puede recuperar este token por medio de la aplicación Google Authenticator instalada en su teléfono","Two factor authentication is now enabled. Scan the following QR code using your phone\'s authenticator application":"La autenticación de doble factor se ha habilitado. Escanee el siguiente código QR usando la aplicación Google Authenticator instalada en su teléfono","Store these recovery codes in a secure password manager. They can be used to recover access to your account if your two factor authentication device is lost":"Guarde estos códigos de restauración en un administrador de contraseñas seguro. Se pueden usar para recuperar el acceso a su cuenta si pierde su dispositivo de autenitcación","For security, please confirm your password to continue":"Por seguridad, porfavor confirme su contraseña para continuar","Please enter your password to confirm you would like to logout of your other browser sessions across all of your devices":"Ingrese su contraseña para confirmar que desea cerrar las otras sesiones en todos sus dispositivos","This password does not match our records":"Esta contraseña no coincide con nuestros registros","Photo":"Foto","Select a new photo":"Seleccionar una nueva foto","Email":"Correo","Current password":"Contraseña actual","Remove photo":"Eliminar foto","Switch teams":"Seleccionar equipos","Team settings":"Ajuste de equipos","Manage team":"Administrar equipos","Create new team":"Crear equipo","API tokens":"Llaves de acceso","Manage account":"Administrar cuenta","Update password":"Actualizar contraseña","New password":"Nueva contraseña","Confirm password":"Confirmar contraseña","User sessions":"Sesiones de usuario","This device":"Este dispositivo","Last active :hours hours ago":"Last active :hours hours ago","Active":"Activo","Logout other all sessions":"Cerrar las demás sesiones","Enable":"Habilitar","Delete account":"Eliminar cuenta","Permanently delete your account":"Elimina la cuenta permanentemente","Two factor authentication":"Factor de autenticación doble","Regenerate recovery codes":"Generar nuevos códigos de restauración","Show recovery codes":"Mostrar códigos de restauración","Disable":"Deshabilitar","Confirm":"Confirmar","Bearing":"Rodamiento","bearing":"rodamiento","Operation":"Operación","Dispatch of vehicles":"Despacho de vehículos","Dispatches":"Despachos","Dispatch":"Despacho","To dispatch":"Despachar","Administration":"Administración","Companies":"Empresas","No registers":"Sin registros","Main":"Principal","Are you sure you want to delete this company?":"Está seguro que desea eliminar esta empresa?","Are you sure you want to delete this vehicle?":"Está seguro que desea eliminar este vehículo?","Are you sure you want to delete this route?":"Está seguro que desea eliminar esta ruta?","Are you sure you want to delete this associated?":"Está seguro que desea eliminar este asociado?","Are you sure you want to delete this driver?":"Está seguro que desea eliminar este Operador?","Are you sure you want to delete this city?":"Está seguro que desea eliminar esta ciudad?","Are you sure you want to delete this passenger?":"Está seguro que desea eliminar este pasajero?","Are you sure you want to delete this office?":"Está seguro que desea eliminar esta oficina?","Are you sure you want to delete this service type?":"Está seguro que desea eliminar este tipo de servicio?","For security enter the company name":"Por seguridad ingrese el nombre de la empresa","For security enter the vehicle plate":"Por seguridad ingrese la placa del vehículo","For security enter the route name":"Por seguridad ingrese el nombre de la ruta","For security enter the office name":"Por seguridad ingrese el nombre de la oficina","For security enter the service type name":"Por seguridad ingrese el nombre del tipo de servicio","capacity":"capacidad","Associates":"Asociados","Associated":"Asociado","associated":"asociado","Office":"Oficina","Offices":"Oficinas","office":"oficina","offices":"oficinas","Last name":"Apellido","Identity":"Identificación","Capacity":"Capacidad","Select":"Seleccione","Updated at":"Modificado","Description":"Descripción","Global":"Global","Dashboard":"Panel de Control","Code":"Código","days":"días","associates":"associados","destinations":"destinos","No elements found":"No encontrado","current":"actual","City":"Ciudad","city":"ciudad","Cities":"Ciudades","cities":"ciudades","Tariff":"Tarifa","tariff":"tarifa","Destination":"Destino","Service type":"Tipo de servicio","Updated":"Actualizado","Type":"Tipo","Service types":"Tipos de servicio","service type":"tipo de servicio","service types":"tipos de servicio","Type at least 3 chars":"Escriba al menos 3 caractéres","Type at least 2 chars":"Escriba al menos 2 caractéres","Current turn":"Turno actual","Generate":"Generar","Open":"Abrir","Closed":"Cerrado","Active turn":"Turno activo","Closed turn":"Turno cerrado","Start date":"Fecha inicio","End date":"Fecha fin","User":"Usuario","Manage bearing":"Administrar rodamiento","Manage":"Administrar","Unassigned":"No asignado","Empty":"Vacío","Reserved":"Parqueado","Details":"Detalles","Usage rate":"Tasa de uso","Usage r.":"T. de uso","Ramp":"Rampa","Dispatched":"Despachado","In ramp":"En rampa","dispatch":"despacho","Sell":"Vender","Seating":"Asientos","seating":"asientos","available":"disponibles","Today":"Hoy","Now":"Ahora","Yesterday":"Ayer","Tomorrow":"Mañana","Passenger":"Pasajero","Origin":"Origen","In ramp from":"En rampa desde","Remember me":"Mantener sesión abierta","Redirecting":"Redireccionando","Only one active session is allowed":"Solo se permite una sesión activa","Log out of the following devices":"Cierre la session en los siguientes dispositivos","Logout other sessions":"Cerrar otras sessiones","Register new passenger":"Registrar nuevo pasajero","Print":"Imprimir","Register dispatch":"Despachar vehículo","Are you sure you want to dispatch this vehicle?":"Confirme el despacho del siguiente vehículo","dispatches":"despachos","STQ":"Sistema de tiquetes QR","Department":"Departamento","NIT":"NIT","In 15 minutes":"En 15 min.","In 30 minutes":"En 30 min.","In 1 hour":"En 1 hora","Dispatcher":"Despachador","System":"Sistema","Administrator":"Administrador","Administrator users can perform any action":"Los usuarios administradores tienen acceso total","Supervisor users have the ability to read, create, and update":"Los usuarios Supervisores pueden realizar acciones de Lectura, Creación y Modificación","Dispatcher users have the ability to read and update":"Los usuarios Despachadores pueden realizar acciones de Lectura y Modificación","Team members":"Miembros del equipo","Team Settings":"Ajuste","Please provide the an existing email to add to this team":"Porfavor ingresa un correo existente para asociarlo a este equipo","Add team member":"Agregar usuario","Add a new user to your team":"Agrega un nuevo usuario a tu equipo","This user already belongs to the team.":"Este usuario ya se encuentra en el equipo","Added":"Agregado","Add":"Agregar","All of the people that are part of this team":"Todas las personas que forman parte del equipo","Role":"Rol","Team name":"Nombre del equipo","The team\'s name and owner information":"Nombre del equipo e información del propietario","Owner":"Propietario","Manage role":"Administar rol","Remove team member":"Eliminar miembro del equipo","Are you sure you would like to remove this person from the team?":"Está seguro que desea eliminar este miembro del equipo?","Leave":"Abandonar","Leave team":"Abandonar equipo","Are you sure you would like to leave this team?":"Está seguro que desea abandonar este equipo?","We were unable to find a registered user with this email address.":"No pudimos encontrar un usuario registrado con este correo","Delete team":"Eliminar equipo","Permanently delete this team":"Elimina este equipo de manera permanente","Once a team is deleted, all of its resources and data will be permanently deleted. Before deleting this team, please download any data or information that you wish to retain":"Una vez que se elimina un equipo, todos sus recursos y datos se eliminarán de forma permanente. Antes de eliminar este equipo, descargue cualquier dato o información que desee conservar","Are you sure you want to delete this team? Once a team is deleted, all of its resources and data will be permanently deleted":"¿Estás seguro de que deseas eliminar este equipo? Una vez que se elimina un equipo, todos sus recursos y datos se eliminarán de forma permanente","Team details":"Detalles del equipo","Team":"Equipo","Whoops! Something went wrong":"Whoops! algo salió mal","The :attribute must be at least :min characters":"Al menos  :min caracteres","Forbidden":"Acceso no autorizado","This action is unauthorized.":"Esta acción no está autorizada","Team of":"Equipo de","Manage users":"Administrar usuarios","Teams":"Equipos","username":"usuario","Admin users":"Administrar usuarios","The password confirmation does not match.":"Las constraseñas no coinciden","dispatcher":"despachador","system":"analista","Analyst":"Analista","analyst":"analista","admin":"administrator","owner":"administrador","Unassigned rol":"Sin rol","« Previous":"« Anterior","Next »":"« Siguiente","Parent route":"Ruta padre","annul":"anular","Annul":"Anular","Type a description":"Ingrese una descripción","Print driver report":"Imprimir reporte para operador","The time departure should be greater than current time":"La hora de salida debe ser mayor que la hora actual","Transactions":"Transacciones","Service":"Servicio","My dispatches":"Mis despachos","Value":"Valor","TOTAL":"TOTAL","Vehicle associates":"Asociados del vehículo","Vehicle associated":"Asociado del vehículo","Initial date":"Fecha inicial","Current":"Actual","Info":"Info","Total":"Total","By range":"Por rango","By day":"Por día","Last week":"-1 semana","Last month":"-1 mes","Charge":"Valor","Clear filters":"Borrar filtros","Turn number":"# Turno","to":"a","Clients":"Clientes","Account":"Cuenta","Reservations":"Parqueos","Reservation":"Parqueo","Model":"Modelo","Client":"Cliente","Zone":"Zona","Color":"Color","minute":"minuto","Id":"Id","Parked":"Parqueado","Log in":"Ingresar","Finished":"Finalizado","In total":"En total","Vehicle plate is required":"Se requiere la placa del vehículo","Zone is required":"Especifique la zona de parqueo","hours":"horas","minutes":"minutos","Internal":"Interno","reservation":"parqueo","Finalize":"Finalizar","Terminate":"Cerrar","Entry":"Ingreso","Exit":"Salida","Charges":"Cargos","h":"h","m":"m","#":"#","Already registered?":"Inicia sesión"}');
 
 /***/ })
 
