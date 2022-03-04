@@ -35,7 +35,9 @@ class ReservationController extends Controller
     public function show($parking): Collection|array
     {
         $date = request()->get('date');
-        return $this->service->list('any', 'any', $parking, $date);
+        $zone = request()->get('zone');
+
+        return $this->service->list('any', $zone, $parking, $date);
     }
 
     /**

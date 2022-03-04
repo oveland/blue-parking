@@ -51,8 +51,9 @@ class ParkingZone extends Model
     function scopeForParking(Builder $query, $id = 'any'): Builder|ParkingZone
     {
         return $query->whereHas('type', function (Builder $query) use ($id) {
-            if (!$id) return $query;
-            return $query->where('parking_id', $id);
+            if ($id && $id != 'any') return $query->where('parking_id', $id);
+
+            return $query;
         })->orderBy('code');
     }
 

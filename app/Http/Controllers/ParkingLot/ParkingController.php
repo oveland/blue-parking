@@ -5,6 +5,7 @@ namespace App\Http\Controllers\ParkingLot;
 use App\Http\Controllers\Controller;
 use App\Models\ParkingLot\Parking;
 use App\Models\ParkingLot\ParkingType;
+use App\Models\ParkingLot\ParkingZone;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 
@@ -27,8 +28,8 @@ class ParkingController extends Controller
 
     public function show(): Collection|array
     {
-        $all = Parking::all()->sortBy('name')->values();
-        $all->prepend([
+        $list = Parking::all()->sortBy('name')->values();
+        $list->prepend([
             'id' => 'any',
             'name' => __('All'),
             'address' => '',
@@ -36,7 +37,21 @@ class ParkingController extends Controller
             'inStreet' => false,
         ]);
 
-        return $all;
+        return $list;
+    }
+
+    public function zones($parking): Collection|array
+    {
+        $list = ParkingZone::forParking($parking)->get()->sortBy('code')->values();
+        $list->prepend([
+            'id' => 'any',
+            'code' => __('All'),
+            'available' => true,
+            'parking' => null,
+            'totalReservations' => null,
+        ]);
+
+        return $list;
     }
 
     public function edit(ParkingType $parkingType)

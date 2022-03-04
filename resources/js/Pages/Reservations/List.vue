@@ -39,6 +39,15 @@
                     {{ $t('Description') }}
                 </p>
             </div>
+
+            <div class="border-b border-b-indigo-900 border-t borde-t-gray-200 overflow-x-scroll">
+                <div class="px-6 flex gap-2 zone-list">
+                    <jet-button v-for="zone in zones" @click="selectZone(zone)" color="white" :class="{selected: selectedZone?.id === zone.id }">
+                        <div class="float-left">{{ zone.code }}</div>
+                    </jet-button>
+                </div>
+            </div>
+
             <div class="border-t border-gray-200 overflow-x-scroll">
                 <jet-table v-if="list.length">
                     <template #head>
@@ -127,6 +136,7 @@ import JetTable from '@/Jetstream/Table'
 import JetSelectDate from '@/Jetstream/SelectDate'
 
 import moment from 'moment'
+import Button from "@/Jetstream/Button";
 
 export default {
     props: ['parking'],
@@ -137,7 +147,9 @@ export default {
         return {
             list: [],
             loading: false,
-            date: new Date(),
+            date: moment().format('YYYY-MM-DD'),
+            zones: [],
+            selectedZone: {},
             dataForm: {
                 create: false,
                 edit: false,
@@ -145,6 +157,7 @@ export default {
         }
     },
     components: {
+        Button,
         JetTable,
         JetLabel,
         JetCheck,
@@ -173,19 +186,41 @@ export default {
     },
     watch: {
         parking() {
-            this.refresh();
+            console.log('LOAD by parking! ', this.zones);
+            this.refreshAll();
         },
         date() {
-            this.refresh();
+            console.log('LOAD by date! ', this.zones);
+            if (!this.zones.length) this.refreshAll();
+            else this.refresh();
         }
     },
     methods: {
+        refreshAll() {
+            this.loadZones().then(() => {
+                this.refresh();
+            });
+        },
+        loadZones() {
+            this.loading = true;
+            return new Promise((resolve) => {
+                axios.get(route('parking.zones', {parking: this.parking?.id})).then(response => {
+                    this.zones = response.data;
+
+                    this.selectedZone = this.zones.find( zone => zone.id === 'any' );
+                    this.reset();
+
+                    return resolve(true);
+                });
+            });
+        },
         refresh() {
             this.loading = true;
             this.list = [];
             axios.get(route('reservations.show', {reservation: this.parking?.id ? this.parking?.id : 'all'}), {
                 params: {
-                    date: moment(this.date).format('YYYY-MM-DD')
+                    date: moment(this.date).format('YYYY-MM-DD'),
+                    zone: this.selectedZone?.id
                 }
             }).then(response => {
                 this.list = response.data
@@ -225,11 +260,45 @@ export default {
         reset() {
             this.loading = false;
             this.dataForm = null;
+        },
+        selectZone(zone) {
+            this.selectedZone = zone;
+            this.refresh();
         }
+    },
+    mounted() {
+        this.refreshAll();
     }
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 
+$selected: rgb(54 47 120 / 1);
+
+.zone-list {
+    button {
+        border-radius: 0;
+        border-bottom: 4px solid white;
+    }
+
+    button:hover {
+        background: #f1ecff;
+        color: rgba($selected, 1);
+        border-bottom: 4px solid rgba($selected, 0.5);
+    }
+
+    .selected {
+        border-bottom: 4px solid $selected;
+
+        :hover div {
+            color: white;
+        }
+
+        div {
+            color: $selected;
+            font-weight: 900;
+        }
+    }
+}
 </style>

@@ -24,11 +24,13 @@ export default {
     components: {Datepicker},
     data() {
         return {
-            date: null,
+            date: moment(),
         };
     },
-    computed: {
-
+    watch: {
+        value() {
+            this.date = this.value;
+        }
     },
     methods: {
         format() {

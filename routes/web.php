@@ -32,6 +32,10 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     });
 
     Route::resource('parking', ParkingController::class);
+    Route::name('parking.')->prefix('parking')->group(function () {
+        Route::get('zones/{parking}', [ParkingController::class, 'zones'])->name('zones');
+    });
+
     Route::resource('parking-types', ParkingTypeController::class);
 
     Route::get('/clients', function () {
