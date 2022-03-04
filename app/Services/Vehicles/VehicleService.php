@@ -2,12 +2,15 @@
 
 namespace App\Services\Vehicles;
 
+use Log;
 use App\Services\AWS\RekognitionService;
 
 class VehicleService
 {
-    function decodePlate($photo): string
+    function decodePlate($photo, $uid = null, $datetime = null): string
     {
+        Log::info("Decoding plate. Uid = $uid, Datetime = $datetime");
+
         $rekognitionService = new RekognitionService();
 
         $textInPhoto = $rekognitionService->setPhoto($photo)->getText();
@@ -19,7 +22,11 @@ class VehicleService
             return strlen($text) == 6 && strtoupper($text) === $text && ($totalDigits == 2 || $totalDigits == 3);
         })->sortByDesc('Confidence')->first();
 
-        return $this->format($betterDetection['DetectedText'] ?? "");
+        $formatted = $this->format($betterDetection['DetectedText'] ?? "");
+
+        Log::info("     Decoded plate = $formatted for Uid = $uid, Datetime = $datetime");
+
+        return $formatted;
     }
 
     private function format($plate): string

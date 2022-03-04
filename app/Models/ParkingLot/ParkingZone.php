@@ -38,7 +38,7 @@ class ParkingZone extends Model
         return $this->belongsTo(ParkingType::class, 'parking_type_id', 'id');
     }
 
-    function reservations(): HasMany | Collection
+    function reservations(): HasMany|Collection|Reservation
     {
         return $this->hasMany(Reservation::class);
     }
@@ -63,7 +63,7 @@ class ParkingZone extends Model
             'code' => $this->code,
             'available' => $this->available,
             'parking' => $this->type->parking,
-            'totalReservations' => $this->reservations()->where('active', true)->count()
+            'totalReservations' => $this->reservations()->statusQuery('active')->dateStartQuery(Carbon::now()->toDateString())->count()
         ];
     }
 }

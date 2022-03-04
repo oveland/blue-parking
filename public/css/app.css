@@ -1239,6 +1239,9 @@ input[type=file]::file-selector-button:hover {
 .pointer-events-none {
   pointer-events: none;
 }
+.invisible {
+  visibility: hidden;
+}
 .fixed {
   position: fixed;
 }
@@ -1533,6 +1536,12 @@ input[type=file]::file-selector-button:hover {
 }
 .-bottom-px {
   bottom: -1px;
+}
+.right-2 {
+  right: 0.5rem;
+}
+.right-1 {
+  right: 0.25rem;
 }
 .z-0 {
   z-index: 0;
@@ -2719,8 +2728,8 @@ input[type=file]::file-selector-button:hover {
 .grid-cols-1 {
   grid-template-columns: repeat(1, minmax(0, 1fr));
 }
-.grid-cols-2 {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+.flex-row {
+  flex-direction: row;
 }
 .flex-row-reverse {
   flex-direction: row-reverse;
@@ -4643,6 +4652,15 @@ input[type=file]::file-selector-button:hover {
 }
 .pl-6 {
   padding-left: 1.5rem;
+}
+.pr-1 {
+  padding-right: 0.25rem;
+}
+.pl-1 {
+  padding-left: 0.25rem;
+}
+.pl-10 {
+  padding-left: 2.5rem;
 }
 .text-left {
   text-align: left;
@@ -12428,6 +12446,10 @@ input[type=file]::file-selector-button:hover {
 }
 @media (min-width: 640px) {
 
+  .sm\:visible {
+    visibility: visible;
+  }
+
   .sm\:top-0 {
     top: 0px;
   }
@@ -12915,8 +12937,16 @@ input[type=file]::file-selector-button:hover {
     display: block;
   }
 
+  .sm\:inline-block {
+    display: inline-block;
+  }
+
   .sm\:flex {
     display: flex;
+  }
+
+  .sm\:inline-flex {
+    display: inline-flex;
   }
 
   .sm\:table-row-group {
@@ -19533,6 +19563,14 @@ input[type=file]::file-selector-button:hover {
     display: block;
   }
 
+  .md\:inline-block {
+    display: inline-block;
+  }
+
+  .md\:inline-flex {
+    display: inline-flex;
+  }
+
   .md\:table-row-group {
     display: table-row-group;
   }
@@ -19543,6 +19581,10 @@ input[type=file]::file-selector-button:hover {
 
   .md\:grid {
     display: grid;
+  }
+
+  .md\:inline-grid {
+    display: inline-grid;
   }
 
   .md\:hidden {

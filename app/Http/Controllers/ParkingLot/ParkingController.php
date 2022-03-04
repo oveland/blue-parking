@@ -3,11 +3,12 @@
 namespace App\Http\Controllers\ParkingLot;
 
 use App\Http\Controllers\Controller;
+use App\Models\ParkingLot\Parking;
 use App\Models\ParkingLot\ParkingType;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 
-class ParkingTypeController extends Controller
+class ParkingController extends Controller
 {
     public function index()
     {
@@ -24,12 +25,18 @@ class ParkingTypeController extends Controller
         //
     }
 
-    public function show($filter): Collection|array
+    public function show(): Collection|array
     {
-        return match ($filter) {
-            'all' => ParkingType::parkingQuery(request()->get('parking'))->get()->sortBy('parkingName')->values(),
-            default => ParkingType::where('id', $filter)->get(),
-        };
+        $all = Parking::all()->sortBy('name')->values();
+        $all->prepend([
+            'id' => 'any',
+            'name' => __('All'),
+            'address' => '',
+            'description' => '',
+            'inStreet' => false,
+        ]);
+
+        return $all;
     }
 
     public function edit(ParkingType $parkingType)

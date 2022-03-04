@@ -2,7 +2,7 @@
     <button :type="type" :disabled="disabled" @click="$emit('click', $event)"
             class="inline-flex items-center py-2 border border-transparent rounded-md font-semibold text-xs tracking-widest focus:outline-none transition ease-in-out duration-200 uppercase"
             :class="`
-                bg-${ color }-700 hover:bg-${ color }-600 active:bg-${ color }-900 focus:border-${ color }-900
+                bg-${ color }-700 hover:bg-${hoverBgColor} hover:text-${hoverTextColor} active:bg-${ color }-900 focus:border-${ color }-900
                 focus:shadow-outline-${ color }
                 ${ padding }
                 ${ textColor }
@@ -54,7 +54,13 @@ export default {
     },
     computed: {
         textColor() {
-            return this.isTransparent ? 'text-gray-500' : 'text-white';
+            return this.isTransparent || this.isWhite ? 'text-gray-500' : 'text-white';
+        },
+        hoverBgColor() {
+            return this.isTransparent || this.isWhite ? 'gray-900' : `${ this.color }-600`;
+        },
+        hoverTextColor() {
+            return this.isTransparent || this.isWhite ? 'white' : `${ this.color }-50`;
         },
         padding() {
             return this.isTransparent ? 'px-0' : 'px-4';
@@ -64,6 +70,9 @@ export default {
         },
         isTransparent() {
             return this.color === 'transparent';
+        },
+        isWhite() {
+            return this.color === 'white';
         }
     }
 }

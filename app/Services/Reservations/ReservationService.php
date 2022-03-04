@@ -30,9 +30,9 @@ class ReservationService
         $this->rotationCheckService = $rotationCheckService;
     }
 
-    function list($status = 'any', $zone = 'any'): Collection|array
+    function list($status = 'any', $zone = 'any', $parking = 'any', $date = 'any'): Collection|array
     {
-        return Reservation::statusQuery($status)->zoneQuery($zone)->orderBy('start')->get();
+        return Reservation::statusQuery($status)->zoneQuery($zone)->parkingQuery($parking)->dateStartQuery($date)->orderBy('start')->get();
     }
 
     function searchVehicleReservation(Vehicle $vehicle = null): ?Reservation
@@ -49,7 +49,7 @@ class ReservationService
     {
         Log::info("Creating reservation ", $data->toArray());
 
-        $date = $data->get('date') ?? Carbon::now();
+        $date = $data->get('date') ?? Carbon::now()->toDateTimeString();
 
         $vehicle = $this->validateVehicle($data);
         $reservation = $this->searchVehicleReservation($vehicle);
@@ -57,6 +57,11 @@ class ReservationService
 
         $currentRotationCheck = $this->rotationCheckService->getCurrentCheck('active', $parkingZone->id);
         $prevRotationCheck = $this->rotationCheckService->getCheckPrevTo($currentRotationCheck);
+
+        if($reservation) {
+            $reservation->latitude = $data->get('latitude');
+            $reservation->longitude = $data->get('longitude');
+        }
 
         if ($reservation &&
             ($reservation->rotationCheck?->id == $currentRotationCheck?->id || $reservation->rotationCheck?->id == $prevRotationCheck?->id) &&

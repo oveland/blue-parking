@@ -55,6 +55,7 @@ class Vehicle extends Model
         return [
             'id' => $this->id,
             'plate' => $this->plate,
+            'editablePlate' => false,
             'color' => $this->color,
             'model' => $this->model,
             'type' => $this->type->toArray(),

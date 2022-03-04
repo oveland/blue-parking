@@ -55,16 +55,19 @@ class APIReservationController implements APIAppsInterface
 
         $status = $this->request->get('status');
         $zone = $this->request->get('zone');
+        $date = $this->request->get('date') ?? Carbon::now()->toDateString();
 
-        return response()->json($this->reservationService->list($status, $zone));
+        return response()->json($this->reservationService->list($status, $zone, 'any', $date));
     }
 
     function createReservation(): JsonResponse
     {
         $response = collect(['success' => false]);
 
+        $uid = $this->request->get('uid');
+
         $data = collect([
-            'date' => $this->request->get('timestamp') ? Carbon::createFromTimestamp($this->request->get('timestamp')) : Carbon::now(),
+            'date' => $this->request->get('date'),
             'vehicle' => [
                 'plate' => $this->request->get('vehicle-plate'),
                 'user' => [
@@ -80,10 +83,8 @@ class APIReservationController implements APIAppsInterface
             'zone' => [
                 'id' => $this->request->get('parking-zone')
             ],
-            'location' => [
-                'latitude' => $this->request->get('location-lat'),
-                'longitude' => $this->request->get('location-lng'),
-            ]
+            'latitude' => $this->request->get('location-lat'),
+            'longitude' => $this->request->get('location-lng'),
         ]);
 
         try {
@@ -92,6 +93,7 @@ class APIReservationController implements APIAppsInterface
             if ($reservation) {
                 $response->put('success', true);
                 $response->put('reservation', $reservation->toArray());
+                $response->put('uid', $uid);
             } else {
                 $response->put('message', 'Reservation not created');
             }

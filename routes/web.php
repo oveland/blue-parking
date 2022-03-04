@@ -1,9 +1,9 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ParkingLot\ParkingController;
 use App\Http\Controllers\ParkingLot\ParkingTypeController;
 use App\Http\Controllers\Reservations\ReservationController;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -20,7 +20,7 @@ use Inertia\Inertia;
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/', function () {
-        return \Redirect::route('dashboard');
+        return Redirect::route('dashboard');
     })->name('home');
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
@@ -31,6 +31,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         Route::put('finalize/{reservation}', [ReservationController::class, 'finalize'])->name('finalize');
     });
 
+    Route::resource('parking', ParkingController::class);
     Route::resource('parking-types', ParkingTypeController::class);
 
     Route::get('/clients', function () {

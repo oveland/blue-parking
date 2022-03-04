@@ -32,9 +32,10 @@ class ReservationController extends Controller
         return redirect(route('dashboard'));
     }
 
-    public function show(): Collection|array
+    public function show($parking): Collection|array
     {
-        return $this->service->list();
+        $date = request()->get('date');
+        return $this->service->list('any', 'any', $parking, $date);
     }
 
     /**

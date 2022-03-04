@@ -46,6 +46,7 @@ import ParkingType from "@/Pages/Reservations/Form/ParkingType";
 export default {
     props: {
         reservation: Object,
+        parking: Object,
     },
     data() {
         return {
@@ -69,7 +70,11 @@ export default {
     },
     methods: {
         init() {
-            axios.get(route('parking-types.show', {'parking_type': (this.form.create ? 'all' : this.form.type)})).then(response => {
+            axios.get(route('parking-types.show', {'parking_type': (this.form.create ? 'all' : this.form.type)}), {
+                params: {
+                    parking: this.parking?.id
+                }
+            }).then(response => {
                 this.parkingTypes = response.data;
                 this.form.type = this.form.type?.id ? this.form.type : _.first(this.parkingTypes);
             });

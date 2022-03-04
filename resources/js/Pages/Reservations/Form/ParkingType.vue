@@ -1,6 +1,6 @@
 <template>
     <div class="w-full shadow rounded-xl" :class="mainColor + ' ' + textColor + (selected ? '' : ' cursor-pointer')" @click="select">
-        <div class="flex gap-6 p-6">
+        <div class="flex gap-6 p-6 relative">
             <div class="w-auto rounded-md p-3 text-center" :class="`bg-${vehicleType.color}-100`">
                 <icon :name="vehicleType.icon" :color="vehicleType.color" h="8" w="8"></icon>
             </div>
@@ -8,13 +8,13 @@
                 <span class="text-xl font-bold">
                     {{ vehicleType.name }}
                 </span>
-                <br>
-                <span v-if="reservation && reservation.start" class="pt-2 text-lg font-bold">
+                <small class="text-gray-300 absolute font-bold" style="right: 20px">{{ type.parkingName }}</small>
+                <div v-if="reservation && reservation.start" class="text-lg font-bold">
                     <time-ago :from="reservation.start" :to="reservation.end" :full="true"></time-ago>
-                </span>
-                <span v-else class="pt-2">
+                </div>
+                <div v-else class="">
                     {{ type.available }} {{ $t('available') }}
-                </span>
+                </div>
             </div>
             <div class="w-auto float-right text-right font-bold hidden ">
                 <span class="text-3xl">

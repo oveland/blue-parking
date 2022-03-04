@@ -53,8 +53,11 @@ class APIVehicleController implements APIAppsInterface
         $response = collect(['success' => false]);
 
         $photoData = $this->request->get('photo');
+        $uid = $this->request->get('uid');
+        $datetime = $this->request->get('datetime');
+
         $photo = $this->decodeImageData($photoData);
-        $vehiclePlate = $this->vehicleService->decodePlate($photo);
+        $vehiclePlate = $this->vehicleService->decodePlate($photo, $uid, $datetime);
 
         $response->put('success', (bool)$vehiclePlate);
         $response->put('plate', $vehiclePlate);

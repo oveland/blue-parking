@@ -44,7 +44,7 @@ var _hoisted_2 = {
   "class": "fa-group"
 };
 
-var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("path", {
+var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
   fill: "currentColor",
   d: "M192 256a64 64 0 1 1 64-64 64 64 0 0 1-64 64z"
 }, null, -1
@@ -52,10 +52,10 @@ var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("
 );
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("svg", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("g", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("path", {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("svg", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("g", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
     fill: "currentColor",
     d: "M192 0C86 0 0 86 0 192c0 77.41 27 99 172.27 309.67a24 24 0 0 0 39.46 0C357 291 384 269.41 384 192 384 86 298 0 192 0zm0 288a96 96 0 1 1 96-96 96 96 0 0 1-96 96z",
-    "class": $props.light
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)($props.light)
   }, null, 2
   /* CLASS */
   ), _hoisted_3])]);

@@ -2,32 +2,38 @@
     <div class="">
         <div class="bg-white grid">
             <div class="px-6 py-5">
-                <div class="grid grid-cols-2 items-center">
-                    <div>
+                <div class="flex flex-row items-center">
+                    <div class="w-1/4 md:w-1/4">
                         <div class="text-lg cursor-pointer flex items-center" @click="refresh">
                             <div class="float-left animate-pulse mr-2">
                                 <icon name="loading" v-if="loading"></icon>
                                 <icon name="reservation" v-if="!loading"></icon>
                             </div>
                             <div class="font-bold">
-                                {{ $t('Reservations') }}
+                                {{ list.length }} <span class="hidden sm:inline-block">{{ $t('Reservations') }}</span>
                             </div>
                         </div>
-                        <div>
-                            <small class="text-gray-400 font-extrabold">{{ list.length }} {{ $t('In total') }}</small>
+                        <div v-if="parking.id === 'any'">
+                            {{ $t('All') }}
+                        </div>
+                        <div v-else>
+                            <span class="hidden text-gray-400 font-bold sm:inline-block md:text-gray-700">{{ parking.address }}</span>
+                            <span class="hidden text-gray-400 font-extrabold md:inline-block pl-1">• <small>{{ parking.description }}</small></span>
                         </div>
                     </div>
 
-                    <div class="text-right md:text-center hidden">
+                    <div class="w-1/4 md:w-1/2 px-1 flex items-center justify-center">
                         <jet-button :disabled="disable" @click="add()" class="hidden md:block">
                             {{ $t('Create') }}
                         </jet-button>
                         <span>
-                            <icon name="add" size="8" color="blue" @click="add()" class="float-right md:hidden"></icon>
+                            <icon name="add" size="8" color="indigo" @click="add()" class="float-right md:hidden"></icon>
                         </span>
                     </div>
 
-                    <div class="hidden md:block"></div>
+                    <div class="w-1/2 md:w-1/4 text-right md:text-center">
+                        <jet-select-date v-model="date"></jet-select-date>
+                    </div>
                 </div>
                 <p class="mt-1 max-w-2xl text-sm text-gray-500 hidden">
                     {{ $t('Description') }}
@@ -56,7 +62,7 @@
                                 {{ $t('Zone') }}
                             </th>
                             <th scope="col" class="px-6 py-3 text-left text-sm text-gray-400 uppercase">
-                                {{ $t('TIEMPO') }}
+                                {{ $t('Time parking') }}
                             </th>
                             <th scope="col" class="px-6 py-3 text-right text-sm  text-gray-400 uppercase">
                                 <span class="">{{ $t('Actions') }}</span>
@@ -98,7 +104,7 @@
                 </div>
             </template>
             <template #content>
-                <reservation-form :reservation.sync="dataForm" @refresh="refresh" @close="dataForm = null"></reservation-form>
+                <reservation-form :reservation.sync="dataForm" :parking="parking" @refresh="refresh" @close="dataForm = null"></reservation-form>
             </template>
         </jet-dialog-modal>
     </div>
@@ -118,9 +124,12 @@ import JetCheck from '@/Jetstream/Check'
 import ReservationForm from '@/Pages/Reservations/Form'
 import ReservationDetail from '@/Pages/Reservations/Detail'
 import JetTable from '@/Jetstream/Table'
+import JetSelectDate from '@/Jetstream/SelectDate'
+
+import moment from 'moment'
 
 export default {
-    props: {},
+    props: ['parking'],
     created() {
         this.refresh();
     },
@@ -128,6 +137,7 @@ export default {
         return {
             list: [],
             loading: false,
+            date: new Date(),
             dataForm: {
                 create: false,
                 edit: false,
@@ -147,7 +157,8 @@ export default {
         JetDialogModal,
         JetActionMessage,
         ReservationForm,
-        ReservationDetail
+        ReservationDetail,
+        JetSelectDate
     },
     computed: {
         showModalForm() {
@@ -160,11 +171,23 @@ export default {
             return _.sortBy(this.list, 'start');
         }
     },
+    watch: {
+        parking() {
+            this.refresh();
+        },
+        date() {
+            this.refresh();
+        }
+    },
     methods: {
         refresh() {
             this.loading = true;
             this.list = [];
-            axios.get(route('reservations.show', {reservation: 'all'})).then(response => {
+            axios.get(route('reservations.show', {reservation: this.parking?.id ? this.parking?.id : 'all'}), {
+                params: {
+                    date: moment(this.date).format('YYYY-MM-DD')
+                }
+            }).then(response => {
                 this.list = response.data
                 this.reset();
             });
