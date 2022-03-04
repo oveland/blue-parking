@@ -19,6 +19,7 @@ class CreateParkingTypesTable extends Migration
 
             $table->integer('tariff');
             $table->integer('hold_tariff');
+            $table->unsignedBigInteger('version')->default(0);
 
             $table->unsignedBigInteger('vehicle_type_id');
             $table->unsignedBigInteger('parking_id');

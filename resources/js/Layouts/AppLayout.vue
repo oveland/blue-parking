@@ -1,13 +1,17 @@
 <template>
-    <div class="max-w-screen-2xl mx-auto rounded-tr-3xl overflow-hidden">
+    <div class="max-w-screen-2xl mx-auto overflow-hidden">
         <jet-banner />
 
         <div class="min-h-screen flex">
-            <nav class="bg-blue-800 w-full sm:w-2/3 md:w-1/3 lg:relative lg:w-full xl:w-1/2 absolute inset-y-0 transition-all duration-200 ease-in-out" :class="showSidebar ? 'bg-red-900' : 'transform -translate-x-full lg:translate-x-0'">
-                <div class="flex justify-between items-center bg-blue-900 shadow py-6 px-6 lg:rounded-bl-3xl border-blue-900 border-b-4 lg:border-0">
+            <nav class="bg-blue-800 w-auto absolute
+                sm:w-2/3 md:w-1/3 lg:w-4/12 xl:w-3/12
+                xl:relative
+                xl:w-auto
+                inset-y-0 transition-all duration-200 ease-in-out z-10" :class="showSidebar ? 'bg-blue-900' : '-translate-x-full xl:translate-x-0'">
+                <div class="flex justify-between items-center bg-blue-900 shadow py-6 px-6 xl:rounded-bl-3xl border-blue-900 border-b-4 xl:border-0">
                     <div class="flex items-center">
                         <!-- Logo -->
-                        <div class="flex-shrink-0 flex items-center">
+                        <div class="shrink-0 flex items-center">
                             <inertia-link :href="route('dashboard')">
                                 <jet-application-mark class="block h-9 w-auto" />
                             </inertia-link>
@@ -20,7 +24,7 @@
                             </a>
                         </div>
                     </div>
-                    <div class="lg:hidden" @click="showSidebar = false">
+                    <div class="xl:hidden" @click="showSidebar = false">
                         <span class="text-white">
                             <icon name="times" color="blank" h="7" w="7"></icon>
                         </span>
@@ -34,16 +38,16 @@
                         {{ $t('Dashboard') }}
                     </jet-nav-link>
 
-                    <jet-nav-link :href="route('clients')" :active="route().current('clients')" icon="passengers" class="w-full">
+                    <jet-nav-link :href="route('clients')" :active="route().current('clients')" icon="passengers" class="w-full hidden" :disabled="true">
                         {{ $t('Clients') }}
                     </jet-nav-link>
 
-                    <jet-nav-link :href="route('vehicles')" :active="route().current('vehicles')" icon="vehicle" class="w-full">
-                        {{ $t('Vehicles') }}
+                    <jet-nav-link :href="route('vehicles')" :active="route().current('vehicles')" icon="vehicle" class="w-full" :disabled="true">
+                        {{ $t('Reports') }}
                     </jet-nav-link>
 
-                    <jet-nav-link :href="route('account')" :active="route().current('account')" icon="user" class="w-full">
-                        {{ $t('Account') }}
+                    <jet-nav-link :href="route('account')" :active="route().current('account')" icon="add" class="w-full" :disabled="true">
+                        {{ $t('Administration') }}
                     </jet-nav-link>
                 </div>
 
@@ -58,7 +62,7 @@
                     <!-- Responsive Settings Options -->
                     <div class="pt-4 pb-1 border-t border-gray-200">
                         <div class="flex items-center px-4">
-                            <div v-if="$page.props.jetstream.managesProfilePhotos" class="flex-shrink-0 mr-3" >
+                            <div v-if="$page.props.jetstream.managesProfilePhotos" class="shrink-0 mr-3" >
                                 <img class="h-10 w-10 rounded-full object-cover" :src="$page.props.user.profile_photo_url" :alt="$page.props.user.name" />
                             </div>
 
@@ -125,18 +129,18 @@
             </nav>
 
             <!-- Page Content -->
-            <main>
+            <main class="w-full">
                 <!-- Page Heading -->
-                <header class="bg-blue-900 lg:bg-white shadow lg:border-b py-6 px-8" v-if="$slots.header">
+                <header class="bg-blue-900 xl:bg-white shadow xl:border-b py-6 px-6" v-if="$slots.header">
                     <div class="flex justify-between items-center">
-                        <div class="flex items-center text-white lg:text-gray-600 header">
-                            <button class="bg-blue-900 p-2 rounded-md mr-2 lg:hidden">
-                                <icon name="menu" @click="showSidebar = true" color="blank"></icon>
-                            </button>
+                        <button class="bg-blue-900 p-2 rounded-md mr-2 xl:hidden text-white">
+                            <icon name="menu" @click="showSidebar = true" color="blank"></icon>
+                        </button>
+                        <div class="flex items-center text-white xl:text-gray-600 header overflow-x-scroll">
                             <slot name="header"></slot>
                         </div>
 
-                        <div class="hidden sm:flex sm:items-center sm:ml-6">
+                        <div class="hiddsen sm:flex sm:items-center sm:ml-6">
                             <div class="ml-3 relative">
                                 <!-- Teams Dropdown -->
                                 <jet-dropdown align="right" width="60" v-if="$page.props.jetstream.hasTeamFeatures">
@@ -200,27 +204,34 @@
                                         </button>
 
                                         <span v-else class="inline-flex rounded-md">
-                                            <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-bold rounded-md text-gray-500 bg-transparent hover:text-blue-200 focus:outline-none transition">
-                                                {{ $page.props.user.name }}
-                                                <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                            <button type="button" class="px-3 py-2 text-center inline-flex items-center border border-transparent text-sm leading-4 font-bold rounded-md text-gray-500 bg-transparent hover:text-blue-200 focus:outline-none transition">
+                                                <span class="hidden md:inline-block">{{ $page.props.user.name }}</span>
+                                                <svg class="hidden md:inline-block ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                                                     <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
                                                 </svg>
+                                                <span class="block md:hidden">
+                                                    <icon name="user"></icon>
+                                                </span>
                                             </button>
                                         </span>
                                     </template>
 
                                     <template #content>
+                                        <div class="block md:hidden px-4 py-2 text-xs text-gray-400 uppercase font-extrabold">
+                                            {{ $page.props.user.name }}
+                                        </div>
+
                                         <!-- Account Management -->
-                                        <div class="block px-4 py-2 text-xs text-gray-400">
-                                            Manage Account
+                                        <div class="hidden md:block px-4 py-2 text-xs text-gray-400">
+                                            {{ $t('Manage account') }}
                                         </div>
 
                                         <jet-dropdown-link :href="route('profile.show')">
-                                            Profile
+                                            {{ $t('Profile') }}
                                         </jet-dropdown-link>
 
                                         <jet-dropdown-link :href="route('api-tokens.index')" v-if="$page.props.jetstream.hasApiFeatures">
-                                            API Tokens
+                                            {{ $t('API Tokens') }}
                                         </jet-dropdown-link>
 
                                         <div class="border-t border-gray-100"></div>
@@ -228,7 +239,7 @@
                                         <!-- Authentication -->
                                         <form @submit.prevent="logout">
                                             <jet-dropdown-link as="button">
-                                                Log Out
+                                                {{ $t('Logout') }}
                                             </jet-dropdown-link>
                                         </form>
                                     </template>
@@ -238,7 +249,9 @@
                     </div>
                 </header>
 
-                <slot></slot>
+                <div class="">
+                    <slot></slot>
+                </div>
             </main>
         </div>
     </div>

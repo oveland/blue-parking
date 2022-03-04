@@ -1,16 +1,79 @@
 <template>
-    <button :type="type" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition">
+    <button :type="type" :disabled="disabled" @click="$emit('click', $event)"
+            class="inline-flex items-center py-2 border border-transparent rounded-md font-semibold text-xs tracking-widest focus:outline-none transition ease-in-out duration-200 uppercase"
+            :class="`
+                bg-${ color }-700 hover:bg-${hoverBgColor} hover:text-${hoverTextColor} active:bg-${ color }-900 focus:border-${ color }-900
+                focus:shadow-outline-${ color }
+                ${ padding }
+                ${ textColor }
+                ${ disabled ? 'opacity-25' : '' }
+                h-${ h }`
+            ">
+        <icon v-if="icon" :name="icon" :color="colorIcon" :density="densityIcon" :class="onlyIcon ? '' : 'mr-2'" :size="sizeIcon"></icon>
         <slot></slot>
     </button>
 </template>
 
 <script>
-    export default {
-        props: {
-            type: {
-                type: String,
-                default: 'submit',
-            },
+import Icon from '@/Jetstream/Icon'
+
+export default {
+    props: {
+        disabled: {
+            type: Boolean,
+            default: false,
+        },
+        type: {
+            type: String,
+            default: 'submit',
+        },
+        color: {
+            type: String,
+            default: 'gray',
+        },
+        h: {
+            type: [Number, String],
+            default: 10
+        },
+        icon: {
+            type: String,
+            required: false
+        },
+        sizeIcon: {
+            type: [Number, String],
+            default: 3
+        },
+        colorIcon: {
+            type: [String],
+            default: 'gray'
+        },
+        onlyIcon: false,
+    },
+    components: {
+        Icon
+    },
+    computed: {
+        textColor() {
+            return this.isTransparent || this.isWhite ? 'text-gray-500' : 'text-white';
+        },
+        hoverBgColor() {
+            return this.isTransparent || this.isWhite ? 'gray-900' : `${ this.color }-600`;
+        },
+        hoverTextColor() {
+            return this.isTransparent || this.isWhite ? 'white' : `${ this.color }-50`;
+        },
+        padding() {
+            return this.isTransparent ? 'px-0' : 'px-4';
+        },
+        densityIcon() {
+            return this.isTransparent ? 400 : 50;
+        },
+        isTransparent() {
+            return this.color === 'transparent';
+        },
+        isWhite() {
+            return this.color === 'white';
         }
     }
+}
 </script>

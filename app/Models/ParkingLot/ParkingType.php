@@ -20,11 +20,13 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $updated_at
  * @property int $tariff
  * @property int $hold_tariff
+ * @property int $version
  * @property int $vehicle_type_id
  * @property int $parking_id
  * @property-read Parking $parking
  * @property-read VehicleType $vehicleType
  * @property-read Collection|ParkingZone[] $zones
+ * @method static Builder|ParkingType parkingQuery($parking = 'any')
  * @method static Builder|ParkingType newModelQuery()
  * @method static Builder|ParkingType newQuery()
  * @method static Builder|ParkingType query()
@@ -33,6 +35,8 @@ use Illuminate\Support\Carbon;
 class ParkingType extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['tariff', 'holdTariff', 'vehicle_type_id', 'parking_id'];
 
     function vehicleType(): BelongsTo
     {
@@ -44,8 +48,33 @@ class ParkingType extends Model
         return $this->belongsTo(Parking::class);
     }
 
-    function zones(): HasMany
+    function zones(): HasMany|ParkingZone
     {
         return $this->hasMany(ParkingZone::class);
+    }
+
+    function scopeParkingQuery(Builder $query, $parking = 'any'): Builder|ParkingType
+    {
+        if ($parking != 'any') {
+            $query = $query->where('parking_id', $parking);
+        }
+
+        return $query;
+    }
+
+    public function toArray(): array
+    {
+        $availableZones = $this->zones()->available()->get();
+
+        return [
+            'id' => $this->id,
+            'tariff' => $this->tariff,
+            'holdTariff' => $this->hold_tariff,
+            'vehicleType' => $this->vehicleType->toArray(),
+            'available' => $availableZones->count(),
+            'version' => $this->version,
+            'parkingName' => $this->parking->name,
+            'availableZones' => $availableZones->toArray(),
+        ];
     }
 }

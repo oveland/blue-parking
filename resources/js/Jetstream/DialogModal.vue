@@ -1,18 +1,18 @@
 <template>
-    <modal :show="show" :max-width="maxWidth" :closeable="closeable" @close="close">
-        <div class="px-6 py-4">
+    <modal :show="show" :width="width" :closeable="closeable" @close="close">
+        <div :class="clear ? '' : 'px-6 py-4'">
             <div class="text-lg">
                 <slot name="title">
                 </slot>
             </div>
 
-            <div class="mt-4">
+            <div :class="clear ? '' : 'mt-4'">
                 <slot name="content">
                 </slot>
             </div>
         </div>
 
-        <div class="px-6 py-4 bg-gray-100 text-right">
+        <div :class="clear || noFooter ? '' : 'px-6 py-4 bg-gray-100 text-right'">
             <slot name="footer">
             </slot>
         </div>
@@ -30,14 +30,20 @@
         },
 
         props: {
+            clear: {
+                default: false
+            },
             show: {
                 default: false
             },
-            maxWidth: {
-                default: '2xl'
+            width: {
+                default: 'md'
             },
             closeable: {
                 default: true
+            },
+            noFooter: {
+                default: false
             },
         },
 

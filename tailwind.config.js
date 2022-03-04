@@ -3,7 +3,7 @@ const defaultTheme = require('tailwindcss/defaultTheme');
 const colors = require('tailwindcss/colors')
 
 module.exports = {
-    purge: [
+    content: [
         './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
         './vendor/laravel/jetstream/**/*.blade.php',
         './storage/framework/views/*.php',
@@ -11,34 +11,29 @@ module.exports = {
         './resources/js/**/*.vue',
     ],
 
+    safelist: [
+        {
+            pattern: /(bg-|text-|h-|w-|top-)/,
+            variants: ['sm', 'md', 'lg', 'xl', '2xl', 'hover'],
+        }
+    ],
+
     theme: {
         extend: {
-            screens: {
-                'sm': '376px',
-                // 'md': '768px',
-                // 'lg': '1024px',
-                // 'xl': '1280px',
-                // '2xl': '1536px',
-                // 'sm': {'min': '0px', 'max': '767px'},
-                // 'md': {'min': '768px', 'max': '1023px'},
-                // 'lg': {'min': '1024px', 'max': '1279px'},
-                // 'xl': {'min': '1280px', 'max': '1535px'},
-                // '2xl': {'min': '1536px'},
-            },
             colors: {
-                gray: colors.blueGray,
+                gray: colors.slate,
                 green: colors.lime,
                 blue: {
                     50: '#cfcde5',
                     100: '#aeaae5',
-                    200: '#554cde',
-                    300: '#3629e9',
-                    400: '#2115e3',
-                    500: '#2116d0',
-                    600: '#180cc8',
-                    700: '#180cb7',
-                    800: '#0e067c',
-                    900: '#070341',
+                    200: '#7c73f5',
+                    300: '#6961e8',
+                    400: '#5951e0',
+                    500: '#3025de',
+                    600: '#150ab4',
+                    700: '#1006a0',
+                    800: '#09017f',
+                    900: '#05004c',
                 },
             },
             fontFamily: {
@@ -47,11 +42,11 @@ module.exports = {
         },
     },
 
-    variants: {
-        extend: {
-            opacity: ['disabled'],
-        },
-    },
+    plugins: [
+        require('@tailwindcss/forms'),
+        require('@tailwindcss/typography'),
+        require('flowbite/plugin')
+    ],
 
-    plugins: [require('@tailwindcss/forms'), require('@tailwindcss/typography')],
+    separator: ':',
 };

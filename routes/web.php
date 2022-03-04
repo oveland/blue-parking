@@ -1,6 +1,9 @@
 <?php
 
-use Illuminate\Foundation\Application;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ParkingLot\ParkingController;
+use App\Http\Controllers\ParkingLot\ParkingTypeController;
+use App\Http\Controllers\Reservations\ReservationController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -15,28 +18,35 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
+Route::middleware(['auth:sanctum', 'verified'])->group(function () {
+    Route::get('/', function () {
+        return Redirect::route('dashboard');
+    })->name('home');
+
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+    Route::resource('reservations', ReservationController::class);
+    Route::name('reservations.')->prefix('reservations')->group(function () {
+        Route::post('open', [ReservationController::class, 'open'])->name('open');
+        Route::put('finalize/{reservation}', [ReservationController::class, 'finalize'])->name('finalize');
+    });
+
+    Route::resource('parking', ParkingController::class);
+    Route::resource('parking-types', ParkingTypeController::class);
+
+    Route::get('/clients', function () {
+        return Inertia::render('Dashboard');
+    })->name('clients');
+
+    Route::get('/vehicles', function () {
+        return Inertia::render('Dashboard');
+    })->name('vehicles');
+
+    Route::get('/account', function () {
+        return Inertia::render('Dashboard');
+    })->name('account');
 });
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->name('dashboard');
-
-
-Route::middleware(['auth:sanctum', 'verified'])->get('/clients', function () {
-    return Inertia::render('Dashboard');
-})->name('clients');
-
-Route::middleware(['auth:sanctum', 'verified'])->get('/vehicles', function () {
-    return Inertia::render('Dashboard');
-})->name('vehicles');
-
-Route::middleware(['auth:sanctum', 'verified'])->get('/account', function () {
-    return Inertia::render('Dashboard');
-})->name('account');
+Route::get('/offline', function () {
+    return "Offline";
+});
