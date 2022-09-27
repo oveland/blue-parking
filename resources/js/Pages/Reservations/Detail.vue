@@ -20,7 +20,7 @@
             </div>
         </td>
 
-        <td class="px-6 py-2 w-1/4 hidden">
+        <td class="px-6 py-2 w-1/4">
             <div class="text-sm text-gray-500 font-semibold">
                 {{ reservation.vehicle.user?.name }}
             </div>
@@ -65,13 +65,13 @@
             <div>
                 {{ reservation.zone.code }}
             </div>
-            <div class="text-gray-400 hidden">
+            <div class="text-gray-400">
                 <small>${{ reservation.type.tariff }}/min</small>
             </div>
         </td>
 
         <td class="px-6 py-2 w-1/4 text-sm text-gray-500 font-semibold">
-            <div class="hidden">
+            <div class="">
                 {{ $filter.currency(charges) }}
             </div>
             <div class="text-gray-400">

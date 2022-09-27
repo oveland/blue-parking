@@ -58,7 +58,7 @@
                             <th scope="col" class="px-6 py-3 text-left text-sm text-gray-400 uppercase">
                                 {{ $t('Vehicle') }}
                             </th>
-                            <th scope="col" class="px-6 py-3 text-left text-sm text-gray-400 uppercase hidden">
+                            <th scope="col" class="px-6 py-3 text-left text-sm text-gray-400 uppercase">
                                 {{ $t('Client') }}
                             </th>
                             <th scope="col" class="px-6 py-3 text-left text-sm text-gray-400 uppercase">

@@ -33634,7 +33634,7 @@ var _hoisted_7 = {
 var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" • ");
 
 var _hoisted_9 = {
-  "class": "px-6 py-2 w-1/4 hidden"
+  "class": "px-6 py-2 w-1/4"
 };
 var _hoisted_10 = {
   "class": "text-sm text-gray-500 font-semibold"
@@ -33662,13 +33662,13 @@ var _hoisted_17 = {
   "class": "px-6 py-2 w-1/4 text-sm text-gray-500 font-semibold"
 };
 var _hoisted_18 = {
-  "class": "text-gray-400 hidden"
+  "class": "text-gray-400"
 };
 var _hoisted_19 = {
   "class": "px-6 py-2 w-1/4 text-sm text-gray-500 font-semibold"
 };
 var _hoisted_20 = {
-  "class": "hidden"
+  "class": ""
 };
 var _hoisted_21 = {
   "class": "text-gray-400"
@@ -34003,30 +34003,25 @@ var _hoisted_3 = {
   "class": "text-xl font-bold"
 };
 var _hoisted_4 = {
-  "class": "text-gray-300 absolute font-bold",
+  key: 0,
+  "class": "text-lg font-bold"
+};
+var _hoisted_5 = {
+  key: 1,
+  "class": ""
+};
+var _hoisted_6 = {
+  "class": "w-auto float-right text-right font-bold"
+};
+var _hoisted_7 = {
+  "class": "text-gray-300 font-bold",
   style: {
     "right": "20px"
   }
 };
-var _hoisted_5 = {
-  key: 0,
-  "class": "text-lg font-bold"
-};
-var _hoisted_6 = {
-  key: 1,
-  "class": ""
-};
-var _hoisted_7 = {
-  "class": "w-auto float-right text-right font-bold hidden"
-};
 var _hoisted_8 = {
-  "class": "text-3xl"
+  "class": "text-xl"
 };
-
-var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
-/* HOISTED */
-);
-
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_icon = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("icon");
 
@@ -34050,19 +34045,17 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* CLASS */
   ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.vehicleType.name), 1
   /* TEXT */
-  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("small", _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.type.parkingName), 1
-  /* TEXT */
-  ), $props.reservation && $props.reservation.start ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_time_ago, {
+  ), $props.reservation && $props.reservation.start ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_time_ago, {
     from: $props.reservation.start,
     to: $props.reservation.end,
     full: true
   }, null, 8
   /* PROPS */
-  , ["from", "to"])])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.type.available) + " " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$t('available')), 1
+  , ["from", "to"])])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.type.available) + " " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$t('available')), 1
   /* TEXT */
-  ))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_8, " $" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.type.tariff), 1
+  ))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("small", _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.type.parkingName), 1
   /* TEXT */
-  ), _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$t('minute')), 1
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_8, " $" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.type.tariff) + "/" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$t('min')), 1
   /* TEXT */
   )])])], 2
   /* CLASS */
@@ -34203,7 +34196,7 @@ var _hoisted_22 = {
 };
 var _hoisted_23 = {
   scope: "col",
-  "class": "px-6 py-3 text-left text-sm text-gray-400 uppercase hidden"
+  "class": "px-6 py-3 text-left text-sm text-gray-400 uppercase"
 };
 var _hoisted_24 = {
   scope: "col",

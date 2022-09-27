@@ -8,7 +8,6 @@
                 <span class="text-xl font-bold">
                     {{ vehicleType.name }}
                 </span>
-                <small class="text-gray-300 absolute font-bold" style="right: 20px">{{ type.parkingName }}</small>
                 <div v-if="reservation && reservation.start" class="text-lg font-bold">
                     <time-ago :from="reservation.start" :to="reservation.end" :full="true"></time-ago>
                 </div>
@@ -16,12 +15,11 @@
                     {{ type.available }} {{ $t('available') }}
                 </div>
             </div>
-            <div class="w-auto float-right text-right font-bold hidden ">
-                <span class="text-3xl">
-                    ${{ type.tariff }}
+            <div class="w-auto float-right text-right font-bold">
+                <small class="text-gray-300 font-bold" style="right: 20px">{{ type.parkingName }}</small>
+                <span class="text-xl">
+                    ${{ type.tariff }}/{{ $t('min') }}
                 </span>
-                <br>
-                <span>{{ $t('minute') }}</span>
             </div>
         </div>
     </div>

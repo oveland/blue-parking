@@ -3026,10 +3026,6 @@ input[type=file]::file-selector-button:hover {
   --tw-border-opacity: 1;
   border-color: rgb(5 0 76 / var(--tw-border-opacity));
 }
-.border-indigo-900 {
-  --tw-border-opacity: 1;
-  border-color: rgb(54 47 120 / var(--tw-border-opacity));
-}
 .border-x-yellow-50 {
   --tw-border-opacity: 1;
   border-left-color: rgb(253 253 234 / var(--tw-border-opacity));
@@ -4606,10 +4602,6 @@ input[type=file]::file-selector-button:hover {
 .py-px {
   padding-top: 1px;
   padding-bottom: 1px;
-}
-.px-10 {
-  padding-left: 2.5rem;
-  padding-right: 2.5rem;
 }
 .pt-6 {
   padding-top: 1.5rem;
