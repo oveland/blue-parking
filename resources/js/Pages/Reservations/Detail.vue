@@ -13,8 +13,12 @@
                 </div>
                 <div class="text-sm text-gray-500">
                     <span class="font-extrabold">{{ reservation.vehicle.plate }}</span>
-                    <div v-if="reservation.vehicle.model">
-                        <small>{{ reservation.vehicle.model }}</small> • <small>{{ reservation.vehicle.color }}</small>
+                    <div class="flex gap-1">
+                        <small v-if="reservation.vehicle.model">{{ reservation.vehicle.model }}</small>
+                        <small v-else>{{ reservation.vehicle.type.name }}</small>
+
+                        <span v-if="reservation.vehicle.color">•</span>
+                        <small>{{ reservation.vehicle.color }}</small>
                     </div>
                 </div>
             </div>

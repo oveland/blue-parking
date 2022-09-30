@@ -12,12 +12,17 @@
                     <time-ago :from="reservation.start" :to="reservation.end" :full="true"></time-ago>
                 </div>
                 <div v-else class="">
-                    {{ type.available }} {{ $t('available') }}
+                    <span v-if="showAvailable">
+                        {{ type.available }} {{ $t('available') }}
+                    </span>
+                    <span v-else>
+                        {{ type.parkingName }}
+                    </span>
                 </div>
             </div>
             <div class="w-auto float-right text-right font-bold">
-                <small class="text-gray-300 font-bold" style="right: 20px">{{ type.parkingName }}</small>
-                <span class="text-xl">
+                <small class="text-gray-300 font-bold" style="right: 20px" v-if="showAvailable">{{ type.parkingName }}</small>
+                <span class="text-xl" v-if="type.tariff">
                     ${{ type.tariff }}/{{ $t('min') }}
                 </span>
             </div>
@@ -48,6 +53,9 @@ export default {
         },
         textColor() {
             return this.selected ? 'text-white' : 'text-gray-400';
+        },
+        showAvailable() {
+            return this.type.vehicleType.id !== 6;
         }
     },
     methods: {

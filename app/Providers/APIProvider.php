@@ -2,10 +2,12 @@
 
 namespace App\Providers;
 
+use App\Http\Controllers\API\Apps\APIParkingTypeController;
 use App\Http\Controllers\API\Apps\APIParkingZoneController;
 use App\Http\Controllers\API\Apps\APIReservationController;
 use App\Http\Controllers\API\Apps\APIRotationController;
 use App\Http\Controllers\API\Apps\APIVehicleController;
+use App\Services\ParkingLot\ParkingTypeService;
 use App\Services\ParkingLot\ParkingZoneService;
 use App\Services\Reservations\ReservationService;
 use App\Services\Reservations\RotationService;
@@ -49,6 +51,7 @@ class APIProvider extends ServiceProvider
                 'vehicle' => new APIVehicleController($params['service'] ?? null, new VehicleService()),
                 'rotation' => new APIRotationController($params['service'] ?? null, new RotationService()),
                 'reservation' => new APIReservationController($params['service'] ?? null, new ReservationService(new RotationService())),
+                'parking-types' => new APIParkingTypeController($params['service'] ?? null, new ParkingTypeService()),
                 default => self::NOT_FOUND_RESPONSE,
             };
         });

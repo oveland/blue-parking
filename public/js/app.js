@@ -28358,6 +28358,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     textColor: function textColor() {
       return this.selected ? 'text-white' : 'text-gray-400';
+    },
+    showAvailable: function showAvailable() {
+      return this.type.vehicleType.id !== 6;
     }
   },
   methods: {
@@ -33628,16 +33631,16 @@ var _hoisted_6 = {
   "class": "font-extrabold"
 };
 var _hoisted_7 = {
+  "class": "flex gap-1"
+};
+var _hoisted_8 = {
   key: 0
 };
-
-var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" • ");
-
 var _hoisted_9 = {
-  "class": "px-6 py-2 w-1/4"
+  key: 1
 };
 var _hoisted_10 = {
-  "class": "text-sm text-gray-500 font-semibold"
+  key: 2
 };
 var _hoisted_11 = {
   "class": "px-6 py-2 w-1/4"
@@ -33646,34 +33649,40 @@ var _hoisted_12 = {
   "class": "text-sm text-gray-500 font-semibold"
 };
 var _hoisted_13 = {
-  "class": "flex items-center gap-1"
-};
-var _hoisted_14 = {
-  "class": "flex items-center gap-1"
-};
-var _hoisted_15 = {
   "class": "px-6 py-2 w-1/4"
 };
+var _hoisted_14 = {
+  "class": "text-sm text-gray-500 font-semibold"
+};
+var _hoisted_15 = {
+  "class": "flex items-center gap-1"
+};
 var _hoisted_16 = {
-  key: 0,
-  "class": "text-sm text-gray-500"
+  "class": "flex items-center gap-1"
 };
 var _hoisted_17 = {
-  "class": "px-6 py-2 w-1/4 text-sm text-gray-500 font-semibold"
+  "class": "px-6 py-2 w-1/4"
 };
 var _hoisted_18 = {
-  "class": "text-gray-400"
+  key: 0,
+  "class": "text-sm text-gray-500"
 };
 var _hoisted_19 = {
   "class": "px-6 py-2 w-1/4 text-sm text-gray-500 font-semibold"
 };
 var _hoisted_20 = {
-  "class": ""
-};
-var _hoisted_21 = {
   "class": "text-gray-400"
 };
+var _hoisted_21 = {
+  "class": "px-6 py-2 w-1/4 text-sm text-gray-500 font-semibold"
+};
 var _hoisted_22 = {
+  "class": ""
+};
+var _hoisted_23 = {
+  "class": "text-gray-400"
+};
+var _hoisted_24 = {
   "class": "px-6 py-2 w-auto float-right"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -33706,13 +33715,15 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* PROPS */
   , ["name", "color"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.reservation.vehicle.plate), 1
   /* TEXT */
-  ), $props.reservation.vehicle.model ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("small", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.reservation.vehicle.model), 1
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [$props.reservation.vehicle.model ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("small", _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.reservation.vehicle.model), 1
   /* TEXT */
-  ), _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("small", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.reservation.vehicle.color), 1
+  )) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("small", _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.reservation.vehicle.type.name), 1
   /* TEXT */
-  )])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)((_$props$reservation$v = $props.reservation.vehicle.user) === null || _$props$reservation$v === void 0 ? void 0 : _$props$reservation$v.name), 1
+  )), $props.reservation.vehicle.color ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_10, "•")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("small", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.reservation.vehicle.color), 1
   /* TEXT */
-  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_tooltip, {
+  )])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)((_$props$reservation$v = $props.reservation.vehicle.user) === null || _$props$reservation$v === void 0 ? void 0 : _$props$reservation$v.name), 1
+  /* TEXT */
+  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_tooltip, {
     placement: "left"
   }, {
     data: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -33721,7 +33732,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       )];
     }),
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_icon, {
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_icon, {
         name: "arrow-circle-left",
         color: "blue",
         density: 200,
@@ -33744,7 +33755,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       )];
     }),
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_icon, {
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_icon, {
         name: "arrow-circle-right",
         color: "green",
         density: 500,
@@ -33757,7 +33768,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     _: 1
     /* STABLE */
 
-  })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_15, [$props.reservation.active || true ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_17, [$props.reservation.active || true ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_18, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["text-uppercase text-xs font-bold", "text-".concat($props.reservation.status.color, "-500")])
   }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$t($props.reservation.status.name).toUpperCase()), 3
   /* TEXT, CLASS */
@@ -33767,15 +33778,15 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onElapsed: $options.elapsed
   }, null, 8
   /* PROPS */
-  , ["from", "to", "onElapsed"])])])) : 0]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.reservation.zone.code), 1
+  , ["from", "to", "onElapsed"])])])) : 0]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.reservation.zone.code), 1
   /* TEXT */
-  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_18, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("small", null, "$" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.reservation.type.tariff) + "/min", 1
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("small", null, "$" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.reservation.type.tariff) + "/min", 1
   /* TEXT */
-  )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$filter.currency($options.charges)), 1
+  )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_22, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$filter.currency($options.charges)), 1
   /* TEXT */
-  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.elapsedTime) + " min", 1
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_23, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.elapsedTime) + " min", 1
   /* TEXT */
-  )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_tooltip, {
+  )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_24, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_tooltip, {
     "class": "flex items-center gap-1 align-middle md:mt-2"
   }, {
     data: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -34011,15 +34022,23 @@ var _hoisted_5 = {
   "class": ""
 };
 var _hoisted_6 = {
-  "class": "w-auto float-right text-right font-bold"
+  key: 0
 };
 var _hoisted_7 = {
+  key: 1
+};
+var _hoisted_8 = {
+  "class": "w-auto float-right text-right font-bold"
+};
+var _hoisted_9 = {
+  key: 0,
   "class": "text-gray-300 font-bold",
   style: {
     "right": "20px"
   }
 };
-var _hoisted_8 = {
+var _hoisted_10 = {
+  key: 1,
   "class": "text-xl"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -34051,13 +34070,15 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     full: true
   }, null, 8
   /* PROPS */
-  , ["from", "to"])])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.type.available) + " " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$t('available')), 1
+  , ["from", "to"])])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_5, [$options.showAvailable ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.type.available) + " " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$t('available')), 1
   /* TEXT */
-  ))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("small", _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.type.parkingName), 1
+  )) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.type.parkingName), 1
   /* TEXT */
-  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_8, " $" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.type.tariff) + "/" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$t('min')), 1
+  ))]))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [$options.showAvailable ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("small", _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.type.parkingName), 1
   /* TEXT */
-  )])])], 2
+  )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $props.type.tariff ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_10, " $" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.type.tariff) + "/" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$t('min')), 1
+  /* TEXT */
+  )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])], 2
   /* CLASS */
   );
 }
@@ -91668,6 +91689,14 @@ var map = {
 		"./resources/js/Icons/Bicycle.vue",
 		"resources_js_Icons_Bicycle_vue"
 	],
+	"./Bus": [
+		"./resources/js/Icons/Bus.vue",
+		"resources_js_Icons_Bus_vue"
+	],
+	"./Bus.vue": [
+		"./resources/js/Icons/Bus.vue",
+		"resources_js_Icons_Bus_vue"
+	],
 	"./Dashboard": [
 		"./resources/js/Icons/Dashboard.vue",
 		"resources_js_Icons_Dashboard_vue"
@@ -91724,6 +91753,14 @@ var map = {
 		"./resources/js/Icons/Motorcycle.vue",
 		"resources_js_Icons_Motorcycle_vue"
 	],
+	"./Parking": [
+		"./resources/js/Icons/Parking.vue",
+		"resources_js_Icons_Parking_vue"
+	],
+	"./Parking.vue": [
+		"./resources/js/Icons/Parking.vue",
+		"resources_js_Icons_Parking_vue"
+	],
 	"./Passengers": [
 		"./resources/js/Icons/Passengers.vue",
 		"resources_js_Icons_Passengers_vue"
@@ -91755,6 +91792,14 @@ var map = {
 	"./Times.vue": [
 		"./resources/js/Icons/Times.vue",
 		"resources_js_Icons_Times_vue"
+	],
+	"./Truck": [
+		"./resources/js/Icons/Truck.vue",
+		"resources_js_Icons_Truck_vue"
+	],
+	"./Truck.vue": [
+		"./resources/js/Icons/Truck.vue",
+		"resources_js_Icons_Truck_vue"
 	],
 	"./User": [
 		"./resources/js/Icons/User.vue",
@@ -92011,7 +92056,7 @@ module.exports = JSON.parse('{"Home":"Inicio","Create":"Crear","Created":"Creado
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_Icons_Add_vue":1,"resources_js_Icons_ArrowCircleLeft_vue":1,"resources_js_Icons_ArrowCircleRight_vue":1,"resources_js_Icons_Bicycle_vue":1,"resources_js_Icons_Dashboard_vue":1,"resources_js_Icons_Delete_vue":1,"resources_js_Icons_Edit_vue":1,"resources_js_Icons_Exit_vue":1,"resources_js_Icons_Loading_vue":1,"resources_js_Icons_Menu_vue":1,"resources_js_Icons_Motorcycle_vue":1,"resources_js_Icons_Passengers_vue":1,"resources_js_Icons_Point_vue":1,"resources_js_Icons_Reservation_vue":1,"resources_js_Icons_Times_vue":1,"resources_js_Icons_User_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_Icons_Add_vue":1,"resources_js_Icons_ArrowCircleLeft_vue":1,"resources_js_Icons_ArrowCircleRight_vue":1,"resources_js_Icons_Bicycle_vue":1,"resources_js_Icons_Bus_vue":1,"resources_js_Icons_Dashboard_vue":1,"resources_js_Icons_Delete_vue":1,"resources_js_Icons_Edit_vue":1,"resources_js_Icons_Exit_vue":1,"resources_js_Icons_Loading_vue":1,"resources_js_Icons_Menu_vue":1,"resources_js_Icons_Motorcycle_vue":1,"resources_js_Icons_Parking_vue":1,"resources_js_Icons_Passengers_vue":1,"resources_js_Icons_Point_vue":1,"resources_js_Icons_Reservation_vue":1,"resources_js_Icons_Times_vue":1,"resources_js_Icons_Truck_vue":1,"resources_js_Icons_User_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};
