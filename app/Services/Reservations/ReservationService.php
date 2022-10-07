@@ -83,9 +83,9 @@ class ReservationService
         $reservation->hold_end = $date;
         $reservation->hold_timeout = 60;
         $reservation->active = true;
-	$reservation->latitude = $data->get('latitude');
+        $reservation->latitude = $data->get('latitude');
         $reservation->longitude = $data->get('longitude');
-   
+
         DB::beginTransaction();
 
         $reservation->vehicle()->associate($vehicle);
