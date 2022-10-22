@@ -26,6 +26,7 @@ use Illuminate\Support\Carbon;
  * @property-read Parking $parking
  * @property-read VehicleType $vehicleType
  * @property-read Collection|ParkingZone[] $zones
+ * @method static Builder|ParkingZone forParking($id)
  * @method static Builder|ParkingType parkingQuery($parking = 'any')
  * @method static Builder|ParkingType newModelQuery()
  * @method static Builder|ParkingType newQuery()
@@ -58,6 +59,13 @@ class ParkingType extends Model
         if ($parking != 'any') {
             $query = $query->where('parking_id', $parking);
         }
+
+        return $query;
+    }
+
+    function scopeForParking(Builder $query, $id = 'any'): Builder|ParkingType
+    {
+        if ($id && $id != 'any') return $query->where('parking_id', $id);
 
         return $query;
     }

@@ -16,6 +16,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Log;
 use Illuminate\Support\Collection;
+use phpDocumentor\Reflection\Types\Boolean;
 use Throwable;
 
 class ReservationService
@@ -58,7 +59,7 @@ class ReservationService
         $currentRotationCheck = $this->rotationCheckService->getCurrentCheck('active', $parkingZone->id);
         $prevRotationCheck = $this->rotationCheckService->getCheckPrevTo($currentRotationCheck);
 
-        if($reservation) {
+        if ($reservation) {
             $reservation->latitude = $data->get('latitude');
             $reservation->longitude = $data->get('longitude');
         }
@@ -82,6 +83,8 @@ class ReservationService
         $reservation->hold_end = $date;
         $reservation->hold_timeout = 60;
         $reservation->active = true;
+        $reservation->latitude = $data->get('latitude');
+        $reservation->longitude = $data->get('longitude');
 
         DB::beginTransaction();
 
@@ -119,6 +122,7 @@ class ReservationService
         DB::rollBack();
         return null;
     }
+
 
     function finalize(Reservation $reservation): ?Reservation
     {
@@ -169,5 +173,12 @@ class ReservationService
         $vehicle->save();
 
         return $vehicle;
+    }
+
+    function deleteById($id): bool
+    {
+        $reservation = Reservation::find(intval($id));
+
+        return $reservation->forceDelete();
     }
 }

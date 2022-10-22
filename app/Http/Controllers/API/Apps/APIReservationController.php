@@ -38,6 +38,7 @@ class APIReservationController implements APIAppsInterface
             return match ($this->service) {
                 'list' => $this->listReservations(),
                 'create' => $this->createReservation(),
+                'delete' => $this->deleteReservation(),
                 default => response()->json([
                     'error' => true,
                     'message' => 'No action serve'
@@ -51,7 +52,8 @@ class APIReservationController implements APIAppsInterface
         }
     }
 
-    function listReservations():JsonResponse {
+    function listReservations(): JsonResponse
+    {
 
         $status = $this->request->get('status');
         $zone = $this->request->get('zone');
@@ -97,6 +99,23 @@ class APIReservationController implements APIAppsInterface
             } else {
                 $response->put('message', 'Reservation not created');
             }
+        } catch (Throwable $e) {
+            $response->put('message', $e->getMessage());
+        }
+
+        return response()->json($response->toArray());
+    }
+
+    function deleteReservation(): JsonResponse
+    {
+        $response = collect(['success' => false]);
+
+        try {
+            $id = $this->request->get('id');
+            $deleted = $this->reservationService->deleteById($id);
+            $response->put('success', $deleted);
+            $response->put('message', $deleted ? 'Reservation deleted successfully' : 'Reservation not deleted');
+
         } catch (Throwable $e) {
             $response->put('message', $e->getMessage());
         }

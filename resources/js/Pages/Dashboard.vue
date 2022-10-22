@@ -37,7 +37,7 @@ export default {
             axios.get(route('parking.show', {parking: 'all'})).then(response => {
                 this.parkingLots = response.data;
 
-                this.selected = this.parkingLots.find( parking => parking.id === 2 );
+                this.selected = this.parkingLots.find( parking => parking.id === 1 );
             });
         },
         select(parking) {

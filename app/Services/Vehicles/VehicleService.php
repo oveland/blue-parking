@@ -2,11 +2,18 @@
 
 namespace App\Services\Vehicles;
 
+use App\Models\Vehicles\VehicleType;
+use Illuminate\Support\Collection;
 use Log;
 use App\Services\AWS\RekognitionService;
 
 class VehicleService
 {
+    function getTypes(): VehicleType|Collection
+    {
+        return VehicleType::all();
+    }
+
     function decodePlate($photo, $uid = null, $datetime = null): string
     {
         Log::info("Decoding plate. Uid = $uid, Datetime = $datetime");

@@ -1239,9 +1239,6 @@ input[type=file]::file-selector-button:hover {
 .pointer-events-none {
   pointer-events: none;
 }
-.invisible {
-  visibility: hidden;
-}
 .fixed {
   position: fixed;
 }
@@ -1536,12 +1533,6 @@ input[type=file]::file-selector-button:hover {
 }
 .-bottom-px {
   bottom: -1px;
-}
-.right-2 {
-  right: 0.5rem;
-}
-.right-1 {
-  right: 0.25rem;
 }
 .z-0 {
   z-index: 0;
@@ -3295,6 +3286,10 @@ input[type=file]::file-selector-button:hover {
   --tw-border-opacity: 1;
   border-left-color: rgb(99 49 18 / var(--tw-border-opacity));
 }
+.border-b-indigo-900 {
+  --tw-border-opacity: 1;
+  border-bottom-color: rgb(54 47 120 / var(--tw-border-opacity));
+}
 .bg-inherit {
   background-color: inherit;
 }
@@ -4653,14 +4648,8 @@ input[type=file]::file-selector-button:hover {
 .pl-6 {
   padding-left: 1.5rem;
 }
-.pr-1 {
-  padding-right: 0.25rem;
-}
 .pl-1 {
   padding-left: 0.25rem;
-}
-.pl-10 {
-  padding-left: 2.5rem;
 }
 .text-left {
   text-align: left;
@@ -12446,10 +12435,6 @@ input[type=file]::file-selector-button:hover {
 }
 @media (min-width: 640px) {
 
-  .sm\:visible {
-    visibility: visible;
-  }
-
   .sm\:top-0 {
     top: 0px;
   }
@@ -12943,10 +12928,6 @@ input[type=file]::file-selector-button:hover {
 
   .sm\:flex {
     display: flex;
-  }
-
-  .sm\:inline-flex {
-    display: inline-flex;
   }
 
   .sm\:table-row-group {
@@ -19567,10 +19548,6 @@ input[type=file]::file-selector-button:hover {
     display: inline-block;
   }
 
-  .md\:inline-flex {
-    display: inline-flex;
-  }
-
   .md\:table-row-group {
     display: table-row-group;
   }
@@ -19581,10 +19558,6 @@ input[type=file]::file-selector-button:hover {
 
   .md\:grid {
     display: grid;
-  }
-
-  .md\:inline-grid {
-    display: inline-grid;
   }
 
   .md\:hidden {

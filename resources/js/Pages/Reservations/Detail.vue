@@ -13,14 +13,18 @@
                 </div>
                 <div class="text-sm text-gray-500">
                     <span class="font-extrabold">{{ reservation.vehicle.plate }}</span>
-                    <div v-if="reservation.vehicle.model">
-                        <small>{{ reservation.vehicle.model }}</small> • <small>{{ reservation.vehicle.color }}</small>
+                    <div class="flex gap-1">
+                        <small v-if="reservation.vehicle.model">{{ reservation.vehicle.model }}</small>
+                        <small v-else>{{ reservation.vehicle.type.name }}</small>
+
+                        <span v-if="reservation.vehicle.color">•</span>
+                        <small>{{ reservation.vehicle.color }}</small>
                     </div>
                 </div>
             </div>
         </td>
 
-        <td class="px-6 py-2 w-1/4 hidden">
+        <td class="px-6 py-2 w-1/4">
             <div class="text-sm text-gray-500 font-semibold">
                 {{ reservation.vehicle.user?.name }}
             </div>
@@ -65,13 +69,13 @@
             <div>
                 {{ reservation.zone.code }}
             </div>
-            <div class="text-gray-400 hidden">
+            <div class="text-gray-400">
                 <small>${{ reservation.type.tariff }}/min</small>
             </div>
         </td>
 
         <td class="px-6 py-2 w-1/4 text-sm text-gray-500 font-semibold">
-            <div class="hidden">
+            <div class="">
                 {{ $filter.currency(charges) }}
             </div>
             <div class="text-gray-400">

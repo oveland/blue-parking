@@ -34,6 +34,7 @@ class APIVehicleController implements APIAppsInterface
     {
         if ($this->service) {
             return match ($this->service) {
+                'types' => $this->types(),
                 'decode-plate' => $this->decodePlate(),
                 default => response()->json([
                     'success' => false,
@@ -46,6 +47,14 @@ class APIVehicleController implements APIAppsInterface
                 'message' => 'No service found!'
             ]);
         }
+    }
+
+    function types(): JsonResponse {
+        $response = collect(['success' => false]);
+
+        $vehicleTypes = $this->vehicleService->getTypes()->sortBy('id')->values();
+
+        return response()->json($vehicleTypes);
     }
 
     function decodePlate(): JsonResponse
